@@ -1,0 +1,34 @@
+{
+  "moyenTransports": [
+    {
+      "id": "1",
+      "label": "Bus 101",
+      "code": "B101",
+      "type": "bus"
+    },
+    {
+      "id": "2",
+      "label": "Métro Ligne 1",
+      "code": "M1",
+      "type": "metro"
+    },
+    {
+      "id": "3",
+      "label": "TGM A",
+      "code": "TGM-A",
+      "type": "tgm"
+    },
+    {
+      "id": "191e",
+      "label": "jbbib",
+      "code": "i,dro²",
+      "type": "bus"
+    },
+    {
+      "id": "b4d1",
+      "label": "dfoib,df",
+      "code": "aeo,lp;hp",
+      "type": "fghmfgh;f"
+    }
+  ]
+}

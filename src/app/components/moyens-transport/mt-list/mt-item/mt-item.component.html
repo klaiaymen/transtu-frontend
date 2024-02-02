@@ -1,0 +1,14 @@
+<tr *ngIf="moyenTransport">
+    <td>{{moyenTransport.id}}</td>
+    <td>{{moyenTransport.label}}</td>
+    <td>{{moyenTransport.code}}</td>
+    <td>{{moyenTransport.type}}</td>
+    <td>
+        <button (click)="onDelete(moyenTransport)" class="btn">
+            <i class="cil-trash" style="color: red"></i>
+        </button>
+        <button (click)="onEdit(moyenTransport)" class="btn">
+            <i class="cil-pencil"></i>
+        </button>
+    </td>
+</tr>
