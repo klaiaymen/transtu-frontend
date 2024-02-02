@@ -5,10 +5,17 @@ import { Observable, of} from "rxjs";
 import {
     DeleteMTActionError,
     DeleteMTActionSuccess,
+    EditMTActionError,
+    EditMTActionSuccess,
     GetAllMTActionError,
     GetAllMTActionSuccess,
     MoyensTransportActions,
-    MoyensTransportActionsTypes, NewMTActionSuccess, SaveMTActionError, SaveMTActionSuccess
+    MoyensTransportActionsTypes,
+    NewMTActionSuccess,
+    SaveMTActionError,
+    SaveMTActionSuccess,
+    UpdateMTActionError,
+    UpdateMTActionSuccess
 } from "./moyensTransport.actions";
 import {catchError, map, mergeMap} from 'rxjs/operators';
 @Injectable()
@@ -67,7 +74,36 @@ export class MoyensTransportEffects {
             })
         )
     );
+
+  /* edit moyen transport*/
+  editMoyenTransportEffect:Observable<MoyensTransportActions>=createEffect(
+    ()=>this.effectActions.pipe(
+      ofType(MoyensTransportActionsTypes.EDIT_MT),
+      mergeMap((action: MoyensTransportActions)=>{
+        return this.moyenTransportService.getMtById(action.payload)
+          .pipe(
+            map((product)=> new EditMTActionSuccess(product)),
+            catchError((err)=>of(new EditMTActionError(err.message)))
+          )
+      })
+    )
+  );
+
+    /* update Product*/
+    updateMoyenTransportEffect:Observable<MoyensTransportActions>=createEffect(
+        ()=>this.effectActions.pipe(
+            ofType(MoyensTransportActionsTypes.UPDATE_MT),
+            mergeMap((action: MoyensTransportActions)=>{
+                return this.moyenTransportService.update(action.payload)
+                    .pipe(
+                        map((moyenTransport)=> new UpdateMTActionSuccess(moyenTransport)),
+                        catchError((err)=>of(new UpdateMTActionError(err.message)))
+                    )
+            })
+        )
+    );
 }
+
 
 
 

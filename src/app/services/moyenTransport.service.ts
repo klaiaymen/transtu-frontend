@@ -22,4 +22,14 @@ export class MoyenTransportService{
     let host="http://localhost:3000";
     return this.http.delete<void>(host+"/moyenTransports/"+id);
   }
+
+  public getMtById(id:number):Observable<MoyenTransport>{
+    let host="http://localhost:3000";
+    return this.http.get<MoyenTransport>(host+"/moyenTransports/"+id);
+  }
+
+  public update(moyenTransport:MoyenTransport):Observable<MoyenTransport>{
+    let host="http://localhost:3000";
+    return this.http.put<MoyenTransport>(host+"/moyenTransports/"+moyenTransport.id,moyenTransport);
+  }
 }

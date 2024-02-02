@@ -28,7 +28,7 @@ import {
   FormModule,
   GridModule,
   HeaderModule,
-  ListGroupModule,
+  ListGroupModule, ModalBodyComponent, ModalComponent, ModalFooterComponent, ModalHeaderComponent,
   NavModule,
   ProgressModule,
   SharedModule,
@@ -45,6 +45,10 @@ import {StoreModule} from "@ngrx/store";
 import {moyensTransportReducer} from "./ngrx/moyensTransport.reducer";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 import {HttpClientModule} from "@angular/common/http";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  EditMoyenTransportComponent
+} from "./components/moyens-transport/edit-moyen-transport/edit-moyen-transport.component";
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
@@ -87,7 +91,9 @@ const APP_CONTAINERS = [
     StoreDevtoolsModule.instrument(),
     HttpClientModule,
     AlertModule,
+    NgbModule,
     //BrowserAnimationsModule
+    EditMoyenTransportComponent
   ],
   providers: [
     {

@@ -17,6 +17,8 @@ import {MtItemComponent} from "./mt-item/mt-item.component";
 export class MtListComponent implements OnInit{
     @Input() moyenTransport: MoyenTransport|null=null;
     @Input() state:MoyensTransportState|null=null;
+    constructor() {
+    }
 
   ngOnInit(): void {
   }

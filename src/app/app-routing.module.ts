@@ -14,6 +14,7 @@ import {
   EditMoyenTransportComponent
 } from "./components/moyens-transport/edit-moyen-transport/edit-moyen-transport.component";
 
+
 const routes: Routes = [
   {
     path: '',

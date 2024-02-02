@@ -67,6 +67,25 @@ export function moyensTransportReducer (state =initState,action :Action): Moyens
     case MoyensTransportActionsTypes.DELETE_MT_ERROR:
       return {...state, dataState:MoyensTransportStateEnum.ERROR, errorMessage:(<MoyensTransportActions>action).payload}
 
+    /* edit Product*/
+    case MoyensTransportActionsTypes.EDIT_MT:
+      return {...state, dataState:MoyensTransportStateEnum.LOADING }
+    case MoyensTransportActionsTypes.EDIT_MT_SUCCESS:
+      return {...state, dataState:MoyensTransportStateEnum.LOADED,currentMt:(<MoyensTransportActions>action).payload}
+    case MoyensTransportActionsTypes.EDIT_MT_ERROR:
+      return {...state, dataState:MoyensTransportStateEnum.ERROR, errorMessage:(<MoyensTransportActions>action).payload}
+
+
+      /* update Product*/
+    case MoyensTransportActionsTypes.UPDATE_MT:
+      return {...state, dataState:MoyensTransportStateEnum.LOADING }
+    case MoyensTransportActionsTypes.UPDATE_MT_SUCCESS:
+      let updatedMoyenTransport: MoyenTransport=(<MoyensTransportActions>action).payload;
+      let updatedMoyensTransport= state.moyensTransport.map(mt=>(mt.id==updatedMoyenTransport.id)?updatedMoyenTransport:mt);
+      return {...state, dataState:MoyensTransportStateEnum.UPDATED,moyensTransport:updatedMoyensTransport}
+    case MoyensTransportActionsTypes.UPDATE_MT_ERROR:
+      return {...state, dataState:MoyensTransportStateEnum.ERROR, errorMessage:(<MoyensTransportActions>action).payload}
+
     default : return {...state}
   }
 }

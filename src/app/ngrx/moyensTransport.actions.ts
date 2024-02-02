@@ -15,9 +15,19 @@ export enum MoyensTransportActionsTypes{
   SAVE_MT_SUCCESS="[MoyensTransport] save moyen transport Success",
   SAVE_MT_ERROR="[MoyensTransport] save moyen transport Error",
   /* delete moyen transport*/
-  DELETE_MT="[Product] delete moyen transport",
-  DELETE_MT_SUCCESS="[Product] delete moyen transport Success",
-  DELETE_MT_ERROR="[Product] delete moyen transport Error",
+  DELETE_MT="[MoyensTransport] delete moyen transport",
+  DELETE_MT_SUCCESS="[MoyensTransport] delete moyen transport Success",
+  DELETE_MT_ERROR="[MoyensTransport] delete moyen transport Error",
+
+  /* edit moyen transport*/
+  EDIT_MT="[MoyensTransport] edit product",
+  EDIT_MT_SUCCESS="[MoyensTransport] edit product Success",
+  EDIT_MT_ERROR="[MoyensTransport] edit product Error",
+
+  /* update moyen transport*/
+  UPDATE_MT="[MoyensTransport] update product",
+  UPDATE_MT_SUCCESS="[MoyensTransport] update product Success",
+  UPDATE_MT_ERROR="[MoyensTransport] update product Error"
 }
 
 // new moyen transport
@@ -91,6 +101,46 @@ export class DeleteMTActionSuccess implements Action{
 
 export class DeleteMTActionError implements Action{
   type: MoyensTransportActionsTypes=MoyensTransportActionsTypes.DELETE_MT_ERROR;
+  constructor(public payload:string) {
+  }
+}
+
+/* edit Product Actions*/
+
+export class EditMTAction implements Action{
+  type: MoyensTransportActionsTypes=MoyensTransportActionsTypes.EDIT_MT;
+  constructor(public payload:number) {
+  }
+}
+
+export class EditMTActionSuccess implements Action{
+  type: MoyensTransportActionsTypes=MoyensTransportActionsTypes.EDIT_MT_SUCCESS;
+  constructor(public payload:MoyenTransport) {
+  }
+}
+
+export class EditMTActionError implements Action{
+  type: MoyensTransportActionsTypes=MoyensTransportActionsTypes.EDIT_MT_ERROR;
+  constructor(public payload:string) {
+  }
+}
+
+/* update moyen transport Actions*/
+
+export class UpdateMTAction implements Action{
+  type: MoyensTransportActionsTypes=MoyensTransportActionsTypes.UPDATE_MT;
+  constructor(public payload:MoyenTransport) {
+  }
+}
+
+export class UpdateMTActionSuccess implements Action{
+  type: MoyensTransportActionsTypes=MoyensTransportActionsTypes.UPDATE_MT_SUCCESS;
+  constructor(public payload:MoyenTransport) {
+  }
+}
+
+export class UpdateMTActionError implements Action{
+  type: MoyensTransportActionsTypes=MoyensTransportActionsTypes.UPDATE_MT_ERROR;
   constructor(public payload:string) {
   }
 }
