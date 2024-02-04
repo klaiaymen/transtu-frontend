@@ -10,6 +10,9 @@ import {
 import {Store} from "@ngrx/store";
 import {GetAllMTAction} from "../../../ngrx/moyensTransport.actions";
 import {RouterLink} from "@angular/router";
+import {EditMoyenTransportComponent} from "../edit-moyen-transport/edit-moyen-transport.component";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {NewMoyenTransportComponent} from "../new-moyen-transport/new-moyen-transport.component";
 
 @Component({
   selector: 'app-mt-navbar',
@@ -19,7 +22,7 @@ import {RouterLink} from "@angular/router";
   styleUrl: './mt-navbar.component.scss'
 })
 export class MtNavbarComponent implements OnInit{
-  constructor(private store:Store<any>) {
+  constructor(private store:Store<any>,private modalService: NgbModal) {
   }
   ngOnInit(): void {
   }
@@ -29,6 +32,6 @@ export class MtNavbarComponent implements OnInit{
   }
 
   onNewMT() {
-
+    const modalRef = this.modalService.open(NewMoyenTransportComponent);
   }
 }

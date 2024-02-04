@@ -4,19 +4,19 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {MoyensTransportState, MoyensTransportStateEnum} from "../../../ngrx/moyensTransport.reducer";
 import {Store} from "@ngrx/store";
 import {Router} from "@angular/router";
-import {NewMTAction, SaveMTAction} from "../../../ngrx/moyensTransport.actions";
+import {GetAllMTAction, NewMTAction, SaveMTAction} from "../../../ngrx/moyensTransport.actions";
 import {
-  ModalBodyComponent,
-  ModalComponent,
-  ModalFooterComponent,
-  ModalHeaderComponent,
-  ModalToggleDirective
+    ModalBodyComponent,
+    ModalComponent,
+    ModalFooterComponent,
+    ModalHeaderComponent,
+    ModalToggleDirective, ToastBodyComponent, ToastComponent, ToasterComponent, ToastHeaderComponent
 } from "@coreui/angular";
 
 @Component({
   selector: 'app-new-moyen-transport',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ModalToggleDirective, ModalComponent, ModalHeaderComponent, ModalBodyComponent, ModalFooterComponent],
+    imports: [CommonModule, ReactiveFormsModule, ModalToggleDirective, ModalComponent, ModalHeaderComponent, ModalBodyComponent, ModalFooterComponent, ToastBodyComponent, ToastComponent, ToastHeaderComponent, ToasterComponent],
   templateUrl: './new-moyen-transport.component.html',
   styleUrl: './new-moyen-transport.component.scss'
 })

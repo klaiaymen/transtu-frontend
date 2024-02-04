@@ -1,47 +1,64 @@
-<head>
+<div class="container">
 
-</head>
-<body>
-<div class="container" style="width: 500px">
-        <ng-container *ngIf="mtFormGroup">
+  <ng-container *ngIf="state">
+    <ng-container *ngIf="state.dataState==MoyensTransportStateEnum.LOADING">
+      <div class="position-relative" >
+        <c-toaster placement="top-end" position="absolute" >
+          <c-toast [autohide]="false" visible>
+            <c-toast-header style="background-color: cadetblue">
 
-            <ng-container *ngIf="state as data">
-                <ng-container *ngIf="data.dataState==MoyensTransportStateEnum.LOADING">
-                    Loading ...
-                </ng-container>
-                <ng-container *ngIf="data.dataState==MoyensTransportStateEnum.LOADED">
-                    <div class="alert-success container p-3 m-3 bg-secondary">
-                        <span>ProductSaved successfully</span>
-                        <button class="btn btn-success ml-3" (click)="newMoyenTransport()">New Moyen transport</button>
-                    </div>
-                </ng-container>
-                <ng-container *ngIf="data.dataState==MoyensTransportStateEnum.NEW">
-                    <form [formGroup]="mtFormGroup" (ngSubmit)="onSaveMt()">
-                        <div class="form-group" >
-                            <label for="label"> Label</label>
-                            <input type="text" class="form-control" formControlName="label" id="label" [ngClass]="{'is-valid':submitted && mtFormGroup.controls['label'].errors}">
-                            <div *ngIf="submitted && mtFormGroup.controls['label'].errors" class="invalid-feedback">
-                                <div *ngIf="mtFormGroup.controls['label'].hasError('required')">label is required</div>
-                            </div>
-                        </div>
+              <strong class="me-auto">Loading ...</strong>
+              <small class="text-muted">Just now</small>
+            </c-toast-header>
+            <c-toast-body>Pls wait !</c-toast-body>
+          </c-toast>
+        </c-toaster>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="state.dataState==MoyensTransportStateEnum.LOADED">
+      <div class="position-relative" >
+        <c-toaster placement="top-end" position="absolute" >
+          <c-toast [autohide]="false" visible>
+            <c-toast-header style="background-color: darkseagreen">
 
+              <strong class="me-auto">Well done</strong>
+              <small class="text-muted">Just now</small>
+            </c-toast-header>
+            <c-toast-body>Moyen Transport ajouté avec success</c-toast-body>
+          </c-toast>
+        </c-toaster>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="state.dataState==MoyensTransportStateEnum.NEW">
+      <ng-container>
+        <form *ngIf="mtFormGroup" [formGroup]="mtFormGroup" (ngSubmit)="onSaveMt()" style="margin: 50px">
+          <div class="form-group">
+            <h5>Ajout Moyen Transport </h5>
+          </div>
+          <hr>
 
-                        <div class="form-group">
-                            <label for="code"> Code</label>
-                            <input type="text" class="form-control" formControlName="code" id="code" >
-                        </div>
-                        <div class="form-group">
-                            <label for="type"> Type</label>
-                            <input type="text" class="form-control" formControlName="type" id="type" >
-                        </div>
+          <div class="form-group" >
+            <label for="label"> Label</label>
+            <input type="text" class="form-control" formControlName="label" id="label" [ngClass]="{'is-valid':submitted && mtFormGroup.controls['label'].errors}">
+            <div *ngIf="submitted && mtFormGroup.controls['label'].errors" class="invalid-feedback">
+              <div *ngIf="mtFormGroup.controls['label'].hasError('required')">label is required</div>
+            </div>
+          </div>
 
-                        <button type="submit" class="btn btn-success" style="margin-top: 10px">Ajouter</button>
-                    </form>
+          <div class="form-group">
+            <label for="code"> Code</label>
+            <input type="text" class="form-control" formControlName="code" id="code" >
+          </div>
 
-                </ng-container>
-            </ng-container>
-        </ng-container>
+          <div class="form-group">
+            <label for="type"> Type</label>
+            <input type="text" class="form-control" formControlName="type" id="type" >
+          </div>
 
+          <button type="submit" class="btn btn-success" style="margin-top: 10px">Ajouter</button>
+        </form>
 
+      </ng-container>
+    </ng-container>
+  </ng-container>
 </div>
-</body>

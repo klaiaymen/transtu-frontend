@@ -2,13 +2,13 @@ import { INavData } from '@coreui/angular';
 
 export const navItems: INavData[] = [
   {
-    name: 'Dashboard',
+    name: 'Home',
     url: '/dashboard',
-    iconComponent: { name: 'cil-speedometer' },
-    badge: {
+    iconComponent: { name: 'cil-home' },
+    /*badge: {
       color: 'info',
       text: 'NEW'
-    }
+    }*/
   },
   {
     title: true,
@@ -17,9 +17,9 @@ export const navItems: INavData[] = [
   {
     name: 'Gestion des moyens de transport',
     url: '/gestionMT',
-    iconComponent: { name: 'cil-drop' }
+    iconComponent: { name: 'cil-truck'}
   },
-  {
+ /* {
     title: true,
     name: 'Theme'
   },
@@ -267,5 +267,5 @@ export const navItems: INavData[] = [
     url: 'https://coreui.io/product/angular-dashboard-template/',
     iconComponent: { name: 'cil-layers' },
     attributes: { target: '_blank' }
-  }
+  }*/
 ];
