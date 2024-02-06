@@ -1,0 +1,4 @@
+<input type="text" [formControl]="searchControl" placeholder="Search items" />
+<ul *ngIf="searchResults.length > 0">
+  <li *ngFor="let mt of searchResults">{{ mt.label }}</li>
+</ul>

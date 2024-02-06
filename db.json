@@ -2,7 +2,7 @@
   "moyenTransports": [
     {
       "id": "1",
-      "label": "Bus 202",
+      "label": "Bus 20",
       "code": "B101",
       "type": "bus"
     },
@@ -17,6 +17,18 @@
       "label": "TGM A",
       "code": "TGM-A",
       "type": "tgm"
+    },
+    {
+      "id": "08c8",
+      "label": "icnd",
+      "code": "1111111",
+      "type": "p,vpvd"
+    },
+    {
+      "id": "fe52",
+      "label": "Bus 10",
+      "code": "article4",
+      "type": "p,vpvd"
     }
   ]
 }

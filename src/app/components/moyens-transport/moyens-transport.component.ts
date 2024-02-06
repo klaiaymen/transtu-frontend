@@ -11,6 +11,8 @@ import {map} from "rxjs/operators";
 import {state} from "@angular/animations";
 import {EditMTAction, GetAllMTAction} from "../../ngrx/moyensTransport.actions";
 import {Validators} from "@angular/forms";
+import {MoyenTransport} from "../../model/moyenTransport.model";
+import {MoyenTransportService} from "../../services/moyenTransport.service";
 
 @Component({
   selector: 'app-moyens-transport',
@@ -23,14 +25,16 @@ export class MoyensTransportComponent implements  OnInit{
   moyensTransportState$:Observable<MoyensTransportState>|null=null;
   readonly MoyensTransportStateEnum= MoyensTransportStateEnum;
   state:MoyensTransportState|null=null;
-  constructor(private store:Store<any> ) {
+
+  constructor(private store:Store<any>) {
   }
   ngOnInit(): void {
     this.moyensTransportState$=this.store.pipe(
         map((state)=>  state.catalogState)
     );
-
     this.store.dispatch(new GetAllMTAction({}));
+
   }
+
 
 }

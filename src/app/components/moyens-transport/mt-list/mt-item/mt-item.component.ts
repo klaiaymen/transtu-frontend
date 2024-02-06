@@ -35,11 +35,6 @@ export class MtItemComponent implements  OnInit{
 
 
     onDelete(moyenTransport:MoyenTransport) {
-      /*const isConfirmed = confirm("Êtes-vous sûr de vouloir supprimer ce moyen de transport ?");
-      if (isConfirmed) {
-        this.store.dispatch(new DeleteMTtAction(moyenTransport))
-        console.log("moyen transport supprimé !");
-      }*/
       const modalRef = this.modalService.open(ModalConfirmationComponent);
 
       modalRef.componentInstance.confirmationMessage = "Êtes-vous sûr de vouloir supprimer ce moyen de transport ?";

@@ -10,10 +10,14 @@
         </li>
 
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit"><i class="cil-search"></i></button>
-      </form>
+
+      <!--<form #f="ngForm" (ngSubmit)="onSearch(f.value)" class="form-inline">
+        <input type="text" ngModel name="keyword">
+        <button type="submit" class="btn btn-outline-success btn-sm">
+          <i class="fa fa-search"></i>search
+        </button>
+      </form>-->
+      <app-search-moyens-transport></app-search-moyens-transport>
     </div>
   </div>
 </nav>

@@ -49,6 +49,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {
   EditMoyenTransportComponent
 } from "./components/moyens-transport/edit-moyen-transport/edit-moyen-transport.component";
+import {MatInputModule} from "@angular/material/input";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
@@ -92,7 +94,8 @@ const APP_CONTAINERS = [
     HttpClientModule,
     AlertModule,
     NgbModule,
-    //BrowserAnimationsModule
+    MatAutocompleteModule,
+    MatInputModule,
     EditMoyenTransportComponent
   ],
   providers: [

@@ -15,6 +15,10 @@
             <app-mt-item *ngFor="let moyenTransport of state.moyensTransport" [moyenTransport]="moyenTransport" style="display: contents"></app-mt-item>
           </tbody>
         </table>
+      <!-- Affichez les contrôles de pagination ici -->
+      <button cButton class="me-1" variant="ghost" color="info"  (click)="loadNextPage()">
+        >>
+      </button>
     </c-card-body>
   </c-card>
 </c-col>

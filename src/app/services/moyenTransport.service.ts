@@ -5,31 +5,30 @@ import {HttpClient} from "@angular/common/http";
 
 @Injectable({providedIn:"root"})
 export class MoyenTransportService{
-
-  constructor(private http:HttpClient) {
-  }
+  private baseUrl = 'http://localhost:8081';
+  constructor(private http:HttpClient) { }
 
   public getMoyensTransport():Observable<MoyenTransport[]>{
-    let host="http://localhost:3000";
-    return this.http.get<MoyenTransport[]>(host+"/moyenTransports");
+    return this.http.get<MoyenTransport[]>(this.baseUrl + '/api/mt');
   }
   public save(moyentransport:MoyenTransport):Observable<MoyenTransport>{
-    let host="http://localhost:3000";
-    return this.http.post<MoyenTransport>(host+"/moyenTransports/",moyentransport);
+    return this.http.post<MoyenTransport>(this.baseUrl+ '/api/mt',moyentransport);
   }
 
   public delete(id:number):Observable<void>{
-    let host="http://localhost:3000";
-    return this.http.delete<void>(host+"/moyenTransports/"+id);
+    return this.http.delete<void>(this.baseUrl+ "/api/mt/" +id);
   }
 
   public getMtById(id:number):Observable<MoyenTransport>{
-    let host="http://localhost:3000";
-    return this.http.get<MoyenTransport>(host+"/moyenTransports/"+id);
+    return this.http.get<MoyenTransport>(this.baseUrl+ "/api/mt/" +id);
   }
 
   public update(moyenTransport:MoyenTransport):Observable<MoyenTransport>{
-    let host="http://localhost:3000";
-    return this.http.put<MoyenTransport>(host+"/moyenTransports/"+moyenTransport.id,moyenTransport);
+    return this.http.put<MoyenTransport>(this.baseUrl+"/api/mt/" + moyenTransport.id, moyenTransport);
   }
+
+  /*public searchMoyensTransport(keyword:string):Observable<MoyenTransport[]>{
+    let host="http://localhost:3000";
+    return this.http.get<MoyenTransport[]>(`${host}/moyenTransports?name_like=${keyword}`);
+  }*/
 }

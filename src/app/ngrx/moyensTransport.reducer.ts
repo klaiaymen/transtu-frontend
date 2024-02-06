@@ -19,6 +19,9 @@ export interface MoyensTransportState{
   errorMessage:string,
   dataState:MoyensTransportStateEnum,
   currentMt: MoyenTransport|null,
+  currentPage: number;
+  pageSize: number;
+  totalPages: number;
 }
 
 const initState:MoyensTransportState={
@@ -26,6 +29,9 @@ const initState:MoyensTransportState={
   errorMessage:"",
   dataState:MoyensTransportStateEnum.INITIAL,
   currentMt:null,
+  currentPage: 1,
+  pageSize: 2,
+  totalPages: 0,
 }
 export function moyensTransportReducer (state =initState,action :Action): MoyensTransportState{
   switch (action.type) {
@@ -86,6 +92,15 @@ export function moyensTransportReducer (state =initState,action :Action): Moyens
     case MoyensTransportActionsTypes.UPDATE_MT_ERROR:
       return {...state, dataState:MoyensTransportStateEnum.ERROR, errorMessage:(<MoyensTransportActions>action).payload}
 
+    /* search Products*/
+    /*case MoyensTransportActionsTypes.SEARCH_MT:
+      return {...state, dataState:MoyensTransportStateEnum.LOADING }
+    case MoyensTransportActionsTypes.SEARCH_MT_SUCCESS:
+      return {...state, dataState:MoyensTransportStateEnum.LOADED, moyensTransport:(<MoyensTransportActions>action).payload}
+    case MoyensTransportActionsTypes.SEARCH_MT_ERROR:
+      return {...state, dataState:MoyensTransportStateEnum.ERROR, errorMessage:(<MoyensTransportActions>action).payload}*/
+    case MoyensTransportActionsTypes.LOAD_NEXT_PAGE:
+      return { ...state, currentPage: state.currentPage + 1 };
     default : return {...state}
   }
 }

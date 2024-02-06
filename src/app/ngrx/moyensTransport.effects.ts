@@ -1,26 +1,29 @@
 import {Injectable} from "@angular/core";
 import {MoyenTransportService} from "../services/moyenTransport.service";
 import {Actions, createEffect, ofType} from '@ngrx/effects';
-import { Observable, of} from "rxjs";
+import {Observable, of, withLatestFrom} from "rxjs";
 import {
-    DeleteMTActionError,
-    DeleteMTActionSuccess,
-    EditMTActionError,
-    EditMTActionSuccess,
-    GetAllMTActionError,
-    GetAllMTActionSuccess,
-    MoyensTransportActions,
-    MoyensTransportActionsTypes,
-    NewMTActionSuccess,
-    SaveMTActionError,
-    SaveMTActionSuccess,
-    UpdateMTActionError,
-    UpdateMTActionSuccess
+  DeleteMTActionError,
+  DeleteMTActionSuccess,
+  EditMTActionError,
+  EditMTActionSuccess, GetAllMTAction,
+  GetAllMTActionError,
+  GetAllMTActionSuccess,
+  MoyensTransportActions,
+  MoyensTransportActionsTypes,
+  NewMTActionSuccess,
+  SaveMTActionError,
+  SaveMTActionSuccess,
+  UpdateMTActionError,
+  UpdateMTActionSuccess
 } from "./moyensTransport.actions";
 import {catchError, map, mergeMap} from 'rxjs/operators';
+import {select, Store} from "@ngrx/store";
+import {MoyensTransportState} from "./moyensTransport.reducer";
 @Injectable()
 export class MoyensTransportEffects {
-  constructor(private moyenTransportService:MoyenTransportService, private effectActions:Actions) {
+  state:MoyensTransportState|null=null;
+  constructor(private moyenTransportService:MoyenTransportService, private effectActions:Actions, private store:Store<any> ) {
   }
 
   getAllMoyensTransportEffects:Observable<MoyensTransportActions>=createEffect(
@@ -32,6 +35,29 @@ export class MoyensTransportEffects {
             map((moyensTrasnport)=> new GetAllMTActionSuccess(moyensTrasnport)),
             catchError((err)=>of(new GetAllMTActionError(err.message)))
           )
+      })
+    )
+  );
+/*  getAllMoyensTransportEffect: Observable<MoyensTransportActions> = createEffect(() =>
+    this.effectActions.pipe(
+      ofType(MoyensTransportActionsTypes.GET_ALL_MT),
+      mergeMap((action: MoyensTransportActions) => {
+        const { page, pageSize } = action.payload;
+        return this.moyenTransportService.getMoyensTransport(page, pageSize)
+          .pipe(
+            map(({ moyensTrasnport, totalPages }) => new GetAllMTActionSuccess(moyensTrasnport, totalPages)),
+            catchError((err) => of(new GetAllMTActionError(err.message)))
+          )
+      })
+    )
+  );*/
+
+  loadNextPageEffect: Observable<MoyensTransportActions> = createEffect(() =>
+    this.effectActions.pipe(
+      ofType(MoyensTransportActionsTypes.LOAD_NEXT_PAGE),
+      withLatestFrom(this.store.pipe(select((state: MoyensTransportState) => state.currentPage))),
+      mergeMap(([action, currentPage]) => {
+        return of(new GetAllMTAction({ page: currentPage + 1, pageSize: 2 }));
       })
     )
   );
@@ -75,14 +101,28 @@ export class MoyensTransportEffects {
         )
     );
 
-  /* edit moyen transport*/
+  /* Search Products*/
+  /*searchMoyensTransportEffect:Observable<MoyensTransportActions>=createEffect(
+    ()=>this.effectActions.pipe(
+      ofType(MoyensTransportActionsTypes.SEARCH_MT),
+      mergeMap((action: MoyensTransportActions)=>{
+        return this.moyenTransportService.searchMoyensTransport(action.payload)
+          .pipe(
+            map((moyensTransport)=> new SearchMTActionSuccess(moyensTransport)),
+            catchError((err)=>of(new SearchMTActionError(err.message)))
+          )
+      })
+    )
+  );*/
+
+  /* edit Product*/
   editMoyenTransportEffect:Observable<MoyensTransportActions>=createEffect(
     ()=>this.effectActions.pipe(
       ofType(MoyensTransportActionsTypes.EDIT_MT),
       mergeMap((action: MoyensTransportActions)=>{
         return this.moyenTransportService.getMtById(action.payload)
           .pipe(
-            map((product)=> new EditMTActionSuccess(product)),
+            map((mt)=> new EditMTActionSuccess(mt)),
             catchError((err)=>of(new EditMTActionError(err.message)))
           )
       })

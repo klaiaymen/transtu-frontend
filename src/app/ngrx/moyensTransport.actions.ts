@@ -27,7 +27,17 @@ export enum MoyensTransportActionsTypes{
   /* update moyen transport*/
   UPDATE_MT="[MoyensTransport] update product",
   UPDATE_MT_SUCCESS="[MoyensTransport] update product Success",
-  UPDATE_MT_ERROR="[MoyensTransport] update product Error"
+  UPDATE_MT_ERROR="[MoyensTransport] update product Error",
+
+  /* search moyens transport*/
+ /* SEARCH_MT="[Moyen transports] Search moyens transport",
+  SEARCH_MT_SUCCESS="[Moyen transports] Search moyens transport Success",
+  SEARCH_MT_ERROR="[Moyen transports] Search moyens transport Error",*/
+  LOAD_NEXT_PAGE = '[MoyensTransport] Load Next Page',
+}
+
+export class LoadNextPageAction implements Action {
+  readonly type: MoyensTransportActionsTypes = MoyensTransportActionsTypes.LOAD_NEXT_PAGE;
 }
 
 // new moyen transport
@@ -56,7 +66,8 @@ export class GetAllMTAction implements Action{
 }
 export class GetAllMTActionSuccess implements Action{
   type: MoyensTransportActionsTypes=MoyensTransportActionsTypes.GET_ALL_MT_SUCCESS;
-  constructor(public payload:MoyenTransport[]) {
+
+  constructor(public payload: MoyenTransport[]) {
   }
 }
 
@@ -144,8 +155,29 @@ export class UpdateMTActionError implements Action{
   constructor(public payload:string) {
   }
 }
+
+/* Search Products Actions*/
+/*
+export class SearchMTAction implements Action{
+  type: MoyensTransportActionsTypes=MoyensTransportActionsTypes.SEARCH_MT;
+  constructor(public payload:string) {
+  }
+}
+
+export class SearchMTActionSuccess implements Action{
+  type: MoyensTransportActionsTypes=MoyensTransportActionsTypes.SEARCH_MT_SUCCESS;
+  constructor(public payload:MoyenTransport[]) {
+  }
+}
+
+export class SearchMTActionError implements Action{
+  type: MoyensTransportActionsTypes=MoyensTransportActionsTypes.SEARCH_MT_ERROR;
+  constructor(public payload:string) {
+  }
+}*/
 export type MoyensTransportActions=
   GetAllMTAction | GetAllMTActionSuccess | GetAllMTActionError
   |SaveMTAction | SaveMTActionSuccess | SaveMTActionError
     |DeleteMTtAction | DeleteMTActionSuccess | DeleteMTActionError
+  /*|SearchMTAction | SearchMTActionSuccess | SearchMTActionError*/
   ;
