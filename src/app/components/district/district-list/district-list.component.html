@@ -1,0 +1,25 @@
+<c-col xs="12">
+    <c-card class="mb-4">
+        <c-card-body>
+            <table *ngIf="state"  [striped]="true" cTable hover>
+                <thead>
+
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Label</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Phone Number</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <app-district-item *ngFor="let district of state.districts" [district]="district" style="display: contents"></app-district-item>
+                </tbody>
+            </table>
+            <!-- Affichez les contrôles de pagination ici -->
+            <button cButton class="me-1" variant="ghost" color="info"  (click)="loadNextPage()">
+                >>
+            </button>
+        </c-card-body>
+    </c-card>
+</c-col>

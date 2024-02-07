@@ -1,0 +1,77 @@
+<div class="container">
+
+  <ng-container *ngIf="state">
+    <ng-container *ngIf="state.dataState==DistrictsStateEnum.LOADING">
+      <div class="position-relative" >
+        <c-toaster placement="top-end" position="absolute" >
+          <c-toast [autohide]="false" visible>
+            <c-toast-header style="background-color: cadetblue">
+
+              <strong class="me-auto">Loading ...</strong>
+              <small class="text-muted">Just now</small>
+            </c-toast-header>
+            <c-toast-body>Pls wait !</c-toast-body>
+          </c-toast>
+        </c-toaster>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="state.dataState==DistrictsStateEnum.ERROR">
+      <div class="position-relative" >
+        <c-toaster placement="top-end" position="absolute" >
+          <c-toast [autohide]="false" visible>
+            <c-toast-header style="background-color: #cf2f4c">
+
+              <strong class="me-auto">Error</strong>
+              <small class="text-muted">Just now</small>
+            </c-toast-header>
+            <c-toast-body>{{state.errorMessage | json}}</c-toast-body>
+          </c-toast>
+        </c-toaster>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="state.dataState==DistrictsStateEnum.UPDATED">
+      <div class="position-relative" >
+        <c-toaster placement="top-end" position="absolute" >
+          <c-toast [autohide]="false" visible>
+            <c-toast-header style="background-color: darkseagreen">
+
+              <strong class="me-auto">Well done</strong>
+              <small class="text-muted">Just now</small>
+            </c-toast-header>
+            <c-toast-body>District Updated Successfully</c-toast-body>
+          </c-toast>
+        </c-toaster>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="state.dataState==DistrictsStateEnum.LOADED">
+      <ng-container *ngIf="formBuilt" >
+        <form *ngIf="districtFormGroup" [formGroup]="districtFormGroup" (ngSubmit)="onUpdateDistrict()" style="margin: 50px">
+          <div class="form-group">
+            <h5>Edition District </h5>
+            <label for="id"> ID  :</label>
+            <label>{{districtFormGroup.controls['id'].value}}</label>
+            <input type="hidden" formControlName="id" id="id">
+          </div>
+          <hr>
+          <div class="form-group">
+            <label for="label"> label</label>
+            <input type="text" class="form-control" formControlName="label" id="label" >
+
+          </div>
+
+          <div class="form-group">
+            <label for="adress"> Address</label>
+            <input type="text" class="form-control" formControlName="adress" id="adress" >
+          </div>
+          <div class="form-group">
+            <label for="phoneNumber"> Phone Number</label>
+            <input type="text" class="form-control" formControlName="phoneNumber" id="phoneNumber" >
+          </div>
+          <button type="submit" class="btn btn-success m-1" >Save</button>
+        </form>
+
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</div>
+

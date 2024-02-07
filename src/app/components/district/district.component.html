@@ -1,0 +1,15 @@
+<app-district-navbar></app-district-navbar>
+<ng-container *ngIf="districtsState$ | async as state" [ngSwitch]="state.dataState">
+    <ng-container *ngSwitchCase="DistrictsStateEnum.INITIAL">
+        <div class="p-2"> Initial State</div>
+    </ng-container>
+    <ng-container *ngSwitchCase="DistrictsStateEnum.LOADING">
+        <div class="p-2"> Loading...</div>
+    </ng-container>
+    <ng-container *ngSwitchCase="DistrictsStateEnum.ERROR">
+        <div class="p-2 text-danger"> {{state.errorMessage |json}}</div>
+    </ng-container>
+    <ng-container *ngSwitchCase="DistrictsStateEnum.LOADED" class="p-4">
+        <app-district-list [state]="state"></app-district-list>
+    </ng-container>
+</ng-container>
