@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {MoyensTransportState, MoyensTransportStateEnum} from "../../../ngrx/moyensTransport.reducer";
+import {MoyensTransportState, MoyensTransportStateEnum} from "../ngrx/moyensTransport.reducer";
 import {Store} from "@ngrx/store";
 import {Router} from "@angular/router";
-import {GetAllMTAction, NewMTAction, SaveMTAction} from "../../../ngrx/moyensTransport.actions";
+import {GetAllMTAction, NewMTAction, SaveMTAction} from "../ngrx/moyensTransport.actions";
 import {
     ModalBodyComponent,
     ModalComponent,

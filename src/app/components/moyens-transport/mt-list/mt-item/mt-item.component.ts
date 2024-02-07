@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MoyenTransport} from "../../../../model/moyenTransport.model";
+import {MoyenTransport} from "../../model/moyenTransport.model";
 import {Store} from "@ngrx/store";
 import {ActivatedRoute, Router} from "@angular/router";
-import {DeleteMTtAction, EditMTAction, GetAllMTAction} from "../../../../ngrx/moyensTransport.actions";
+import {DeleteMTtAction, EditMTAction, GetAllMTAction} from "../../ngrx/moyensTransport.actions";
 import {
   ButtonCloseDirective, ButtonDirective, FormControlDirective, FormDirective, FormLabelDirective,
   ModalBodyComponent,
@@ -27,6 +27,7 @@ import {ModalConfirmationComponent} from "../../../modal-confirmation/modal-conf
 })
 export class MtItemComponent implements  OnInit{
   @Input() moyenTransport: MoyenTransport|null=null;
+
   constructor(private store:Store, private router:Router,private modalService: NgbModal) {
 
     }

@@ -19,11 +19,11 @@ import {
   ToastHeaderComponent
 } from "@coreui/angular";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {MoyensTransportState, MoyensTransportStateEnum} from "../../../ngrx/moyensTransport.reducer";
+import {MoyensTransportState, MoyensTransportStateEnum} from "../ngrx/moyensTransport.reducer";
 import {MtItemComponent} from "../mt-list/mt-item/mt-item.component";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Store} from "@ngrx/store";
-import {EditMTAction, UpdateMTAction} from "../../../ngrx/moyensTransport.actions";
+import {EditMTAction, UpdateMTAction} from "../ngrx/moyensTransport.actions";
 import {DocsComponentsModule} from "@docs-components/docs-components.module";
 
 @Component({

@@ -6,20 +6,20 @@ import {MtNavbarComponent} from "./mt-navbar/mt-navbar.component";
 import {MtListComponent} from "./mt-list/mt-list.component";
 import {Store} from "@ngrx/store";
 import {Observable} from "rxjs";
-import {MoyensTransportState, MoyensTransportStateEnum} from "../../ngrx/moyensTransport.reducer";
+import {MoyensTransportState, MoyensTransportStateEnum} from "./ngrx/moyensTransport.reducer";
 import {map} from "rxjs/operators";
 import {state} from "@angular/animations";
-import {EditMTAction, GetAllMTAction} from "../../ngrx/moyensTransport.actions";
+import {EditMTAction, GetAllMTAction} from "./ngrx/moyensTransport.actions";
 import {Validators} from "@angular/forms";
-import {MoyenTransport} from "../../model/moyenTransport.model";
-import {MoyenTransportService} from "../../services/moyenTransport.service";
+import {MoyenTransport} from "./model/moyenTransport.model";
+import {MoyenTransportService} from "./services/moyenTransport.service";
 
 @Component({
   selector: 'app-moyens-transport',
   standalone: true,
   imports: [CommonModule, DocsComponentsModule, TableDirective, MtNavbarComponent,MtListComponent],
   templateUrl: './moyens-transport.component.html',
-  styleUrl: './moyens-transport.component.scss'
+  styleUrl: './district.component.scss'
 })
 export class MoyensTransportComponent implements  OnInit{
   moyensTransportState$:Observable<MoyensTransportState>|null=null;

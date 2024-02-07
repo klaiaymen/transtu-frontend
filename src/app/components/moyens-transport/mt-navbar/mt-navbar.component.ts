@@ -8,14 +8,14 @@ import {
   NavbarTogglerDirective, NavItemComponent
 } from "@coreui/angular";
 import {Store} from "@ngrx/store";
-import {GetAllMTAction} from "../../../ngrx/moyensTransport.actions";
+import {GetAllMTAction} from "../ngrx/moyensTransport.actions";
 import {RouterLink} from "@angular/router";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {NewMoyenTransportComponent} from "../new-moyen-transport/new-moyen-transport.component";
 import {SearchMoyensTransportComponent} from "../search-moyens-transport/search-moyens-transport.component";
 import {FormsModule} from "@angular/forms";
-import {MoyenTransportService} from "../../../services/moyenTransport.service";
-import {MoyenTransport} from "../../../model/moyenTransport.model";
+import {MoyenTransportService} from "../services/moyenTransport.service";
+import {MoyenTransport} from "../model/moyenTransport.model";
 
 
 @Component({

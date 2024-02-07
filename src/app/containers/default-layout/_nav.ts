@@ -19,6 +19,11 @@ export const navItems: INavData[] = [
     url: '/gestionMT',
     iconComponent: { name: 'cil-truck'}
   },
+  {
+    name: 'Gestion des districts',
+    url: '/gestionDistrict',
+    iconComponent: { name: 'cil-truck'}
+  },
  /* {
     title: true,
     name: 'Theme'

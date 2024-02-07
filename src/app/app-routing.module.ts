@@ -13,6 +13,9 @@ import {
 import {
   EditMoyenTransportComponent
 } from "./components/moyens-transport/edit-moyen-transport/edit-moyen-transport.component";
+import {DistrictComponent} from "./components/district/district.component";
+import {NewDistrictComponent} from "./components/district/new-district/new-district.component";
+import {EditDistrictComponent} from "./components/district/edit-district/edit-district.component";
 
 
 const routes: Routes = [
@@ -33,6 +36,7 @@ const routes: Routes = [
         loadChildren: () =>
           import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
       },
+        //mt routings
       {
         path: 'gestionMT',
         component: MoyensTransportComponent
@@ -44,6 +48,19 @@ const routes: Routes = [
       {
         path: 'editMoyenTransport/:id',
         component: EditMoyenTransportComponent
+      },
+        //districts routings
+      {
+        path: 'gestionDistrict',
+        component: DistrictComponent
+      },
+      {
+        path: 'newDistrict',
+        component: NewDistrictComponent
+      },
+      {
+        path: 'editDistrict/:id',
+        component: EditDistrictComponent
       },
       {
         path: 'theme',

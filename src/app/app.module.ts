@@ -28,7 +28,7 @@ import {
   FormModule,
   GridModule,
   HeaderModule,
-  ListGroupModule, ModalBodyComponent, ModalComponent, ModalFooterComponent, ModalHeaderComponent,
+  ListGroupModule,
   NavModule,
   ProgressModule,
   SharedModule,
@@ -40,9 +40,9 @@ import {
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 import {MoyensTransportComponent} from "./components/moyens-transport/moyens-transport.component";
 import {EffectsModule} from "@ngrx/effects";
-import {MoyensTransportEffects} from "./ngrx/moyensTransport.effects";
+import {MoyensTransportEffects} from "./components/moyens-transport/ngrx/moyensTransport.effects";
 import {StoreModule} from "@ngrx/store";
-import {moyensTransportReducer} from "./ngrx/moyensTransport.reducer";
+import {moyensTransportReducer} from "./components/moyens-transport/ngrx/moyensTransport.reducer";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 import {HttpClientModule} from "@angular/common/http";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -51,6 +51,8 @@ import {
 } from "./components/moyens-transport/edit-moyen-transport/edit-moyen-transport.component";
 import {MatInputModule} from "@angular/material/input";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {districtReducers} from "./components/district/ngrx/district.reducers";
+import {DistrictEffects} from "./components/district/ngrx/district.effects";
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
@@ -88,8 +90,8 @@ const APP_CONTAINERS = [
     CardModule,
     NgScrollbarModule,
     MoyensTransportComponent,
-    EffectsModule.forRoot([MoyensTransportEffects]),
-    StoreModule.forRoot({catalogState: moyensTransportReducer}),
+    EffectsModule.forRoot([MoyensTransportEffects,DistrictEffects]),
+    StoreModule.forRoot({catalogState: moyensTransportReducer,districtState: districtReducers}),
     StoreDevtoolsModule.instrument(),
     HttpClientModule,
     AlertModule,

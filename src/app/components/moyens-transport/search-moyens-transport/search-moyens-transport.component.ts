@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
 import {debounceTime, Observable, startWith, switchMap, tap} from "rxjs";
-import {MoyenTransportService} from "../../../services/moyenTransport.service";
+import {MoyenTransportService} from "../services/moyenTransport.service";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatInputModule} from "@angular/material/input";
 import {map} from "rxjs/operators";
@@ -12,7 +12,7 @@ import {map} from "rxjs/operators";
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, MatAutocompleteModule, MatInputModule],
   templateUrl: './search-moyens-transport.component.html',
-  styleUrl: './search-moyens-transport.component.scss'
+  styleUrl: './search-district.component.scss'
 })
 export class SearchMoyensTransportComponent {
   searchControl = new FormControl();
