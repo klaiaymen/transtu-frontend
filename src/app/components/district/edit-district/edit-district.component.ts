@@ -2,10 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ToastBodyComponent, ToastComponent, ToasterComponent, ToastHeaderComponent} from "@coreui/angular";
-import {MoyensTransportState, MoyensTransportStateEnum} from "../../moyens-transport/ngrx/moyensTransport.reducer";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Store} from "@ngrx/store";
-import {EditMTAction, UpdateMTAction} from "../../moyens-transport/ngrx/moyensTransport.actions";
 import {DistrictsState, DistrictsStateEnum} from "../ngrx/district.reducers";
 import {EditDistrictAction, UpdateDistrictAction} from "../ngrx/district.actions";
 

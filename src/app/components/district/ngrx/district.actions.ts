@@ -1,13 +1,4 @@
 import {Action} from "@ngrx/store";
-import {MoyenTransport} from "../../moyens-transport/model/moyenTransport.model";
-import {
-    DeleteMTActionError,
-    DeleteMTActionSuccess,
-    DeleteMTtAction,
-    GetAllMTAction, GetAllMTActionError,
-    GetAllMTActionSuccess,
-    MoyensTransportActionsTypes, SaveMTAction, SaveMTActionError, SaveMTActionSuccess
-} from "../../moyens-transport/ngrx/moyensTransport.actions";
 import {District} from "../model/district.model";
 
 export enum DistrictActionsTypes{

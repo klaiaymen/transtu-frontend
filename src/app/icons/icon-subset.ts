@@ -83,7 +83,7 @@ import {
   cilSun,
   cilTags,
   cilTask,
-  cilTrash, cilTruck,
+  cilTrash, cilTruck,cilIndustry,cilGraph,
   cilUnderline,
   cilUser,
   cilUserFemale,
@@ -92,6 +92,8 @@ import {
 } from '@coreui/icons';
 
 export const iconSubset = {
+  cilIndustry,
+  cilGraph,
   cibCcAmex,
   cibCcApplePay,
   cibCcMastercard,

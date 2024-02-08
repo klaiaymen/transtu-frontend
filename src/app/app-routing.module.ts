@@ -16,6 +16,9 @@ import {
 import {DistrictComponent} from "./components/district/district.component";
 import {NewDistrictComponent} from "./components/district/new-district/new-district.component";
 import {EditDistrictComponent} from "./components/district/edit-district/edit-district.component";
+import {LigneComponent} from "./components/ligne/ligne.component";
+import {NewLigneComponent} from "./components/ligne/new-ligne/new-ligne.component";
+import {EditLigneComponent} from "./components/ligne/edit-ligne/edit-ligne.component";
 
 
 const routes: Routes = [
@@ -61,6 +64,19 @@ const routes: Routes = [
       {
         path: 'editDistrict/:id',
         component: EditDistrictComponent
+      },
+      //lignes routings
+      {
+        path: 'gestionLigne',
+        component: LigneComponent
+      },
+      {
+        path: 'newLigne',
+        component: NewLigneComponent
+      },
+      {
+        path: 'editLigne/:id',
+        component: EditLigneComponent
       },
       {
         path: 'theme',

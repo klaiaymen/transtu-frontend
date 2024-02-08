@@ -1,0 +1,16 @@
+<tr *ngIf="ligne">
+  <td>{{ligne.id}}</td>
+  <td>{{ligne.code}}</td>
+  <td>{{ligne.type}}</td>
+  <td>
+    <button (click)="onDelete(ligne)" class="btn btn-sm m-1" style="background-color: crimson">
+      <i class="cil-trash" ></i>
+    </button>
+    <button (click)="onEdit(ligne)"  class="btn btn-sm m-1" style="background-color: cornflowerblue">
+      <i class="cil-pencil"></i>
+    </button>
+    <button (click)="onDetails(ligne)"  class="btn btn-sm m-1" style="background-color: gold">
+      <i class="cil-options"></i>
+    </button>
+  </td>
+</tr>

@@ -1,0 +1,73 @@
+<div class="container">
+
+  <ng-container *ngIf="state">
+    <ng-container *ngIf="state.dataState==LignesStateEnum.LOADING">
+      <div class="position-relative" >
+        <c-toaster placement="top-end" position="absolute" >
+          <c-toast [autohide]="false" visible>
+            <c-toast-header style="background-color: cadetblue">
+
+              <strong class="me-auto">Loading ...</strong>
+              <small class="text-muted">Just now</small>
+            </c-toast-header>
+            <c-toast-body>Pls wait !</c-toast-body>
+          </c-toast>
+        </c-toaster>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="state.dataState==LignesStateEnum.ERROR">
+      <div class="position-relative" >
+        <c-toaster placement="top-end" position="absolute" >
+          <c-toast [autohide]="false" visible>
+            <c-toast-header style="background-color: #cf2f4c">
+
+              <strong class="me-auto">Error</strong>
+              <small class="text-muted">Just now</small>
+            </c-toast-header>
+            <c-toast-body>{{state.errorMessage | json}}</c-toast-body>
+          </c-toast>
+        </c-toaster>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="state.dataState==LignesStateEnum.UPDATED">
+      <div class="position-relative" >
+        <c-toaster placement="top-end" position="absolute" >
+          <c-toast [autohide]="false" visible>
+            <c-toast-header style="background-color: darkseagreen">
+
+              <strong class="me-auto">Well done</strong>
+              <small class="text-muted">Just now</small>
+            </c-toast-header>
+            <c-toast-body>Ligne Updated Successfully</c-toast-body>
+          </c-toast>
+        </c-toaster>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="state.dataState==LignesStateEnum.LOADED">
+      <ng-container *ngIf="formBuilt" >
+        <form *ngIf="ligneFormGroup" [formGroup]="ligneFormGroup" (ngSubmit)="onUpdateLigne()" style="margin: 50px">
+          <div class="form-group">
+            <h5>Edition District </h5>
+            <label for="id"> ID  :</label>
+            <label>{{ligneFormGroup.controls['id'].value}}</label>
+            <input type="hidden" formControlName="id" id="id">
+          </div>
+          <hr>
+          <div class="form-group">
+            <label for="code"> Code</label>
+            <input type="text" class="form-control" formControlName="code" id="code" >
+
+          </div>
+
+          <div class="form-group">
+            <label for="type"> Type</label>
+            <input type="text" class="form-control" formControlName="type" id="type" >
+          </div>
+          <button type="submit" class="btn btn-success m-1" >Save</button>
+        </form>
+
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</div>
+

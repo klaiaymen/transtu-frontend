@@ -4,4 +4,6 @@ export interface MoyenTransport{
   code:string;
   type:string;
   assignedToDistrict: boolean;
+  assignedToLigne: boolean;
+  disabled:boolean;
 }

@@ -53,6 +53,8 @@ import {MatInputModule} from "@angular/material/input";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {districtReducers} from "./components/district/ngrx/district.reducers";
 import {DistrictEffects} from "./components/district/ngrx/district.effects";
+import {ligneReducers} from "./components/ligne/ngrx/ligne.reducers";
+import {LigneEffects} from "./components/ligne/ngrx/ligne.effects";
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
@@ -90,8 +92,8 @@ const APP_CONTAINERS = [
     CardModule,
     NgScrollbarModule,
     MoyensTransportComponent,
-    EffectsModule.forRoot([MoyensTransportEffects,DistrictEffects]),
-    StoreModule.forRoot({catalogState: moyensTransportReducer,districtState: districtReducers}),
+    EffectsModule.forRoot([MoyensTransportEffects,DistrictEffects,LigneEffects]),
+    StoreModule.forRoot({catalogState: moyensTransportReducer,districtState: districtReducers,lineState:ligneReducers}),
     StoreDevtoolsModule.instrument(),
     HttpClientModule,
     AlertModule,

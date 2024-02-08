@@ -22,7 +22,12 @@ export const navItems: INavData[] = [
   {
     name: 'Gestion des districts',
     url: '/gestionDistrict',
-    iconComponent: { name: 'cil-truck'}
+    iconComponent: { name: 'cil-industry'}
+  },
+  {
+    name: 'Gestion des lignes',
+    url: '/gestionLigne',
+    iconComponent: { name: 'cil-graph'}
   },
  /* {
     title: true,
