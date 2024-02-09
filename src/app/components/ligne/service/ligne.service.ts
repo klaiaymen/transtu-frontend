@@ -4,6 +4,7 @@ import {Observable, throwError} from "rxjs";
 import {Ligne} from "../model/ligne.model";
 import {MoyenTransport} from "../../moyens-transport/model/moyenTransport.model";
 import {catchError} from "rxjs/operators";
+import {Station} from "../../station/model/station.model";
 
 @Injectable({providedIn:"root"})
 export class LigneService {
@@ -36,6 +37,18 @@ export class LigneService {
 
   removeMTFromLigne(mtId: number, ligneId: number): Observable<any> {
     const url = `${this.baseUrl}/api/${mtId}/remove-from-ligne/${ligneId}`;
+    return this.http.delete(url, {}).pipe(
+      catchError(error => throwError(error))
+    );
+  }
+
+  assignStationToLigne(stationId: number, ligneId: number): Observable<Station> {
+    const url = `${this.baseUrl}/api/${stationId}/assign-station-to-ligne/${ligneId}`;
+    return this.http.post<Station>(url, null);
+  }
+
+  removeStationFromLIgne(stationId: number, ligneId: number): Observable<any> {
+    const url = `${this.baseUrl}/api/${stationId}/remove-station-from-ligne/${ligneId}`;
     return this.http.delete(url, {}).pipe(
       catchError(error => throwError(error))
     );

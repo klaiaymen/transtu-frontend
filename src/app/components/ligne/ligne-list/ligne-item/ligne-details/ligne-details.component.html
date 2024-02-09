@@ -95,6 +95,88 @@
         </div>
       </ng-template>
     </c-accordion-item>
+
+    <c-accordion-item #item3="cAccordionItem" [visible]="false">
+      <ng-template cTemplateId="accordionHeaderTemplate">
+        <button (click)="item3.toggleItem()" [collapsed]="!item3.visible" cAccordionButton>
+          Stations associés
+        </button>
+      </ng-template>
+      <ng-template cTemplateId="accordionBodyTemplate">
+        <div class="accordion-body">
+          <c-col xs="12">
+            <c-card class="mb-4">
+              <c-card-body>
+                <table  [striped]="true" cTable hover>
+                  <thead>
+
+                  <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Label</th>
+                    <th scope="col">Code</th>
+                    <th scope="col">Longitude</th>
+                    <th scope="col">Latitude</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let station of stations">
+                    <td>{{station.id}}</td>
+                    <td>{{station.label}}</td>
+                    <td>{{station.code}}</td>
+                    <td>{{station.longitude}}</td>
+                    <td>{{station.lattitude}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </c-card-body>
+            </c-card>
+          </c-col>
+        </div>
+      </ng-template>
+    </c-accordion-item>
+
+    <c-accordion-item #item4="cAccordionItem" [visible]="false">
+      <ng-template cTemplateId="accordionHeaderTemplate">
+        <button (click)="item4.toggleItem()" [collapsed]="!item4.visible" cAccordionButton>
+          Liste de tous les stations
+        </button>
+      </ng-template>
+      <ng-template cTemplateId="accordionBodyTemplate">
+        <div class="accordion-body">
+          <c-col xs="12">
+            <c-card class="mb-4">
+              <c-card-body>
+                <table  [striped]="true" cTable hover>
+                  <thead>
+
+                  <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Label</th>
+                    <th scope="col">Code</th>
+                    <th scope="col">Longitude</th>
+                    <th scope="col">lattitude</th>
+                    <th scope="col">Assignée</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let station of allStations">
+                    <td>{{station.id}}</td>
+                    <td>{{station.label}}</td>
+                    <td>{{station.code}}</td>
+                    <td>{{station.longitude}}</td>
+                    <td>{{station.lattitude}}</td>
+                    <td>
+                      <input type="checkbox" [(ngModel)]="station.assignedToLigne" (change)="toggleStationsAssignment(station, ligne)">
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </c-card-body>
+            </c-card>
+          </c-col>
+        </div>
+      </ng-template>
+    </c-accordion-item>
   </c-accordion>
 </div>
 <div class="modal-footer">

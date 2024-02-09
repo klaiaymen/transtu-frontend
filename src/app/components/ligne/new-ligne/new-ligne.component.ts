@@ -26,9 +26,9 @@ export class NewLigneComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.store.dispatch(new NewDistrictAction({}))
+    this.store.dispatch(new NewLigneAction({}))
     this.store.subscribe(state=>{
-      this.state=state.districtState;
+      this.state=state.lineState;
       if(this.state?.dataState==LignesStateEnum.NEW){
         this.ligneFormGroup=this.fb.group({
           code:['',Validators.required],

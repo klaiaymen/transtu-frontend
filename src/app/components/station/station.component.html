@@ -1,0 +1,15 @@
+<app-station-navbar></app-station-navbar>
+<ng-container *ngIf="StationsState$ | async as state" [ngSwitch]="state.dataState">
+  <ng-container *ngSwitchCase="StationsStateEnum.INITIAL">
+    <div class="p-2"> Initial State</div>
+  </ng-container>
+  <ng-container *ngSwitchCase="StationsStateEnum.LOADING">
+    <div class="p-2"> Loading...</div>
+  </ng-container>
+  <ng-container *ngSwitchCase="StationsStateEnum.ERROR">
+    <div class="p-2 text-danger"> {{state.errorMessage |json}}</div>
+  </ng-container>
+  <ng-container *ngSwitchCase="StationsStateEnum.LOADED" class="p-4">
+    <app-station-list [state]="state"></app-station-list>
+  </ng-container>
+</ng-container>

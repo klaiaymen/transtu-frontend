@@ -15,6 +15,9 @@ import {ActivatedRoute} from "@angular/router";
 import {DomSanitizer} from "@angular/platform-browser";
 import {MoyenTransportService} from "../../../../moyens-transport/services/moyenTransport.service";
 import {LigneService} from "../../../service/ligne.service";
+import {District} from "../../../../district/model/district.model";
+import {StationService} from "../../../../station/service/station.service";
+import {Station} from "../../../../station/model/station.model";
 
 @Component({
   selector: 'app-ligne-details',
@@ -27,22 +30,25 @@ export class LigneDetailsComponent implements OnInit{
   @Input() ligneID: number;
   ligne: Ligne|null=null;
   moyenTransport: MoyenTransport|null=null;
-  allMoyensTransports: MoyenTransport[]=[]
-
+  allMoyensTransports: MoyenTransport[]=[];
+  allStations: Station[]=[];
+  stations: Station[]=[];
   constructor(public activeModal: NgbActiveModal,private activatedRoute: ActivatedRoute,private sanitizer: DomSanitizer,
-    private modalService: NgbModal, private ligneService: LigneService, private moyenTransportService: MoyenTransportService) {
+    private stationService:StationService,private modalService: NgbModal, private ligneService: LigneService, private moyenTransportService: MoyenTransportService) {
       this.ligneID=activatedRoute.snapshot.params['id'];
   }
 
   ngOnInit(): void {
     this.loadLigneDetails();
     this.loadAllMoyensTransports();
+    this.loadAllStations()
   }
 
   loadLigneDetails(): void {
     this.ligneService.getLigneById(this.ligneID).subscribe((ligne: Ligne) => {
       this.ligne = ligne;
       this.moyenTransport = ligne.moyenTransport; // Supposant que votre ligne a une propriété moyensTransport
+      this.stations=ligne.stations;
     });
   }
 
@@ -82,6 +88,42 @@ export class LigneDetailsComponent implements OnInit{
         // @ts-ignore
         this.ligneService.removeMTFromLigne(ligne.moyenTransport.id, ligne.id).subscribe(() => {
           ligne.moyenTransport = null;
+        });
+      }
+    }
+  }
+
+
+
+  //station associes panel
+  loadAllStations() {
+    this.stationService.getStations().subscribe(stations => {
+      this.allStations = stations.map(s => ({
+        ...s,
+        assignedToLigne: this.isStationAssignedToLigne(s, this.ligne)
+      }));
+    });
+  }
+
+  isStationAssignedToLigne(station: Station, ligne: Ligne | null): boolean {
+    // @ts-ignore
+    return ligne?.stations.some(s => s.id === station.id);
+  }
+
+  toggleStationsAssignment(station: Station, ligne: Ligne) {
+    if (station.assignedToLigne) {
+      // Ajouter l station a la ligne
+      this.ligneService.assignStationToLigne(station.id, ligne.id).subscribe(() => {
+        station.assignedToLigne = true;
+        ligne.stations.push(station);
+      });
+    } else {
+      // Supprimer la station du ligne
+      const index = ligne.stations.findIndex(s => s.id === station.id);
+      if (index !== -1) {
+        this.ligneService.removeStationFromLIgne(station.id, ligne.id).subscribe(() => {
+          station.assignedToLigne = false;
+          ligne.stations.splice(index, 1);
         });
       }
     }

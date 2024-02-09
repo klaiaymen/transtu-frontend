@@ -1,0 +1,70 @@
+<div class="container">
+
+  <ng-container *ngIf="state">
+    <ng-container *ngIf="state.dataState==StationsStateEnum.LOADING">
+      <div class="position-relative" >
+        <c-toaster placement="top-end" position="absolute" >
+          <c-toast [autohide]="false" visible>
+            <c-toast-header style="background-color: cadetblue">
+
+              <strong class="me-auto">Loading ...</strong>
+              <small class="text-muted">Just now</small>
+            </c-toast-header>
+            <c-toast-body>Pls wait !</c-toast-body>
+          </c-toast>
+        </c-toaster>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="state.dataState==StationsStateEnum.LOADED">
+      <div class="position-relative" >
+        <c-toaster placement="top-end" position="absolute" >
+          <c-toast [autohide]="false" visible>
+            <c-toast-header style="background-color: darkseagreen">
+
+              <strong class="me-auto">Well done</strong>
+              <small class="text-muted">Just now</small>
+            </c-toast-header>
+            <c-toast-body>Station ajouté avec success</c-toast-body>
+          </c-toast>
+        </c-toaster>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="state.dataState==StationsStateEnum.NEW">
+      <ng-container>
+        <form *ngIf="stationFormGroup" [formGroup]="stationFormGroup" (ngSubmit)="onSaveStation()" style="margin: 50px">
+          <div class="form-group">
+            <h5>Ajout Station </h5>
+          </div>
+          <hr>
+
+          <div class="form-group" >
+            <label for="code"> Code</label>
+            <input type="text" class="form-control" formControlName="code" id="code" [ngClass]="{'is-valid':submitted && stationFormGroup.controls['code'].errors}">
+            <div *ngIf="submitted && stationFormGroup.controls['code'].errors" class="invalid-feedback">
+              <div *ngIf="stationFormGroup.controls['code'].hasError('required')">label is required</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="label"> Label</label>
+            <input type="text" class="form-control" formControlName="label" id="label" >
+          </div>
+
+          <div class="form-group">
+            <label for="longitude"> Longitude</label>
+            <input type="text" class="form-control" formControlName="longitude" id="longitude" >
+          </div>
+
+          <div class="form-group">
+            <label for="latitude"> Latitude</label>
+            <input type="text" class="form-control" formControlName="latitude" id="latitude" >
+          </div>
+
+
+          <button type="submit" class="btn btn-success" style="margin-top: 10px">Ajouter</button>
+        </form>
+
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</div>

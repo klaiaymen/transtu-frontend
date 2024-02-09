@@ -1,6 +1,4 @@
-import {District} from "../../district/model/district.model";
 import {Action} from "@ngrx/store";
-import {DistrictActionsTypes, DistrictsActions} from "../../district/ngrx/district.actions";
 import {Ligne} from "../model/ligne.model";
 import {LigneActionsTypes, LignesActions} from "./ligne.actions";
 

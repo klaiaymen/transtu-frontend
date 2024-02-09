@@ -29,6 +29,11 @@ export const navItems: INavData[] = [
     url: '/gestionLigne',
     iconComponent: { name: 'cil-graph'}
   },
+  {
+    name: 'Gestion des Stations',
+    url: '/gestionStation',
+    iconComponent: { name: 'cil-bus-alt'}
+  },
  /* {
     title: true,
     name: 'Theme'

@@ -1,0 +1,15 @@
+<tr *ngIf="station">
+  <td>{{station.id}}</td>
+  <td>{{station.label}}</td>
+  <td>{{station.code}}</td>
+  <td>{{station.longitude}}</td>
+  <td>{{station.lattitude}}</td>
+  <td>
+    <button (click)="onDelete(station)" class="btn btn-sm m-1" style="background-color: crimson">
+      <i class="cil-trash" ></i>
+    </button>
+    <button (click)="onEdit(station)"  class="btn btn-sm m-1" style="background-color: cornflowerblue">
+      <i class="cil-pencil"></i>
+    </button>
+  </td>
+</tr>

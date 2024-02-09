@@ -1,4 +1,5 @@
 import {MoyenTransport} from "../../moyens-transport/model/moyenTransport.model";
+import {Station} from "../../station/model/station.model";
 
 export enum TypeLigne {
   CIRCULAIRE = 'CIRCULAIRE',
@@ -13,6 +14,6 @@ export interface Ligne {
   code: string;
   type: TypeLigne;
   moyenTransport: MoyenTransport|null;
-  /*stations: Station[];
-  itineraire: Itineraire;*/
+  stations: Station[];
+  //itineraire: Itineraire;
 }

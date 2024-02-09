@@ -1,7 +1,7 @@
 <div class="container">
 
   <ng-container *ngIf="state">
-    <ng-container *ngIf="state.dataState==LignesStateEnum.LOADING">
+    <ng-container *ngIf="state.dataState==StationsStateEnum.LOADING">
       <div class="position-relative" >
         <c-toaster placement="top-end" position="absolute" >
           <c-toast [autohide]="false" visible>
@@ -15,7 +15,7 @@
         </c-toaster>
       </div>
     </ng-container>
-    <ng-container *ngIf="state.dataState==LignesStateEnum.ERROR">
+    <ng-container *ngIf="state.dataState==StationsStateEnum.ERROR">
       <div class="position-relative" >
         <c-toaster placement="top-end" position="absolute" >
           <c-toast [autohide]="false" visible>
@@ -29,7 +29,7 @@
         </c-toaster>
       </div>
     </ng-container>
-    <ng-container *ngIf="state.dataState==LignesStateEnum.UPDATED">
+    <ng-container *ngIf="state.dataState==StationsStateEnum.UPDATED">
       <div class="position-relative" >
         <c-toaster placement="top-end" position="absolute" >
           <c-toast [autohide]="false" visible>
@@ -38,21 +38,26 @@
               <strong class="me-auto">Well done</strong>
               <small class="text-muted">Just now</small>
             </c-toast-header>
-            <c-toast-body>Ligne Updated Successfully</c-toast-body>
+            <c-toast-body>Station Updated Successfully</c-toast-body>
           </c-toast>
         </c-toaster>
       </div>
     </ng-container>
-    <ng-container *ngIf="state.dataState==LignesStateEnum.LOADED">
+    <ng-container *ngIf="state.dataState==StationsStateEnum.LOADED">
       <ng-container *ngIf="formBuilt" >
-        <form *ngIf="ligneFormGroup" [formGroup]="ligneFormGroup" (ngSubmit)="onUpdateLigne()" style="margin: 50px">
+        <form *ngIf="stationFormGroup" [formGroup]="stationFormGroup" (ngSubmit)="onUpdateStation()" style="margin: 50px">
           <div class="form-group">
-            <h5>Edition Ligne </h5>
+            <h5>Edition Station </h5>
             <label for="id"> ID  :</label>
-            <label>{{ligneFormGroup.controls['id'].value}}</label>
+            <label>{{stationFormGroup.controls['id'].value}}</label>
             <input type="hidden" formControlName="id" id="id">
           </div>
           <hr>
+          <div class="form-group">
+            <label for="label"> Label</label>
+            <input type="text" class="form-control" formControlName="label" id="label" >
+          </div>
+
           <div class="form-group">
             <label for="code"> Code</label>
             <input type="text" class="form-control" formControlName="code" id="code" >
@@ -60,9 +65,16 @@
           </div>
 
           <div class="form-group">
-            <label for="type"> Type</label>
-            <input type="text" class="form-control" formControlName="type" id="type" >
+            <label for="longitude"> Longitude</label>
+            <input type="text" class="form-control" formControlName="longitude" id="longitude" >
+
           </div>
+          <div class="form-group">
+            <label for="latitude"> Latitude</label>
+            <input type="text" class="form-control" formControlName="latitude" id="latitude" >
+
+          </div>
+
           <button type="submit" class="btn btn-success m-1" >Save</button>
         </form>
 
@@ -70,4 +82,3 @@
     </ng-container>
   </ng-container>
 </div>
-
