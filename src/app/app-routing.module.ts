@@ -22,6 +22,11 @@ import {EditLigneComponent} from "./components/ligne/edit-ligne/edit-ligne.compo
 import {StationComponent} from "./components/station/station.component";
 import {NewStationComponent} from "./components/station/new-station/new-station.component";
 import {EditStationComponent} from "./components/station/edit-station/edit-station.component";
+import {ItineraireComponent} from "./components/itineraire/itineraire.component";
+import {NewItineraireComponent} from "./components/itineraire/new-itineraire/new-itineraire.component";
+import {PointComponent} from "./components/point/point.component";
+import {NewPointComponent} from "./components/point/new-point/new-point.component";
+import {EditPointComponent} from "./components/point/edit-point/edit-point.component";
 
 
 const routes: Routes = [
@@ -93,6 +98,28 @@ const routes: Routes = [
       {
         path: 'editStation/:id',
         component: EditStationComponent
+      },
+      //points routings
+      {
+        path: 'gestionPoint',
+        component: PointComponent
+      },
+      {
+        path: 'newPoint',
+        component: NewPointComponent
+      },
+      {
+        path: 'editPoint/:id',
+        component: EditPointComponent
+      },
+      //itineraires routings
+      {
+        path: 'gestionItineraire',
+        component: ItineraireComponent
+      },
+      {
+        path: 'newItineraire',
+        component: NewItineraireComponent
       },
       {
         path: 'theme',

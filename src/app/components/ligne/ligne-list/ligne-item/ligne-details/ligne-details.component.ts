@@ -107,7 +107,7 @@ export class LigneDetailsComponent implements OnInit{
 
   isStationAssignedToLigne(station: Station, ligne: Ligne | null): boolean {
     // @ts-ignore
-    return ligne?.stations.some(s => s.id === station.id);
+    return ligne.stations.some(s => s.id === station.id);
   }
 
   toggleStationsAssignment(station: Station, ligne: Ligne) {

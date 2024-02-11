@@ -1,0 +1,171 @@
+<div class="modal-header">
+  <h4 class="modal-title">Détails du Ligne</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body" *ngIf="itineraire">
+  <c-accordion [alwaysOpen]="true" [flush]="true" class="shadow rounded-2">
+    <c-accordion-item #item0="cAccordionItem" [visible]="false">
+      <ng-template cTemplateId="accordionHeaderTemplate">
+        <button (click)="item0.toggleItem()" [collapsed]="!item0.visible" cAccordionButton>
+          Itineraire {{itineraire.id}} détails
+        </button>
+      </ng-template>
+      <ng-template cTemplateId="accordionBodyTemplate">
+        <div class="accordion-body">
+          <p><strong>Code:</strong> {{ itineraire.id }}</p>
+        </div>
+      </ng-template>
+    </c-accordion-item>
+    <c-accordion-item #item1="cAccordionItem" [visible]="false">
+      <ng-template cTemplateId="accordionHeaderTemplate">
+        <button (click)="item1.toggleItem()" [collapsed]="!item1.visible" cAccordionButton>
+          Ligne associée
+        </button>
+      </ng-template>
+      <ng-template cTemplateId="accordionBodyTemplate">
+        <div class="accordion-body">
+          <c-col xs="12" *ngIf="itineraire.ligne">
+            <c-card class="mb-4">
+              <c-card-body>
+                <table  [striped]="true" cTable hover>
+                  <thead>
+
+                  <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Code</th>
+                    <th scope="col">Type</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>{{itineraire.ligne.id}}</td>
+                    <td>{{itineraire.ligne.code}}</td>
+                    <td>{{itineraire.ligne.type}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </c-card-body>
+            </c-card>
+          </c-col>
+        </div>
+      </ng-template>
+    </c-accordion-item>
+    <c-accordion-item #item2="cAccordionItem" [visible]="false">
+      <ng-template cTemplateId="accordionHeaderTemplate">
+        <button (click)="item2.toggleItem()" [collapsed]="!item2.visible" cAccordionButton>
+          Liste de tous les Lignes
+        </button>
+      </ng-template>
+      <ng-template cTemplateId="accordionBodyTemplate">
+        <div class="accordion-body">
+          <c-col xs="12">
+            <c-card class="mb-4">
+              <c-card-body>
+                <table  [striped]="true" cTable hover>
+                  <thead>
+
+                  <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Code</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Asigné</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let ligne of allLignes">
+                    <td>{{ligne.id}}</td>
+                    <td>{{ligne.code}}</td>
+                    <td>{{ligne.type}}</td>
+                    <td>
+                      <input type="checkbox" [(ngModel)]="ligne.assignedToItineraire" [disabled]="ligne.disabled"  (change)="toggleLigneAssignment(ligne, itineraire)">
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </c-card-body>
+            </c-card>
+          </c-col>
+        </div>
+      </ng-template>
+    </c-accordion-item>
+
+    <c-accordion-item #item3="cAccordionItem" [visible]="false">
+      <ng-template cTemplateId="accordionHeaderTemplate">
+        <button (click)="item3.toggleItem()" [collapsed]="!item3.visible" cAccordionButton>
+          Points associés
+        </button>
+      </ng-template>
+      <ng-template cTemplateId="accordionBodyTemplate">
+        <div class="accordion-body">
+          <c-col xs="12">
+            <c-card class="mb-4">
+              <c-card-body>
+                <table  [striped]="true" cTable hover>
+                  <thead>
+
+                  <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Longitude</th>
+                    <th scope="col">Latitude</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let point of points">
+                    <td>{{point.id}}</td>
+                    <td>{{point.longitude}}</td>
+                    <td>{{point.latitude}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </c-card-body>
+            </c-card>
+          </c-col>
+        </div>
+      </ng-template>
+    </c-accordion-item>
+
+    <c-accordion-item #item4="cAccordionItem" [visible]="false">
+      <ng-template cTemplateId="accordionHeaderTemplate">
+        <button (click)="item4.toggleItem()" [collapsed]="!item4.visible" cAccordionButton>
+          Liste de tous les Points
+        </button>
+      </ng-template>
+      <ng-template cTemplateId="accordionBodyTemplate">
+        <div class="accordion-body">
+          <c-col xs="12">
+            <c-card class="mb-4">
+              <c-card-body>
+                <table  [striped]="true" cTable hover>
+                  <thead>
+
+                  <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Longitude</th>
+                    <th scope="col">latitude</th>
+                    <th scope="col">Assignée</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let point of allPoints">
+                    <td>{{point.id}}</td>
+                    <td>{{point.longitude}}</td>
+                    <td>{{point.latitude}}</td>
+                    <td>
+                      <input type="checkbox" [(ngModel)]="point.assignedToItineraire" (change)="togglePointsAssignment(point, itineraire)">
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </c-card-body>
+            </c-card>
+          </c-col>
+        </div>
+      </ng-template>
+    </c-accordion-item>
+  </c-accordion>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss()">Fermer</button>
+</div>

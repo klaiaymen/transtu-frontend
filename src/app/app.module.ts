@@ -57,6 +57,10 @@ import {ligneReducers} from "./components/ligne/ngrx/ligne.reducers";
 import {LigneEffects} from "./components/ligne/ngrx/ligne.effects";
 import {StationReducers} from "./components/station/ngrx/station.reducers";
 import {StationEffects} from "./components/station/ngrx/station.effects";
+import {itineraireReducers} from "./components/itineraire/ngrx/itineraire.reducers";
+import {ItineraireEffects} from "./components/itineraire/ngrx/itineraire.effects";
+import {PointReducers} from "./components/point/ngrx/point.reducers";
+import {PointEffects} from "./components/point/ngrx/point.effects";
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
@@ -94,8 +98,8 @@ const APP_CONTAINERS = [
     CardModule,
     NgScrollbarModule,
     MoyensTransportComponent,
-    EffectsModule.forRoot([MoyensTransportEffects,DistrictEffects,LigneEffects,StationEffects]),
-    StoreModule.forRoot({catalogState: moyensTransportReducer,districtState: districtReducers,lineState:ligneReducers,stationState: StationReducers}),
+    EffectsModule.forRoot([MoyensTransportEffects,DistrictEffects,LigneEffects,StationEffects,ItineraireEffects,PointEffects]),
+    StoreModule.forRoot({catalogState: moyensTransportReducer,districtState: districtReducers,lineState:ligneReducers,stationState: StationReducers,itineraireState: itineraireReducers, pointState:PointReducers}),
     StoreDevtoolsModule.instrument(),
     HttpClientModule,
     AlertModule,

@@ -1,0 +1,22 @@
+<c-col xs="12">
+  <c-card class="mb-4">
+    <c-card-body>
+      <table *ngIf="state"  [striped]="true" cTable hover>
+        <thead>
+
+        <tr>
+          <th scope="col">Id</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <app-itineraire-item *ngFor="let itineraire of state.itineraires" [itineraire]="itineraire" style="display: contents"></app-itineraire-item>
+        </tbody>
+      </table>
+      <!-- Affichez les contrôles de pagination ici -->
+      <button cButton class="me-1" variant="ghost" color="info"  (click)="loadNextPage()">
+        >>
+      </button>
+    </c-card-body>
+  </c-card>
+</c-col>

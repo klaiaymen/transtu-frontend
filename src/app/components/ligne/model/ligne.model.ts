@@ -16,4 +16,6 @@ export interface Ligne {
   moyenTransport: MoyenTransport|null;
   stations: Station[];
   //itineraire: Itineraire;
+  assignedToItineraire: boolean;
+  disabled:boolean;
 }

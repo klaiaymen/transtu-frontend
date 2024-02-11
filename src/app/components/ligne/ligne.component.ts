@@ -5,7 +5,6 @@ import {DistrictNavbarComponent} from "../district/district-navbar/district-navb
 import {Observable} from "rxjs";
 import {Store} from "@ngrx/store";
 import {map} from "rxjs/operators";
-import {GetAllDistrictAction} from "../district/ngrx/district.actions";
 import {LignesState, LignesStateEnum} from "./ngrx/ligne.reducers";
 import {GetAllLigneAction} from "./ngrx/ligne.actions";
 import {LigneNavbarComponent} from "./ligne-navbar/ligne-navbar.component";

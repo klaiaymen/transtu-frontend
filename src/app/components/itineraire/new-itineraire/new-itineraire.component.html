@@ -1,0 +1,60 @@
+<div class="container">
+
+  <ng-container *ngIf="state">
+    <ng-container *ngIf="state.dataState==ItinerairesStateEnum.LOADING">
+      <div class="position-relative" >
+        <c-toaster placement="top-end" position="absolute" >
+          <c-toast [autohide]="false" visible>
+            <c-toast-header style="background-color: cadetblue">
+
+              <strong class="me-auto">Loading ...</strong>
+              <small class="text-muted">Just now</small>
+            </c-toast-header>
+            <c-toast-body>Pls wait !</c-toast-body>
+          </c-toast>
+        </c-toaster>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="state.dataState==ItinerairesStateEnum.LOADED">
+      <div class="position-relative" >
+        <c-toaster placement="top-end" position="absolute" >
+          <c-toast [autohide]="false" visible>
+            <c-toast-header style="background-color: darkseagreen">
+
+              <strong class="me-auto">Well done</strong>
+              <small class="text-muted">Just now</small>
+            </c-toast-header>
+            <c-toast-body>Itineraire ajouté avec success</c-toast-body>
+          </c-toast>
+        </c-toaster>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="state.dataState==ItinerairesStateEnum.NEW">
+      <ng-container>
+        <form *ngIf="itineraireFormGroup" [formGroup]="itineraireFormGroup" (ngSubmit)="onSaveItineraire()" style="margin: 50px">
+          <div class="form-group">
+            <h5>Ajout Itineraire </h5>
+          </div>
+          <hr>
+
+          <!--<div class="form-group" >
+            <label for="code"> Code</label>
+            <input type="text" class="form-control" formControlName="code" id="code" [ngClass]="{'is-valid':submitted && ligneFormGroup.controls['code'].errors}">
+            <div *ngIf="submitted && ligneFormGroup.controls['code'].errors" class="invalid-feedback">
+              <div *ngIf="ligneFormGroup.controls['code'].hasError('required')">label is required</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="type"> Type</label>
+            <input type="text" class="form-control" formControlName="type" id="type" >
+          </div>-->
+
+
+          <button type="submit" class="btn btn-success" style="margin-top: 10px">Ajouter</button>
+        </form>
+
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</div>

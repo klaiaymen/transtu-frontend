@@ -1,0 +1,23 @@
+<c-col xs="12">
+  <c-card class="mb-4">
+    <c-card-body>
+      <table *ngIf="state"  [striped]="true" cTable hover>
+        <thead>
+
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Longitude</th>
+          <th scope="col">Latitude</th>
+        </tr>
+        </thead>
+        <tbody>
+        <app-point-item *ngFor="let point of state.points" [point]="point" style="display: contents"></app-point-item>
+        </tbody>
+      </table>
+      <!-- Affichez les contrôles de pagination ici -->
+      <button cButton class="me-1" variant="ghost" color="info"  (click)="loadNextPage()">
+        >>
+      </button>
+    </c-card-body>
+  </c-card>
+</c-col>
