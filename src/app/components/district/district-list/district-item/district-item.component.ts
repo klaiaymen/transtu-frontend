@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {ModalConfirmationComponent} from "../../../modal-confirmation/modal-confirmation.component";
 import {Store} from "@ngrx/store";
@@ -9,18 +9,30 @@ import {DeleteDistrictAction} from "../../ngrx/district.actions";
 import {EditDistrictComponent} from "../../edit-district/edit-district.component";
 import {MtListComponent} from "../../../moyens-transport/mt-list/mt-list.component";
 import {MoyensTransportComponent} from "../../../moyens-transport/moyens-transport.component";
-import {DistrictDetailsComponent} from "./district-details/district-details.component";
+import {MoyenTransport} from "../../../moyens-transport/model/moyenTransport.model";
+import {DistrictService} from "../../service/district.services";
+import {MoyenTransportService} from "../../../moyens-transport/services/moyenTransport.service";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {TableDirective} from "@coreui/angular";
+import {result} from "lodash-es";
 
 @Component({
   selector: 'app-district-item',
   standalone: true,
-  imports: [CommonModule, MtListComponent, MoyensTransportComponent],
+  imports: [CommonModule, MtListComponent, MoyensTransportComponent, ReactiveFormsModule, TableDirective, FormsModule],
   templateUrl: './district-item.component.html',
   styleUrl: './district-item.component.scss'
 })
-export class DistrictItemComponent {
+export class DistrictItemComponent implements OnInit{
+  ngOnInit(): void {
+    this.loadAllMoyensTransports()
+  }
   @Input() district: District|null=null;
-  constructor(private store:Store, private router:Router,private modalService: NgbModal) {
+  allMoyensTransports: MoyenTransport[]=[]
+  showTable:boolean=false;
+  iconFullscreen: string = "cil-fullscreen";
+  iconExitFullscreen: string = "cil-fullscreen-exit";
+  constructor(private store:Store, private router:Router,private modalService: NgbModal,private districtService: DistrictService, private moyenTransportService: MoyenTransportService) {
   }
 
   onDelete(district:District) {
@@ -48,8 +60,50 @@ export class DistrictItemComponent {
     modalRef.componentInstance.districtID = district.id;
   }
 
-  onDetails(district: District) {
+  /*onDetails(district: District) {
     const modalRef = this.modalService.open(DistrictDetailsComponent);
     modalRef.componentInstance.districtID = district.id;
+  }*/
+
+
+  loadAllMoyensTransports() {
+    this.moyenTransportService.getMts(1,2).subscribe(moyensTransports => {
+      this.allMoyensTransports = moyensTransports.map(mt => ({
+        ...mt,
+        assignedToDistrict: this.isMoyenTransportAssignedToDistrict(mt, this.district)
+      }));
+    });
+  }
+
+  isMoyenTransportAssignedToDistrict(moyenTransport: MoyenTransport, district: District | null): boolean {
+    // @ts-ignore
+    return district.moyensTransport.some(mt => mt.id === moyenTransport.id);
+  }
+
+  toggleMoyenTransportAssignment(moyenTransport: MoyenTransport, district: District) {
+    if (moyenTransport.assignedToDistrict) {
+      // Ajouter le moyen de transport au district
+      this.districtService.assignMTToDistrict(moyenTransport.id, district.id).subscribe(() => {
+        moyenTransport.assignedToDistrict = true;
+        district.moyensTransport.push(moyenTransport);
+      });
+    } else {
+      // Supprimer le moyen de transport du district
+      const index = district.moyensTransport.findIndex(mt => mt.id === moyenTransport.id);
+      if (index !== -1) {
+        this.districtService.removeMTFromDistrict(moyenTransport.id, district.id).subscribe(() => {
+          moyenTransport.assignedToDistrict = false;
+          district.moyensTransport.splice(index, 1);
+        });
+      }
+    }
+  }
+  toggleTableMts(): void {
+    this.showTable = !this.showTable;
+    if (this.showTable) {
+      this.iconFullscreen = "cil-exit-fullscreen";
+    } else {
+      this.iconFullscreen = "cil-fullscreen";
+    }
   }
 }

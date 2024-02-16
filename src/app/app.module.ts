@@ -61,6 +61,7 @@ import {itineraireReducers} from "./components/itineraire/ngrx/itineraire.reduce
 import {ItineraireEffects} from "./components/itineraire/ngrx/itineraire.effects";
 import {PointReducers} from "./components/point/ngrx/point.reducers";
 import {PointEffects} from "./components/point/ngrx/point.effects";
+import {DxMapModule, DxSelectBoxModule} from "devextreme-angular";
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
@@ -71,6 +72,8 @@ const APP_CONTAINERS = [
 @NgModule({
   declarations: [AppComponent, ...APP_CONTAINERS],
   imports: [
+    DxMapModule,
+    DxSelectBoxModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
@@ -106,7 +109,8 @@ const APP_CONTAINERS = [
     NgbModule,
     MatAutocompleteModule,
     MatInputModule,
-    EditMoyenTransportComponent
+    EditMoyenTransportComponent,
+    BrowserTransferStateModule,
   ],
   providers: [
     {

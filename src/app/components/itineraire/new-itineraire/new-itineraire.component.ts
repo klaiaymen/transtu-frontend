@@ -30,8 +30,7 @@ export class NewItineraireComponent implements OnInit{
       this.state=state.itineraireState;
       if(this.state?.dataState==ItinerairesStateEnum.NEW){
         this.itineraireFormGroup=this.fb.group({
-          /*code:['',Validators.required],
-          type:['',Validators.required],*/
+          name:['',Validators.required],
         })
       }
     })

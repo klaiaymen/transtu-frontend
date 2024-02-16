@@ -27,6 +27,7 @@ import {NewItineraireComponent} from "./components/itineraire/new-itineraire/new
 import {PointComponent} from "./components/point/point.component";
 import {NewPointComponent} from "./components/point/new-point/new-point.component";
 import {EditPointComponent} from "./components/point/edit-point/edit-point.component";
+import {MapsComponent} from "./components/maps/maps.component";
 
 
 const routes: Routes = [
@@ -44,6 +45,7 @@ const routes: Routes = [
     children: [
       {
         path: 'dashboard',
+        component: MapsComponent,
         loadChildren: () =>
           import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
       },

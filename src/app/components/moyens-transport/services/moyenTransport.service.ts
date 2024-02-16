@@ -11,6 +11,10 @@ export class MoyenTransportService{
   public getMoyensTransport():Observable<MoyenTransport[]>{
     return this.http.get<MoyenTransport[]>(this.baseUrl + '/api/mt');
   }
+
+  public getMts(page: number=1, size:number=4):Observable<Array<MoyenTransport>>{
+    return this.http.get<Array<MoyenTransport>>(`http://localhost:8081/api/mt?_page=${page}&_limit=${size}`);
+  }
   public save(moyentransport:MoyenTransport):Observable<MoyenTransport>{
     return this.http.post<MoyenTransport>(this.baseUrl+ '/api/mt',moyentransport);
   }

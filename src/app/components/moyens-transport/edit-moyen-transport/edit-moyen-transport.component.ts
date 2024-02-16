@@ -23,13 +23,14 @@ import {MoyensTransportState, MoyensTransportStateEnum} from "../ngrx/moyensTran
 import {MtItemComponent} from "../mt-list/mt-item/mt-item.component";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Store} from "@ngrx/store";
-import {EditMTAction, UpdateMTAction} from "../ngrx/moyensTransport.actions";
+import {EditMTAction, GetAllMTAction, UpdateMTAction} from "../ngrx/moyensTransport.actions";
 import {DocsComponentsModule} from "@docs-components/docs-components.module";
+import {ModalConfirmationComponent} from "../../modal-confirmation/modal-confirmation.component";
 
 @Component({
   selector: 'app-edit-moyen-transport',
   standalone: true,
-  imports: [CommonModule, ModalComponent, ModalHeaderComponent, ModalBodyComponent, ModalFooterComponent, ModalToggleDirective, ButtonCloseDirective, ButtonDirective, ModalTitleDirective, FormControlDirective, FormDirective, FormLabelDirective, ReactiveFormsModule, MtItemComponent, DocsComponentsModule, ToastComponent, ToastBodyComponent, ToastHeaderComponent, ProgressBarComponent, ProgressComponent, ToastCloseDirective, ToasterComponent],
+  imports: [CommonModule, ModalComponent, ModalHeaderComponent, ModalBodyComponent, ModalFooterComponent, ModalToggleDirective, ButtonCloseDirective, ButtonDirective, ModalTitleDirective, FormControlDirective, FormDirective, FormLabelDirective, ReactiveFormsModule, MtItemComponent, DocsComponentsModule, ToastComponent, ToastBodyComponent, ToastHeaderComponent, ProgressBarComponent, ProgressComponent, ToastCloseDirective, ToasterComponent, ModalConfirmationComponent],
   templateUrl: './edit-moyen-transport.component.html',
   styleUrl: './edit-moyen-transport.component.scss'
 })
@@ -40,7 +41,7 @@ export class EditMoyenTransportComponent implements  OnInit{
   moyenTransportID:number;
   mtFormGroup: FormGroup |null=null;
   readonly MoyensTransportStateEnum= MoyensTransportStateEnum;
-
+  submitted: boolean=false;
 
 
 
@@ -71,8 +72,10 @@ export class EditMoyenTransportComponent implements  OnInit{
   }
 
   onUpdateMoyenTransport() {
+    this.submitted=true;
     if(this.mtFormGroup?.invalid)return
     this.store.dispatch(new UpdateMTAction(this.mtFormGroup?.value));
+    this.router.navigate(['/gestionMT']);
   }
 
 }

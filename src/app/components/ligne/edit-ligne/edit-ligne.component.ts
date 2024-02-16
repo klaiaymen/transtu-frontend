@@ -21,7 +21,7 @@ export class EditLigneComponent implements OnInit{
   ligneID:number;
   ligneFormGroup: FormGroup |null=null;
   readonly LignesStateEnum= LignesStateEnum;
-
+submitted: boolean=false;
 
   constructor(private activatedRoute: ActivatedRoute, private store:Store<any>, private router:Router,private fb:FormBuilder) {
     this.ligneID=activatedRoute.snapshot.params['id'];
@@ -46,6 +46,7 @@ export class EditLigneComponent implements OnInit{
   }
 
   onUpdateLigne() {
+    this.submitted=true;
     if(this.ligneFormGroup?.invalid)return
     this.store.dispatch(new UpdateLigneAction(this.ligneFormGroup?.value));
   }

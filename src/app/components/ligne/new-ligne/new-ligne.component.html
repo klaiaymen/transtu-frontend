@@ -39,15 +39,21 @@
 
           <div class="form-group" >
             <label for="code"> Code</label>
-            <input type="text" class="form-control" formControlName="code" id="code" [ngClass]="{'is-valid':submitted && ligneFormGroup.controls['code'].errors}">
-            <div *ngIf="submitted && ligneFormGroup.controls['code'].errors" class="invalid-feedback">
-              <div *ngIf="ligneFormGroup.controls['code'].hasError('required')">label is required</div>
+            <input type="text" class="form-control" formControlName="code" id="code" [ngClass]="{'is-invalid':submitted && ligneFormGroup.controls['code'].errors}">
+            <div *ngIf="submitted && ligneFormGroup.controls['label'].errors" class="invalid-feedback">
+              <div *ngIf="ligneFormGroup.controls['code'].hasError('required')">Code can't be empty</div>
             </div>
           </div>
 
           <div class="form-group">
-            <label for="type"> Type</label>
-            <input type="text" class="form-control" formControlName="type" id="type" >
+            <label for="type">Type</label>
+            <select class="form-control" formControlName="type" id="type">
+              <option value="CIRCULAIRE">CIRCULAIRE</option>
+              <option value="SPECIALE">SPECIALE</option>
+              <option value="SCOLAIRE">SCOLAIRE</option>
+              <option value="NUIT">NUIT</option>
+              <option value="NAVETTE">NAVETTE</option>
+            </select>
           </div>
 
 

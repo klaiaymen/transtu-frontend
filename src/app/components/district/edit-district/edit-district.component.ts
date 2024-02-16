@@ -21,7 +21,7 @@ export class EditDistrictComponent implements  OnInit{
   districtID:number;
   districtFormGroup: FormGroup |null=null;
   readonly DistrictsStateEnum= DistrictsStateEnum;
-
+  submitted: boolean=false;
   constructor(private activatedRoute: ActivatedRoute, private store:Store<any>, private router:Router,private fb:FormBuilder) {
     this.districtID=activatedRoute.snapshot.params['id'];
   }
@@ -46,6 +46,7 @@ export class EditDistrictComponent implements  OnInit{
   }
 
   onUpdateDistrict() {
+    this.submitted=true;
     if(this.districtFormGroup?.invalid)return
     this.store.dispatch(new UpdateDistrictAction(this.districtFormGroup?.value));
   }

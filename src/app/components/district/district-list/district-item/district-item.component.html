@@ -3,6 +3,32 @@
     <td>{{district.label}}</td>
     <td>{{district.adress}}</td>
     <td>{{district.phoneNumber}}</td>
+  <button (click)="toggleTableMts()" class="btn btn-sm m-1">
+    <i [class]="showTable ? iconExitFullscreen : iconFullscreen"></i>
+  </button>
+  <table *ngIf="showTable" [striped]="true" cTable hover>
+    <thead>
+
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Label</th>
+      <th scope="col">Code</th>
+      <th scope="col">Type</th>
+      <th scope="col">Asigné</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let moyenTransport of allMoyensTransports">
+      <td>{{moyenTransport.id}}</td>
+      <td>{{moyenTransport.label}}</td>
+      <td>{{moyenTransport.code}}</td>
+      <td>{{moyenTransport.type}}</td>
+      <td>
+        <input type="checkbox" [(ngModel)]="moyenTransport.assignedToDistrict" (change)="toggleMoyenTransportAssignment(moyenTransport, district)">
+      </td>
+    </tr>
+    </tbody>
+  </table>
     <td>
         <button (click)="onDelete(district)" class="btn btn-sm m-1" style="background-color: crimson">
             <i class="cil-trash" ></i>
@@ -10,8 +36,8 @@
         <button (click)="onEdit(district)"  class="btn btn-sm m-1" style="background-color: cornflowerblue">
             <i class="cil-pencil"></i>
         </button>
-      <button (click)="onDetails(district)"  class="btn btn-sm m-1" style="background-color: gold">
+      <!--<button (click)="onDetails(district)"  class="btn btn-sm m-1" style="background-color: gold">
         <i class="cil-options"></i>
-      </button>
+      </button>-->
     </td>
 </tr>

@@ -1,8 +1,12 @@
 <tr *ngIf="itineraire">
   <td>{{itineraire.id}}</td>
+  <td>{{itineraire.name}}</td>
   <td>
     <button (click)="onDelete(itineraire)" class="btn btn-sm m-1" style="background-color: crimson">
       <i class="cil-trash" ></i>
+    </button>
+    <button (click)="onEdit(itineraire)"  class="btn btn-sm m-1" style="background-color: cornflowerblue">
+      <i class="cil-pencil"></i>
     </button>
     <button (click)="onDetails(itineraire)"  class="btn btn-sm m-1" style="background-color: gold">
       <i class="cil-options"></i>

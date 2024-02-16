@@ -53,19 +53,28 @@
             <input type="hidden" formControlName="id" id="id">
           </div>
           <hr>
-          <div class="form-group">
-            <label for="label"> label</label>
-            <input type="text" class="form-control" formControlName="label" id="label" >
-
+          <div class="form-group" >
+            <label for="label"> Label</label>
+            <input type="text" class="form-control" formControlName="label" id="label" [ngClass]="{'is-invalid':submitted && districtFormGroup.controls['label'].errors}">
+            <div *ngIf="submitted && districtFormGroup.controls['label'].errors" class="invalid-feedback">
+              <div *ngIf="districtFormGroup.controls['label'].hasError('required')">Label can't be empty</div>
+            </div>
           </div>
 
-          <div class="form-group">
+          <div class="form-group" >
             <label for="adress"> Address</label>
-            <input type="text" class="form-control" formControlName="adress" id="adress" >
+            <input type="text" class="form-control" formControlName="adress" id="adress" [ngClass]="{'is-invalid':submitted && districtFormGroup.controls['adress'].errors}">
+            <div *ngIf="submitted && districtFormGroup.controls['adress'].errors" class="invalid-feedback">
+              <div *ngIf="districtFormGroup.controls['adress'].hasError('required')">Address can't be empty</div>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="phoneNumber"> Phone Number</label>
-            <input type="text" class="form-control" formControlName="phoneNumber" id="phoneNumber" >
+
+          <div class="form-group" >
+            <label for="phoneNumber"> Phone number</label>
+            <input type="tel" class="form-control" formControlName="phoneNumber" id="phoneNumber" [ngClass]="{'is-invalid':submitted && districtFormGroup.controls['phoneNumber'].errors}">
+            <div *ngIf="submitted && districtFormGroup.controls['phoneNumber'].errors" class="invalid-feedback">
+              <div *ngIf="districtFormGroup.controls['phoneNumber'].hasError('required')">Phone number can't be empty</div>
+            </div>
           </div>
           <button type="submit" class="btn btn-success m-1" >Save</button>
         </form>

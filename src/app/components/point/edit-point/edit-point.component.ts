@@ -22,7 +22,7 @@ export class EditPointComponent {
   pointID:number;
   pointFormGroup: FormGroup |null=null;
   readonly PointsStateEnum= PointsStateEnum;
-
+  submitted: boolean=false;
   constructor(private activatedRoute: ActivatedRoute, private store:Store<any>, private router:Router,private fb:FormBuilder) {
     this.pointID=activatedRoute.snapshot.params['id'];
   }
@@ -47,6 +47,7 @@ export class EditPointComponent {
   }
 
   onUpdatePoint() {
+    this.submitted=true;
     if(this.pointFormGroup?.invalid)return
     this.store.dispatch(new UpdatePointAction(this.pointFormGroup?.value));
   }

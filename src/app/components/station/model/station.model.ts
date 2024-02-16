@@ -5,7 +5,7 @@ export interface Station {
   label: string;
   code: string;
   longitude: number;
-  lattitude: number;
+  latitude: number;
   ligne: Ligne;
   assignedToLigne:boolean;
 }

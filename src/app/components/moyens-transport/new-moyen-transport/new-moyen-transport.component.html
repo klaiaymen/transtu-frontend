@@ -39,7 +39,7 @@
 
           <div class="form-group" >
             <label for="label"> Label</label>
-            <input type="text" class="form-control" formControlName="label" id="label" [ngClass]="{'is-valid':submitted && mtFormGroup.controls['label'].errors}">
+            <input type="text" class="form-control" formControlName="label" id="label" [ngClass]="{'is-invalid':submitted && mtFormGroup.controls['label'].errors}">
             <div *ngIf="submitted && mtFormGroup.controls['label'].errors" class="invalid-feedback">
               <div *ngIf="mtFormGroup.controls['label'].hasError('required')">label is required</div>
             </div>
@@ -47,13 +47,21 @@
 
           <div class="form-group">
             <label for="code"> Code</label>
-            <input type="text" class="form-control" formControlName="code" id="code" >
+            <input type="text" class="form-control" formControlName="code" id="code" [ngClass]="{'is-invalid':submitted && mtFormGroup.controls['code'].errors}">
+            <div *ngIf="submitted && mtFormGroup.controls['code'].errors" class="invalid-feedback">
+              <div *ngIf="mtFormGroup.controls['code'].hasError('required')">Code is required</div>
+            </div>
           </div>
 
           <div class="form-group">
-            <label for="type"> Type</label>
-            <input type="text" class="form-control" formControlName="type" id="type" >
+            <label for="type">Type</label>
+            <select class="form-control" formControlName="type" id="type">
+              <option value="metro">Métro</option>
+              <option value="bus">Bus</option>
+              <option value="tgm">TGM</option>
+            </select>
           </div>
+
 
           <button type="submit" class="btn btn-success" style="margin-top: 10px">Ajouter</button>
         </form>

@@ -1,3 +1,4 @@
+<!--
 <div class="modal-header">
   <h4 class="modal-title">Détails du district</h4>
   <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
@@ -85,7 +86,7 @@
                     <td>{{moyenTransport.code}}</td>
                     <td>{{moyenTransport.type}}</td>
                     <td>
-                      <input type="checkbox" [(ngModel)]="moyenTransport.assignedToDistrict" (change)="toggleMoyenTransportAssignment(moyenTransport, district)">
+                      <input type="checkbox" [(ngModel)]="moyenTransport.assignedToDistrict" (change)="toggleMoyenTransportAssignments(moyenTransport, district)">
                     </td>
                   </tr>
                   </tbody>
@@ -101,3 +102,4 @@
 <div class="modal-footer">
   <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss()">Fermer</button>
 </div>
+-->

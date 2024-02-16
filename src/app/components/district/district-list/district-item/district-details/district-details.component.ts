@@ -1,3 +1,4 @@
+/*
 import {Component, Input, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {District} from "../../../model/district.model";
@@ -61,7 +62,7 @@ export class DistrictDetailsComponent implements OnInit{
     return district.moyensTransport.some(mt => mt.id === moyenTransport.id);
   }
 
-  toggleMoyenTransportAssignment(moyenTransport: MoyenTransport, district: District) {
+  toggleMoyenTransportAssignments(moyenTransport: MoyenTransport, district: District) {
     if (moyenTransport.assignedToDistrict) {
       // Ajouter le moyen de transport au district
       this.districtService.assignMTToDistrict(moyenTransport.id, district.id).subscribe(() => {
@@ -81,3 +82,4 @@ export class DistrictDetailsComponent implements OnInit{
   }
 
 }
+*/

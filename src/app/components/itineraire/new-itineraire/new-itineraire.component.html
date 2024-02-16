@@ -37,18 +37,13 @@
           </div>
           <hr>
 
-          <!--<div class="form-group" >
-            <label for="code"> Code</label>
-            <input type="text" class="form-control" formControlName="code" id="code" [ngClass]="{'is-valid':submitted && ligneFormGroup.controls['code'].errors}">
-            <div *ngIf="submitted && ligneFormGroup.controls['code'].errors" class="invalid-feedback">
-              <div *ngIf="ligneFormGroup.controls['code'].hasError('required')">label is required</div>
+          <div class="form-group" >
+            <label for="name"> Name</label>
+            <input type="text" class="form-control" formControlName="name" id="name" [ngClass]="{'is-invalid':submitted && itineraireFormGroup.controls['name'].errors}">
+            <div *ngIf="submitted && itineraireFormGroup.controls['name'].errors" class="invalid-feedback">
+              <div *ngIf="itineraireFormGroup.controls['name'].hasError('required')">Name can't be empty</div>
             </div>
           </div>
-
-          <div class="form-group">
-            <label for="type"> Type</label>
-            <input type="text" class="form-control" formControlName="type" id="type" >
-          </div>-->
 
 
           <button type="submit" class="btn btn-success" style="margin-top: 10px">Ajouter</button>

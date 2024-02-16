@@ -15,7 +15,6 @@ import {ActivatedRoute} from "@angular/router";
 import {DomSanitizer} from "@angular/platform-browser";
 import {MoyenTransportService} from "../../../../moyens-transport/services/moyenTransport.service";
 import {LigneService} from "../../../service/ligne.service";
-import {District} from "../../../../district/model/district.model";
 import {StationService} from "../../../../station/service/station.service";
 import {Station} from "../../../../station/model/station.model";
 

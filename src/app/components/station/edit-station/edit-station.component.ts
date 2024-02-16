@@ -23,7 +23,7 @@ export class EditStationComponent implements  OnInit{
   stationID:number;
   stationFormGroup: FormGroup |null=null;
   readonly StationsStateEnum= StationsStateEnum;
-
+submitted: boolean=false;
   constructor(private activatedRoute: ActivatedRoute, private store:Store<any>, private router:Router,private fb:FormBuilder) {
     this.stationID=activatedRoute.snapshot.params['id'];
   }
@@ -40,7 +40,7 @@ export class EditStationComponent implements  OnInit{
             label:[this.state.currentStation.label,Validators.required],
             code:[this.state.currentStation.code,Validators.required],
             longitude:[this.state.currentStation.longitude,Validators.required],
-            latitude:[this.state.currentStation.lattitude,Validators.required],
+            latitude:[this.state.currentStation.latitude,Validators.required],
           });
           this.formBuilt=true;
         }
@@ -50,6 +50,7 @@ export class EditStationComponent implements  OnInit{
   }
 
   onUpdateStation() {
+    this.submitted=true;
     if(this.stationFormGroup?.invalid)return
     this.store.dispatch(new UpdateStationAction(this.stationFormGroup?.value));
   }
