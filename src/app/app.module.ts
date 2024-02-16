@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
-import { BrowserModule, Title } from '@angular/platform-browser';
+import {BrowserModule, Title} from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -62,6 +62,7 @@ import {ItineraireEffects} from "./components/itineraire/ngrx/itineraire.effects
 import {PointReducers} from "./components/point/ngrx/point.reducers";
 import {PointEffects} from "./components/point/ngrx/point.effects";
 import {DxMapModule, DxSelectBoxModule} from "devextreme-angular";
+import {MapsComponent} from "./components/maps/maps.component";
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
@@ -110,7 +111,7 @@ const APP_CONTAINERS = [
     MatAutocompleteModule,
     MatInputModule,
     EditMoyenTransportComponent,
-    BrowserTransferStateModule,
+    //BrowserTransferStateModule,
   ],
   providers: [
     {

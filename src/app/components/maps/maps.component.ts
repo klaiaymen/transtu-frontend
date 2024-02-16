@@ -7,6 +7,7 @@ import {DxMapComponent, DxMapModule, DxSelectBoxModule} from "devextreme-angular
 @Component({
   selector: 'app-maps',
   standalone: true,
+  providers: [MapsService],
   imports: [CommonModule, DxMapModule, DxSelectBoxModule],
   templateUrl: './maps.component.html',
   styleUrl: './maps.component.scss'

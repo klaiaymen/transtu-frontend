@@ -27,7 +27,9 @@ const routes: Road[] = [{
   ],
 
 }];
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class MapsService {
   getMarkers(): Marker[] {
     return markers;
