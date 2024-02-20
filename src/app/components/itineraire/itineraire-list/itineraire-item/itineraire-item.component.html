@@ -2,6 +2,58 @@
   <td>{{itineraire.id}}</td>
   <td>{{itineraire.name}}</td>
   <td>
+    <button (click)="toggleTablePoints()" class="btn btn-sm m-1">
+      <i [class]="showTable ? iconExitFullscreen : iconFullscreen"></i>
+    </button>
+    <table  *ngIf="showTable" [striped]="true" cTable hover>
+      <thead>
+
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Longitude</th>
+        <th scope="col">latitude</th>
+        <th scope="col">Assignée</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let point of allPoints">
+        <td>{{point.id}}</td>
+        <td>{{point.longitude}}</td>
+        <td>{{point.latitude}}</td>
+        <td>
+          <input type="checkbox" [(ngModel)]="point.assignedToItineraire" (change)="togglePointsAssignment(point, itineraire)">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </td>
+  <td>
+    <button (click)="toggleTableLignes()" class="btn btn-sm m-1">
+      <i [class]="showTableLignes ? iconExitFullscreen : iconFullscreen"></i>
+    </button>
+    <table  *ngIf="showTableLignes" [striped]="true" cTable hover>
+      <thead>
+
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Code</th>
+        <th scope="col">Type</th>
+        <th scope="col">Asigné</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let ligne of allLignes">
+        <td>{{ligne.id}}</td>
+        <td>{{ligne.code}}</td>
+        <td>{{ligne.type}}</td>
+        <td>
+          <input type="checkbox" [(ngModel)]="ligne.assignedToItineraire" [disabled]="ligne.disabled"  (change)="toggleLigneAssignment(ligne, itineraire)">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </td>
+  <td>
     <button (click)="onDelete(itineraire)" class="btn btn-sm m-1" style="background-color: crimson">
       <i class="cil-trash" ></i>
     </button>

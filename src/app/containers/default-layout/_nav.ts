@@ -10,7 +10,7 @@ export const navItems: INavData[] = [
       text: 'NEW'
     }*/
   },
-  {
+  /*{
     title: true,
     name: 'Gestion des paramétrages'
   },
@@ -43,6 +43,43 @@ export const navItems: INavData[] = [
     name: 'Gestion des Points',
     url: '/gestionPoint',
     iconComponent: { name: 'cil-location-pin'}
+  },*/
+  {
+    name: 'Gestion des Paramétrages',
+    url: '/gestionParams',
+    iconComponent: { name: 'cil-caret-bottom' },
+    children: [
+      {
+        name: 'gestion Mts',
+        iconComponent: { name: 'cil-truck' },
+        url: '/gestionMT'
+      },
+      {
+        name: 'Gestion des districts',
+        iconComponent: { name: 'cil-industry'},
+        url: '/gestionDistrict'
+      },
+      {
+        name: 'gestion des lignes',
+        iconComponent: { name: 'cil-graph'},
+        url: '/gestionLigne'
+      },
+      {
+        name: 'Gestion des Stations',
+        iconComponent: { name: 'cil-bus-alt'},
+        url: '/gestionStation'
+      },
+      {
+        name: 'Gestion des Itinéraires',
+        iconComponent: { name: 'cil-Map'},
+        url: '/gestionItineraire'
+      },
+      {
+        name: 'Gestion des Points',
+        iconComponent: { name: 'cil-location-pin'},
+        url: '/gestionPoint'
+      },
+    ]
   },
  /* {
     title: true,

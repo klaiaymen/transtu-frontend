@@ -44,7 +44,7 @@ export class ItineraireDetailsComponent implements OnInit{
 
   ngOnInit(): void {
     this.loadItineraireDetails();
-    this.loadAllMoyensTransports();
+    this.loadAllLignes();
     this.loadAllPoints()
   }
 
@@ -57,7 +57,7 @@ export class ItineraireDetailsComponent implements OnInit{
   }
 
   //ligne panel
-  loadAllMoyensTransports() {
+  loadAllLignes() {
     this.ligneService.getLignes().subscribe(lignes => {
       this.allLignes = lignes.map(l => ({
         ...l,
