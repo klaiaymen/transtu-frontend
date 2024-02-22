@@ -4,8 +4,8 @@ export interface Station {
   id: number;
   label: string;
   code: string;
-  longitude: number;
-  latitude: number;
+  longitude: any;
+  latitude: any;
   ligne: Ligne;
   assignedToLigne:boolean;
 }

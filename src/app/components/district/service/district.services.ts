@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable, throwError} from "rxjs";
 import {District} from "../model/district.model";
 import {MoyenTransport} from "../../moyens-transport/model/moyenTransport.model";
-import {catchError} from "rxjs/operators";
+import {catchError, map} from "rxjs/operators";
 
 @Injectable({providedIn:"root"})
 export class DistrictService {

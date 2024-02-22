@@ -1,7 +1,12 @@
+import {Ligne} from "../../ligne/model/ligne.model";
+
 export class Marker {
   location: any;
+  tooltip?: {
+    text: string;
+  };
+  iconCssClass?: string;
 }
-
 export type APIKey = {
   bing?: string;
 
@@ -11,6 +16,9 @@ export type APIKey = {
 };
 
 export interface Road {
+  id:number,
+  name: string,
+  ligne: Ligne|null,
   weight: number;
 
   color: string;

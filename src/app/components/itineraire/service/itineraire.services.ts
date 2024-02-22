@@ -16,6 +16,9 @@ export class ItineraireService {
   public getItineraires():Observable<Itineraire[]>{
     return this.http.get<Itineraire[]>(this.baseUrl + '/api/itineraire');
   }
+  public getItinerairesByDistrict(districtId:number|undefined):Observable<Itineraire[]>{
+    return this.http.get<Itineraire[]>(this.baseUrl + '/api/itineraire-district/'+districtId);
+  }
   public save(itineraire:Itineraire):Observable<Itineraire>{
     return this.http.post<Itineraire>(this.baseUrl+ '/api/itineraire',itineraire);
   }

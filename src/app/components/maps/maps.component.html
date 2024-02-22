@@ -33,4 +33,12 @@
     >
     </dx-select-box>
   </div>
+
+  <div class="option">
+    <span>District </span>
+    <select [(ngModel)]="districtId" (change)="loadItineraires()">
+      <option value="">Tous les districts</option>
+      <option *ngFor="let district of districtList" [value]="district.id">{{ district.id }} {{district.label}}</option>
+    </select>
+  </div>
 </div>
