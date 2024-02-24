@@ -13,7 +13,7 @@ import {
   MoyensTransportActionsTypes,
   NewMTActionSuccess,
   SaveMTActionError,
-  SaveMTActionSuccess,
+  SaveMTActionSuccess, SearchMTActionError, SearchMTActionSuccess,
   UpdateMTActionError,
   UpdateMTActionSuccess
 } from "./moyensTransport.actions";
@@ -102,18 +102,18 @@ export class MoyensTransportEffects {
     );
 
   /* Search Products*/
-  /*searchMoyensTransportEffect:Observable<MoyensTransportActions>=createEffect(
+  searchMoyensTransportEffect:Observable<MoyensTransportActions>=createEffect(
     ()=>this.effectActions.pipe(
       ofType(MoyensTransportActionsTypes.SEARCH_MT),
       mergeMap((action: MoyensTransportActions)=>{
-        return this.moyenTransportService.searchMoyensTransport(action.payload)
+        return this.moyenTransportService.searchMts(action.payload)
           .pipe(
             map((moyensTransport)=> new SearchMTActionSuccess(moyensTransport)),
             catchError((err)=>of(new SearchMTActionError(err.message)))
           )
       })
     )
-  );*/
+  );
 
   /* edit Product*/
   editMoyenTransportEffect:Observable<MoyensTransportActions>=createEffect(

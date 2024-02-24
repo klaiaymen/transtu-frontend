@@ -32,7 +32,32 @@ export enum LigneActionsTypes{
   UPDATE_LIGNE_SUCCESS="[Lignes] update Ligne Success",
   UPDATE_LIGNE_ERROR="[Lignes] update Ligne Error",
 
+  /* search Lignes*/
+  SEARCH_LIGNE="[Lignes] search Ligne",
+  SEARCH_LIGNE_SUCCESS="[Lignes] search Ligne Success",
+  SEARCH_LIGNE_ERROR="[Lignes] search Ligne Error",
+
   LOAD_NEXT_PAGE = '[Lignes] Load Next Page',
+}
+
+/* Search lignes Actions*/
+
+export class SearchLigneAction implements Action{
+  type: LigneActionsTypes=LigneActionsTypes.SEARCH_LIGNE;
+  constructor(public payload:string) {
+  }
+}
+
+export class SearchLigneActionSuccess implements Action{
+  type: LigneActionsTypes=LigneActionsTypes.SEARCH_LIGNE_SUCCESS;
+  constructor(public payload:Ligne[]) {
+  }
+}
+
+export class SearchLigneActionError implements Action{
+  type: LigneActionsTypes=LigneActionsTypes.SEARCH_LIGNE_ERROR;
+  constructor(public payload:string) {
+  }
 }
 
 export class LoadNextPageAction implements Action {
@@ -160,4 +185,5 @@ export type LignesActions=
   |DeleteLigneAction | DeleteLigneActionSuccess | DeleteLigneActionError
   |GetAllLigneAction | GetAllLigneActionSuccess | GetAllLigneActionError
   |UpdateLigneAction | UpdateLIgneActionSuccess | UpdateLigneActionError
+  |SearchLigneAction | SearchLigneActionSuccess | SearchLigneActionError
   ;

@@ -90,6 +90,14 @@ export function ligneReducers (state =initState,action :Action): LignesState{
     case LigneActionsTypes.UPDATE_LIGNE_ERROR:
       return {...state, dataState:LignesStateEnum.ERROR, errorMessage:(<LignesActions>action).payload}
 
+    /* search lignes*/
+    case LigneActionsTypes.SEARCH_LIGNE:
+      return {...state, dataState:LignesStateEnum.LOADING }
+    case LigneActionsTypes.SEARCH_LIGNE_SUCCESS:
+      return {...state, dataState:LignesStateEnum.LOADED, lignes:(<LignesActions>action).payload}
+    case LigneActionsTypes.SEARCH_LIGNE_ERROR:
+      return {...state, dataState:LignesStateEnum.ERROR, errorMessage:(<LignesActions>action).payload}
+
     case LigneActionsTypes.LOAD_NEXT_PAGE:
       return { ...state, currentPage: state.currentPage + 1 };
     default : return {...state}

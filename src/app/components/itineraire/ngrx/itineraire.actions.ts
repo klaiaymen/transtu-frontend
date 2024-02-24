@@ -32,11 +32,34 @@ export enum ItineraireActionsTypes{
   UPDATE_ITINERAIRE_SUCCESS="[Itineraire] update Itineraire Success",
   UPDATE_ITINERAIRE_ERROR="[Itineraire] update Itineraire Error",
 
+  /* search Itineraire*/
+  SEARCH_ITINERAIRE="[Itineraire] search Itineraire",
+  SEARCH_ITINERAIRE_SUCCESS="[Itineraire] search Itineraire Success",
+  SEARCH_ITINERAIRE_ERROR="[Itineraire] search Itineraire Error",
+
   LOAD_NEXT_PAGE = '[Itineraire] Load Next Page',
 }
 
 export class LoadNextPageAction implements Action {
   readonly type: ItineraireActionsTypes = ItineraireActionsTypes.LOAD_NEXT_PAGE;
+}
+
+// search Itineraire
+export class SearchItineraireAction implements Action{
+  type: ItineraireActionsTypes=ItineraireActionsTypes.SEARCH_ITINERAIRE;
+  constructor(public payload:string) {
+  }
+}
+export class SearchItineraireActionSuccess implements Action{
+  type: ItineraireActionsTypes=ItineraireActionsTypes.SEARCH_ITINERAIRE_SUCCESS;
+  constructor(public payload:Itineraire[]) {
+  }
+}
+
+export class SearchItineraireActionError implements Action{
+  type: ItineraireActionsTypes=ItineraireActionsTypes.SEARCH_ITINERAIRE_ERROR;
+  constructor(public payload:string) {
+  }
 }
 
 // new Itineraire
@@ -160,4 +183,5 @@ export type ItinerairesActions=
   |DeleteItineraireAction | DeleteItineraireActionSuccess | DeleteItineraireActionError
   |GetAllItineraireAction | GetAllItineraireActionSuccess | GetAllItineraireActionError
   |UpdateItineraireAction | UpdateItineraireActionSuccess | UpdateItineraireActionError
+  |SearchItineraireAction | SearchItineraireActionSuccess | SearchItineraireActionError
   ;

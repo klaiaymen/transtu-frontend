@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable, throwError} from "rxjs";
 import {Ligne} from "../model/ligne.model";
 import {MoyenTransport} from "../../moyens-transport/model/moyenTransport.model";
@@ -13,6 +13,10 @@ export class LigneService {
 
   public getLignes():Observable<Ligne[]>{
     return this.http.get<Ligne[]>(this.baseUrl + '/api/ligne');
+  }
+  searchLignes(query: string): Observable<Ligne[]> {
+    const params = new HttpParams().set('query', query);
+    return this.http.get<Ligne[]>(`${this.baseUrl}/api/ligne/search`, { params });
   }
   public save(ligne:Ligne):Observable<Ligne>{
     return this.http.post<Ligne>(this.baseUrl+ '/api/ligne',ligne);

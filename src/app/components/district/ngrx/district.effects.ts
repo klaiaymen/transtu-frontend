@@ -17,7 +17,7 @@ import {
   GetAllDistrictActionSuccess,
   NewDistrictAction, NewDistrictActionSuccess,
   SaveDistrictActionError,
-  SaveDistrictActionSuccess, UpdateDistrictActionError,
+  SaveDistrictActionSuccess, SearchDistrictActionError, SearchDistrictActionSuccess, UpdateDistrictActionError,
   UpdateDistrictActionSuccess
 } from "./district.actions";
 
@@ -89,19 +89,19 @@ export class DistrictEffects {
         )
     );
 
-    /* Search district*/
-    /*searchMoyensTransportEffect:Observable<MoyensTransportActions>=createEffect(
+     /*Search district*/
+    searchDistrictEffect:Observable<DistrictsActions>=createEffect(
       ()=>this.effectActions.pipe(
-        ofType(MoyensTransportActionsTypes.SEARCH_MT),
-        mergeMap((action: MoyensTransportActions)=>{
-          return this.moyenTransportService.searchMoyensTransport(action.payload)
+        ofType(DistrictActionsTypes.SEARCH_DISTRICT),
+        mergeMap((action: DistrictsActions)=>{
+          return this.districtService.searchDistricts(action.payload)
             .pipe(
-              map((moyensTransport)=> new SearchMTActionSuccess(moyensTransport)),
-              catchError((err)=>of(new SearchMTActionError(err.message)))
+              map((districts)=> new SearchDistrictActionSuccess(districts)),
+              catchError((err)=>of(new SearchDistrictActionError(err.message)))
             )
         })
       )
-    );*/
+    );
 
     /* edit district*/
     editDistrictEffect:Observable<DistrictsActions>=createEffect(

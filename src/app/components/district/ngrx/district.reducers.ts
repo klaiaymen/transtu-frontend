@@ -91,12 +91,13 @@ export function districtReducers (state =initState,action :Action): DistrictsSta
             return {...state, dataState:DistrictsStateEnum.ERROR, errorMessage:(<DistrictsActions>action).payload}
 
         /* search district*/
-        /*case MoyensTransportActionsTypes.SEARCH_MT:
-          return {...state, dataState:MoyensTransportStateEnum.LOADING }
-        case MoyensTransportActionsTypes.SEARCH_MT_SUCCESS:
-          return {...state, dataState:MoyensTransportStateEnum.LOADED, moyensTransport:(<MoyensTransportActions>action).payload}
-        case MoyensTransportActionsTypes.SEARCH_MT_ERROR:
-          return {...state, dataState:MoyensTransportStateEnum.ERROR, errorMessage:(<MoyensTransportActions>action).payload}*/
+        case DistrictActionsTypes.SEARCH_DISTRICT:
+          return {...state, dataState:DistrictsStateEnum.LOADING }
+        case DistrictActionsTypes.SEARCH_DISTRICT_SUCCESS:
+          return {...state, dataState:DistrictsStateEnum.LOADED, districts:(<DistrictsActions>action).payload}
+        case DistrictActionsTypes.SEARCH_DISTRICT_ERROR:
+          return {...state, dataState:DistrictsStateEnum.ERROR, errorMessage:(<DistrictsActions>action).payload}
+
         case DistrictActionsTypes.LOAD_NEXT_PAGE:
             return { ...state, currentPage: state.currentPage + 1 };
         default : return {...state}

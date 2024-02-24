@@ -16,7 +16,7 @@ import {
   ItinerairesActions,
   NewItineraireActionSuccess,
   SaveItineraireActionError,
-  SaveItineraireActionSuccess, UpdateItineraireActionError,
+  SaveItineraireActionSuccess, SearchItineraireActionError, SearchItineraireActionSuccess, UpdateItineraireActionError,
   UpdateItineraireActionSuccess
 } from "./itineraire.actions";
 
@@ -112,6 +112,20 @@ export class ItineraireEffects {
           .pipe(
             map((itineraire)=> new UpdateItineraireActionSuccess(itineraire)),
             catchError((err)=>of(new UpdateItineraireActionError(err.message)))
+          )
+      })
+    )
+  );
+
+  /* Search itineraires*/
+  searchItinerairesEffect:Observable<ItinerairesActions>=createEffect(
+    ()=>this.effectActions.pipe(
+      ofType(ItineraireActionsTypes.SEARCH_ITINERAIRE),
+      mergeMap((action: ItinerairesActions)=>{
+        return this.itineraireService.searchItineraires(action.payload)
+          .pipe(
+            map((itineraires)=> new SearchItineraireActionSuccess(itineraires)),
+            catchError((err)=>of(new SearchItineraireActionError(err.message)))
           )
       })
     )

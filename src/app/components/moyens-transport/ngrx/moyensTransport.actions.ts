@@ -30,9 +30,9 @@ export enum MoyensTransportActionsTypes{
   UPDATE_MT_ERROR="[MoyensTransport] update product Error",
 
   /* search moyens transport*/
- /* SEARCH_MT="[Moyen transports] Search moyens transport",
+  SEARCH_MT="[Moyen transports] Search moyens transport",
   SEARCH_MT_SUCCESS="[Moyen transports] Search moyens transport Success",
-  SEARCH_MT_ERROR="[Moyen transports] Search moyens transport Error",*/
+  SEARCH_MT_ERROR="[Moyen transports] Search moyens transport Error",
   LOAD_NEXT_PAGE = '[MoyensTransport] Load Next Page',
 }
 
@@ -157,7 +157,7 @@ export class UpdateMTActionError implements Action{
 }
 
 /* Search Products Actions*/
-/*
+
 export class SearchMTAction implements Action{
   type: MoyensTransportActionsTypes=MoyensTransportActionsTypes.SEARCH_MT;
   constructor(public payload:string) {
@@ -174,10 +174,10 @@ export class SearchMTActionError implements Action{
   type: MoyensTransportActionsTypes=MoyensTransportActionsTypes.SEARCH_MT_ERROR;
   constructor(public payload:string) {
   }
-}*/
+}
 export type MoyensTransportActions=
   GetAllMTAction | GetAllMTActionSuccess | GetAllMTActionError
   |SaveMTAction | SaveMTActionSuccess | SaveMTActionError
     |DeleteMTtAction | DeleteMTActionSuccess | DeleteMTActionError
-  /*|SearchMTAction | SearchMTActionSuccess | SearchMTActionError*/
+  |SearchMTAction | SearchMTActionSuccess | SearchMTActionError
   ;

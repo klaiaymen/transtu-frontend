@@ -16,7 +16,7 @@ import {
   LignesActions,
   NewLigneActionSuccess,
   SaveLigneActionError,
-  SaveLigneActionSuccess,
+  SaveLigneActionSuccess, SearchLigneActionError, SearchLigneActionSuccess,
   UpdateLigneActionError,
   UpdateLIgneActionSuccess
 } from "./ligne.actions";
@@ -114,6 +114,20 @@ export class LigneEffects {
           .pipe(
             map((ligne)=> new UpdateLIgneActionSuccess(ligne)),
             catchError((err)=>of(new UpdateLigneActionError(err.message)))
+          )
+      })
+    )
+  );
+
+  /* Search lignes*/
+  searchMoyensTransportEffect:Observable<LignesActions>=createEffect(
+    ()=>this.effectActions.pipe(
+      ofType(LigneActionsTypes.SEARCH_LIGNE),
+      mergeMap((action: LignesActions)=>{
+        return this.ligneService.searchLignes(action.payload)
+          .pipe(
+            map((lignes)=> new SearchLigneActionSuccess(lignes)),
+            catchError((err)=>of(new SearchLigneActionError(err.message)))
           )
       })
     )

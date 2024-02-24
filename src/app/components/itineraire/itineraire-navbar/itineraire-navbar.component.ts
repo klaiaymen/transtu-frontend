@@ -3,8 +3,9 @@ import { CommonModule } from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {Store} from "@ngrx/store";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {GetAllItineraireAction, NewItineraireAction} from "../ngrx/itineraire.actions";
+import {GetAllItineraireAction, NewItineraireAction, SearchItineraireAction} from "../ngrx/itineraire.actions";
 import {NewItineraireComponent} from "../new-itineraire/new-itineraire.component";
+import {SearchMTAction} from "../../moyens-transport/ngrx/moyensTransport.actions";
 
 @Component({
   selector: 'app-itineraire-navbar',
@@ -14,6 +15,7 @@ import {NewItineraireComponent} from "../new-itineraire/new-itineraire.component
   styleUrl: './itineraire-navbar.component.scss'
 })
 export class ItineraireNavbarComponent {
+  searchQuery: string='';
   constructor(private store:Store<any>,private modalService: NgbModal) {
   }
 
@@ -25,7 +27,13 @@ export class ItineraireNavbarComponent {
     const modalRef = this.modalService.open(NewItineraireComponent);
   }
 
-  onSearch(value: any) {
+
+  searchItineraires(query: string) {
+    if (query.trim() !== '') {
+      this.store.dispatch(new SearchItineraireAction(query));
+    } else {
+      this.onGetAllItineraires()
+    }
 
   }
 }

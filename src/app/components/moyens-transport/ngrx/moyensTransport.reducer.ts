@@ -82,7 +82,7 @@ export function moyensTransportReducer (state =initState,action :Action): Moyens
       return {...state, dataState:MoyensTransportStateEnum.ERROR, errorMessage:(<MoyensTransportActions>action).payload}
 
 
-      /* update Product*/
+      /* update mts*/
     case MoyensTransportActionsTypes.UPDATE_MT:
       return {...state, dataState:MoyensTransportStateEnum.LOADING }
     case MoyensTransportActionsTypes.UPDATE_MT_SUCCESS:
@@ -92,13 +92,14 @@ export function moyensTransportReducer (state =initState,action :Action): Moyens
     case MoyensTransportActionsTypes.UPDATE_MT_ERROR:
       return {...state, dataState:MoyensTransportStateEnum.ERROR, errorMessage:(<MoyensTransportActions>action).payload}
 
-    /* search Products*/
-    /*case MoyensTransportActionsTypes.SEARCH_MT:
+    /* search mts*/
+    case MoyensTransportActionsTypes.SEARCH_MT:
       return {...state, dataState:MoyensTransportStateEnum.LOADING }
     case MoyensTransportActionsTypes.SEARCH_MT_SUCCESS:
       return {...state, dataState:MoyensTransportStateEnum.LOADED, moyensTransport:(<MoyensTransportActions>action).payload}
     case MoyensTransportActionsTypes.SEARCH_MT_ERROR:
-      return {...state, dataState:MoyensTransportStateEnum.ERROR, errorMessage:(<MoyensTransportActions>action).payload}*/
+      return {...state, dataState:MoyensTransportStateEnum.ERROR, errorMessage:(<MoyensTransportActions>action).payload}
+
     case MoyensTransportActionsTypes.LOAD_NEXT_PAGE:
       return { ...state, currentPage: state.currentPage + 1 };
     default : return {...state}

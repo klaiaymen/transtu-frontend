@@ -29,7 +29,31 @@ export enum DistrictActionsTypes{
     UPDATE_DISTRICT_SUCCESS="[Districts] update district Success",
     UPDATE_DISTRICT_ERROR="[Districts] update district Error",
 
+    /* search  district*/
+    SEARCH_DISTRICT="[District] Search District",
+    SEARCH_DISTRICT_SUCCESS="[District] Search District Success",
+    SEARCH_DISTRICT_ERROR="[District] Search District Error",
+
     LOAD_NEXT_PAGE = '[Districts] Load Next Page',
+}
+
+/* Search districts Actions*/
+export class SearchDistrictAction implements Action{
+  type: DistrictActionsTypes=DistrictActionsTypes.SEARCH_DISTRICT;
+  constructor(public payload:string) {
+  }
+}
+
+export class SearchDistrictActionSuccess implements Action{
+  type: DistrictActionsTypes=DistrictActionsTypes.SEARCH_DISTRICT_SUCCESS;
+  constructor(public payload:District[]) {
+  }
+}
+
+export class SearchDistrictActionError implements Action{
+  type: DistrictActionsTypes=DistrictActionsTypes.SEARCH_DISTRICT_ERROR;
+  constructor(public payload:string) {
+  }
 }
 
 export class LoadNextPageAction implements Action {
@@ -157,4 +181,5 @@ export type DistrictsActions=
     |DeleteDistrictAction | DeleteDistrictActionSuccess | DeleteDistrictActionError
     |GetAllDistrictAction | GetAllDistrictActionSuccess | GetAllDistrictActionError
     |UpdateDistrictAction | UpdateDistrictActionSuccess | UpdateDistrictActionError
+  |SearchDistrictAction | SearchDistrictActionSuccess | SearchDistrictActionError
     ;

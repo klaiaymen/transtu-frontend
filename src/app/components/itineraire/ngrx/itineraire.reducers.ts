@@ -90,6 +90,14 @@ export function itineraireReducers (state =initState,action :Action): Itineraire
     case ItineraireActionsTypes.UPDATE_ITINERAIRE_ERROR:
       return {...state, dataState:ItinerairesStateEnum.ERROR, errorMessage:(<ItinerairesActions>action).payload}
 
+    /* search itineraire*/
+    case ItineraireActionsTypes.SEARCH_ITINERAIRE:
+      return {...state, dataState:ItinerairesStateEnum.LOADING }
+    case ItineraireActionsTypes.SEARCH_ITINERAIRE_SUCCESS:
+      return {...state, dataState:ItinerairesStateEnum.LOADED, itineraires:(<ItinerairesActions>action).payload}
+    case ItineraireActionsTypes.SEARCH_ITINERAIRE_ERROR:
+      return {...state, dataState:ItinerairesStateEnum.ERROR, errorMessage:(<ItinerairesActions>action).payload}
+
     case ItineraireActionsTypes.LOAD_NEXT_PAGE:
       return { ...state, currentPage: state.currentPage + 1 };
     default : return {...state}

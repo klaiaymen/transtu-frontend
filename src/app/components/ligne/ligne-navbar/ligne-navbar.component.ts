@@ -6,7 +6,8 @@ import {GetAllDistrictAction} from "../../district/ngrx/district.actions";
 import {Store} from "@ngrx/store";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {NewLigneComponent} from "../new-ligne/new-ligne.component";
-import {GetAllLigneAction} from "../ngrx/ligne.actions";
+import {GetAllLigneAction, SearchLigneAction} from "../ngrx/ligne.actions";
+import {SearchMTAction} from "../../moyens-transport/ngrx/moyensTransport.actions";
 
 @Component({
   selector: 'app-ligne-navbar',
@@ -16,13 +17,11 @@ import {GetAllLigneAction} from "../ngrx/ligne.actions";
   styleUrl: './ligne-navbar.component.scss'
 })
 export class LigneNavbarComponent {
+  searchQuery: string='';
 
   constructor(private store:Store<any>,private modalService: NgbModal) {
   }
 
-  onSearch(value: any) {
-
-  }
 
   onNewLigne() {
     const modalRef = this.modalService.open(NewLigneComponent);
@@ -30,5 +29,13 @@ export class LigneNavbarComponent {
 
   onGetAllLignes() {
     this.store.dispatch(new GetAllLigneAction({}))
+  }
+
+  searchLignes(query: string) {
+    if (query.trim() !== '') {
+      this.store.dispatch(new SearchLigneAction(query));
+    } else {
+      this.onGetAllLignes()
+    }
   }
 }

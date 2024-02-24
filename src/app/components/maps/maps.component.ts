@@ -28,6 +28,7 @@ export class MapsComponent implements OnInit{
   apiKey: APIKey = {};
   districtList: District[] = [];
   districtId: number | undefined;
+  searchQuery: string = '';
   constructor(private districtService: DistrictService,service: MapsService,private modalService: NgbModal,private stationService:StationService,private itineraireService:ItineraireService) {
     this.apiKey.bing = 'AjeWzxR3mKrEIK0TXRP_6EpnkfOWxM0h4ezJzrHdJpBkzXy0Q6oZ0PmzpwGbf8L8';
 
@@ -77,7 +78,7 @@ export class MapsComponent implements OnInit{
               return [point.latitude, point.longitude];
             })
           };
-          console.log('Ligne de l\'itinéraire:', route.ligne?.code,' Mt associé',route.ligne?.moyenTransport);
+          console.log('Ligne de l\'itinéraire:', route.ligne);
           this.routes.push(route);
         });
       });
@@ -97,36 +98,13 @@ export class MapsComponent implements OnInit{
               return [point.latitude, point.longitude];
             })
           };
-          console.log('Ligne de l\'itinéraire:', route.ligne?.code,' Mt associé',route.ligne?.moyenTransport);
+          console.log('Ligne de l\'itinéraire ',route.id,' :', route.ligne);
           this.routes.push(route);
         });
       });
     }
   }
 
-  /*loadItineraire(districtId: number|undefined): void {
-    const colors = ['blue', 'red', 'green', 'yellow', 'orange', 'purple'];
-    this.itineraireService.getItinerairesByDistrict(districtId).subscribe(itineraires => {
-      itineraires.forEach(itineraire => {
-        const randomIndex = Math.floor(Math.random() * colors.length);
-        const randomColor = colors[randomIndex];
-        const route: Road = {
-          id:itineraire.id,
-          name:itineraire.name,
-          ligne:itineraire.ligne,
-          weight: itineraire.weight,
-          color: randomColor,
-          opacity: itineraire.opacity,
-          mode: itineraire.mode,
-          locations: itineraire.points.map(point => {
-            return [point.latitude, point.longitude];
-          })
-        };
-        console.log('Ligne de l\'itinéraire:', route.ligne?.code,' Mt associé',route.ligne?.moyenTransport);
-        this.routes.push(route);
-      });
-    });
-  }*/
 
   addMarker(e: any) {
     const newMarker = {
@@ -173,6 +151,34 @@ export class MapsComponent implements OnInit{
       return item;
     });
   }
+
+  searchItineraires(query: string): void {
+    if (query.trim() !== '') {
+      this.itineraireService.searchItineraires(query).subscribe(itineraires => {
+        //this.routes = itineraires;
+        this.routes = [];
+        itineraires.forEach(itineraire => {
+          const route: Road = {
+            id:itineraire.id,
+            name:itineraire.name,
+            ligne:itineraire.ligne,
+            weight: itineraire.weight,
+            color: 'blue',
+            opacity: itineraire.opacity,
+            mode: itineraire.mode,
+            locations: itineraire.points.map(point => {
+              return [point.latitude, point.longitude];
+            })
+          };
+          console.log('Ligne de l\'itinéraire:', route.ligne);
+          this.routes.push(route);
+        });
+      });
+    } else {
+      this.loadItineraires();
+    }
+  }
+
 
 
 }

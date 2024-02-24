@@ -6,12 +6,20 @@ import {catchError, map, mergeMap} from "rxjs/operators";
 import {StationsState} from "./station.reducers";
 import {
   DeleteStationActionError,
-  DeleteStationActionSuccess, EditStationActionError, EditStationActionSuccess,
+  DeleteStationActionSuccess,
+  EditStationActionError,
+  EditStationActionSuccess,
   GetAllStationAction,
   GetAllStationActionError,
-  GetAllStationActionSuccess, NewStationActionSuccess, SaveStationActionError, SaveStationActionSuccess,
+  GetAllStationActionSuccess,
+  NewStationActionSuccess,
+  SaveStationActionError,
+  SaveStationActionSuccess, SearchStationActionError,
+  SearchStationActionSuccess,
   StationActionsTypes,
-  StationsActions, UpdateStationActionError, UpdateStationActionSuccess
+  StationsActions,
+  UpdateStationActionError,
+  UpdateStationActionSuccess
 } from "./station.actions";
 import {StationService} from "../service/station.service";
 
@@ -107,6 +115,20 @@ export class StationEffects {
           .pipe(
             map((station)=> new UpdateStationActionSuccess(station)),
             catchError((err)=>of(new UpdateStationActionError(err.message)))
+          )
+      })
+    )
+  );
+
+  /* Search stations*/
+  searchStationsEffect:Observable<StationsActions>=createEffect(
+    ()=>this.effectActions.pipe(
+      ofType(StationActionsTypes.SEARCH_STATIONS),
+      mergeMap((action: StationsActions)=>{
+        return this.stationService.searchStations(action.payload)
+          .pipe(
+            map((stations)=> new SearchStationActionSuccess(stations)),
+            catchError((err)=>of(new SearchStationActionError(err.message)))
           )
       })
     )

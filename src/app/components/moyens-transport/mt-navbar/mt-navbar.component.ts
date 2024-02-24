@@ -8,7 +8,7 @@ import {
   NavbarTogglerDirective, NavItemComponent
 } from "@coreui/angular";
 import {Store} from "@ngrx/store";
-import {GetAllMTAction} from "../ngrx/moyensTransport.actions";
+import {GetAllMTAction, SearchMTAction} from "../ngrx/moyensTransport.actions";
 import {RouterLink} from "@angular/router";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {NewMoyenTransportComponent} from "../new-moyen-transport/new-moyen-transport.component";
@@ -16,6 +16,7 @@ import {SearchMoyensTransportComponent} from "../search-moyens-transport/search-
 import {FormsModule} from "@angular/forms";
 import {MoyenTransportService} from "../services/moyenTransport.service";
 import {MoyenTransport} from "../model/moyenTransport.model";
+import {Road} from "../../maps/model/maps.model";
 
 
 @Component({
@@ -26,7 +27,8 @@ import {MoyenTransport} from "../model/moyenTransport.model";
   styleUrl: './mt-navbar.component.scss'
 })
 export class MtNavbarComponent implements OnInit{
-  constructor(private store:Store<any>,private modalService: NgbModal) {
+  searchQuery: string='';
+  constructor(private store:Store<any>,private modalService: NgbModal,private moyenTransportService:MoyenTransportService) {
   }
   ngOnInit(): void {
   }
@@ -39,8 +41,12 @@ export class MtNavbarComponent implements OnInit{
     const modalRef = this.modalService.open(NewMoyenTransportComponent);
   }
 
-  /*onSearch(dataForm: any) {
-    console.log('Search:', dataForm.keyword);
-    this.store.dispatch(new SearchMTAction(dataForm.keyword));
-  }*/
+
+  searchMts(query: string) {
+    if (query.trim() !== '') {
+      this.store.dispatch(new SearchMTAction(query));
+    } else {
+      this.onGetAllMTs()
+    }
+  }
 }

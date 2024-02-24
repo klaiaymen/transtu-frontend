@@ -90,6 +90,14 @@ export function StationReducers (state =initState,action :Action): StationsState
     case StationActionsTypes.UPDATE_STATION_ERROR:
       return {...state, dataState:StationsStateEnum.ERROR, errorMessage:(<StationsActions>action).payload}
 
+    /* search stations*/
+    case StationActionsTypes.SEARCH_STATIONS:
+      return {...state, dataState:StationsStateEnum.LOADING }
+    case StationActionsTypes.SEARCH_STATIONS_SUCCESS:
+      return {...state, dataState:StationsStateEnum.LOADED, stations:(<StationsActions>action).payload}
+    case StationActionsTypes.SEARCH_STATIONS_ERROR:
+      return {...state, dataState:StationsStateEnum.ERROR, errorMessage:(<StationsActions>action).payload}
+
     case StationActionsTypes.LOAD_NEXT_PAGE:
       return { ...state, currentPage: state.currentPage + 1 };
     default : return {...state}

@@ -6,7 +6,8 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {NewLigneComponent} from "../../ligne/new-ligne/new-ligne.component";
 import {GetAllLigneAction} from "../../ligne/ngrx/ligne.actions";
 import {NewStationComponent} from "../new-station/new-station.component";
-import {GetAllStationAction} from "../ngrx/station.actions";
+import {GetAllStationAction, SearchStationAction} from "../ngrx/station.actions";
+import {SearchMTAction} from "../../moyens-transport/ngrx/moyensTransport.actions";
 
 @Component({
   selector: 'app-station-navbar',
@@ -16,6 +17,7 @@ import {GetAllStationAction} from "../ngrx/station.actions";
   styleUrl: './station-navbar.component.scss'
 })
 export class StationNavbarComponent {
+  searchQuery: string='';
 
   constructor(private store:Store<any>,private modalService: NgbModal) {
   }
@@ -30,5 +32,13 @@ export class StationNavbarComponent {
 
   onSearch(value: any) {
 
+  }
+
+  searchStations(query: string) {
+    if (query.trim() !== '') {
+      this.store.dispatch(new SearchStationAction(query));
+    } else {
+      this.onGetAllStations()
+    }
   }
 }

@@ -7,6 +7,11 @@ export enum StationActionsTypes{
   GET_ALL_STATIONS_SUCCESS="[stations] Get All stations Success",
   GET_ALL_STATIONS_ERROR="[Stations] Get All stations Error",
 
+  /* search stations*/
+  SEARCH_STATIONS="[Stations] search stations",
+  SEARCH_STATIONS_SUCCESS="[stations] search stations Success",
+  SEARCH_STATIONS_ERROR="[Stations] search stations Error",
+
   /* new Station*/
   NEW_STATION="[Station] new Station",
   NEW_STATION_SUCCESS="[Station] new Station Success",
@@ -35,6 +40,23 @@ export enum StationActionsTypes{
   LOAD_NEXT_PAGE = '[Station] Load Next Page',
 }
 
+// search Station
+export class SearchStationAction implements Action{
+  type: StationActionsTypes=StationActionsTypes.SEARCH_STATIONS;
+  constructor(public payload:string) {
+  }
+}
+export class SearchStationActionSuccess implements Action{
+  type: StationActionsTypes=StationActionsTypes.SEARCH_STATIONS_SUCCESS;
+  constructor(public payload:Station[]) {
+  }
+}
+
+export class SearchStationActionError implements Action{
+  type: StationActionsTypes=StationActionsTypes.NEW_STATION_ERROR;
+  constructor(public payload:string) {
+  }
+}
 export class LoadNextPageAction implements Action {
   readonly type: StationActionsTypes = StationActionsTypes.LOAD_NEXT_PAGE;
 }
@@ -160,4 +182,5 @@ export type StationsActions=
   |DeleteStationAction | DeleteStationActionSuccess | DeleteStationActionError
   |GetAllStationAction | GetAllStationActionSuccess | GetAllStationActionError
   |UpdateStationAction | UpdateStationActionSuccess | UpdateStationActionError
+  |SearchStationAction | SearchStationActionSuccess | SearchStationActionError
   ;

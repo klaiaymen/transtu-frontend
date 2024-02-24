@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable, throwError} from "rxjs";
 import {District} from "../model/district.model";
 import {MoyenTransport} from "../../moyens-transport/model/moyenTransport.model";
@@ -12,6 +12,10 @@ export class DistrictService {
 
   public getDistricts():Observable<District[]>{
     return this.http.get<District[]>(this.baseUrl + '/api/district');
+  }
+  searchDistricts(query: string): Observable<District[]> {
+    const params = new HttpParams().set('query', query);
+    return this.http.get<District[]>(`${this.baseUrl}/api/district/search`, { params });
   }
   public save(district:District):Observable<District>{
     return this.http.post<District>(this.baseUrl+ '/api/district',district);

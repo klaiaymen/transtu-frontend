@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable, throwError} from "rxjs";
 import {Ligne} from "../../ligne/model/ligne.model";
 import {MoyenTransport} from "../../moyens-transport/model/moyenTransport.model";
@@ -7,6 +7,7 @@ import {catchError} from "rxjs/operators";
 import {Station} from "../../station/model/station.model";
 import {Itineraire} from "../model/itineraire.model";
 import {Points} from "../../point/model/point.model";
+import {Road} from "../../maps/model/maps.model";
 
 @Injectable({providedIn:"root"})
 export class ItineraireService {
@@ -16,6 +17,12 @@ export class ItineraireService {
   public getItineraires():Observable<Itineraire[]>{
     return this.http.get<Itineraire[]>(this.baseUrl + '/api/itineraire');
   }
+
+  searchItineraires(query: string): Observable<Itineraire[]> {
+    const params = new HttpParams().set('query', query);
+    return this.http.get<Itineraire[]>(`${this.baseUrl}/api/itineraire/search`, { params });
+  }
+
   public getItinerairesByDistrict(districtId:number|undefined):Observable<Itineraire[]>{
     return this.http.get<Itineraire[]>(this.baseUrl + '/api/itineraire-district/'+districtId);
   }

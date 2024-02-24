@@ -11,12 +11,9 @@
 
       </ul>
 
-      <form #f="ngForm" (ngSubmit)="onSearch(f.value)" class="form-inline">
-        <input type="text" ngModel name="keyword">
-        <button type="submit" class="btn btn-outline-success btn-sm">
-          <i class="fa fa-search"></i>search
-        </button>
-      </form>
+      <div class="option" >
+        <input type="text" placeholder="Search" [(ngModel)]="searchQuery" (input)="searchStations(searchQuery)">
+      </div>
     </div>
   </div>
 </nav>

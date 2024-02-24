@@ -1,7 +1,8 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 import {MoyenTransport} from "../model/moyenTransport.model";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
+import {Itineraire} from "../../itineraire/model/itineraire.model";
 
 @Injectable({providedIn:"root"})
 export class MoyenTransportService{
@@ -10,6 +11,11 @@ export class MoyenTransportService{
 
   public getMoyensTransport():Observable<MoyenTransport[]>{
     return this.http.get<MoyenTransport[]>(this.baseUrl + '/api/mt');
+  }
+
+  searchMts(query: string): Observable<MoyenTransport[]> {
+    const params = new HttpParams().set('query', query);
+    return this.http.get<MoyenTransport[]>(`${this.baseUrl}/api/mt/search`, { params });
   }
 
   public getMts(page: number=1, size:number=4):Observable<Array<MoyenTransport>>{
