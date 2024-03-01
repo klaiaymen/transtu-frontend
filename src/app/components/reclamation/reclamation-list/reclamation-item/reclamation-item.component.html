@@ -1,0 +1,20 @@
+<tr *ngIf="reclamation">
+  <td>{{reclamation.id}}</td>
+  <!--<td>{{reclamation.heure}}</td>-->
+  <td>Nom Reporteur</td>
+  <td>{{reclamation.notes}}</td>
+  <td>{{reclamation.state}}</td>
+
+    <button *ngIf="reclamation.state=='brouillon'" (click)="onDelete(reclamation)" class="btn btn-sm m-1" style="background-color: crimson">
+      <i class="cil-trash" ></i>
+    </button>
+    <button *ngIf="reclamation.state=='brouillon'" (click)="onEdit(reclamation)"  class="btn btn-sm m-1" style="background-color: cornflowerblue">
+      <i class="cil-pencil"></i>
+    </button>
+    <button (click)="onDetails(reclamation)"  class="btn btn-sm m-1" style="background-color: gold">
+      <i class="cil-options"></i>
+    </button>
+  <button *ngIf="reclamation.state=='userValidated'" (click)="onDispatcherValidate(reclamation.id)"  class="btn btn-sm m-1 btn-success">
+    <i class="cil-check"></i>
+  </button>
+</tr>

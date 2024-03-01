@@ -28,6 +28,9 @@ import {PointComponent} from "./components/point/point.component";
 import {NewPointComponent} from "./components/point/new-point/new-point.component";
 import {EditPointComponent} from "./components/point/edit-point/edit-point.component";
 import {MapsComponent} from "./components/maps/maps.component";
+import {ReclamationComponent} from "./components/reclamation/reclamation.component";
+import {NewReclamationComponent} from "./components/reclamation/new-reclamation/new-reclamation.component";
+import {EditReclamationComponent} from "./components/reclamation/edit-reclamation/edit-reclamation.component";
 
 
 const routes: Routes = [
@@ -48,6 +51,10 @@ const routes: Routes = [
         component: MapsComponent,
         loadChildren: () =>
           import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
+      },
+      {
+        path: 'reclamation',
+        component: ReclamationComponent,
       },
         //mt routings
       {
@@ -122,6 +129,15 @@ const routes: Routes = [
       {
         path: 'newItineraire',
         component: NewItineraireComponent
+      },
+      //reclamations routings
+      {
+        path: 'newReclamation',
+        component: NewReclamationComponent
+      },
+      {
+        path: 'editReclamation/:id',
+        component: EditReclamationComponent
       },
       {
         path: 'theme',

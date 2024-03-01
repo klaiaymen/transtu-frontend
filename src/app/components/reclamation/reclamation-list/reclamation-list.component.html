@@ -1,0 +1,25 @@
+<c-col xs="12">
+  <c-card class="mb-4">
+    <c-card-body>
+      <table *ngIf="state"  [striped]="true" cTable hover>
+        <thead>
+
+        <tr>
+          <th scope="col">Id</th>
+          <!--<th scope="col">Heure</th>-->
+          <th scope="col">Nom Reporteur</th>
+          <th scope="col">Notes</th>
+          <th scope="col">state</th>
+        </tr>
+        </thead>
+        <tbody>
+        <app-reclamation-item *ngFor="let reclamation of state.reclamations" [reclamation]="reclamation" style="display: contents"></app-reclamation-item>
+        </tbody>
+      </table>
+      <!-- Affichez les contrôles de pagination ici -->
+      <button cButton class="me-1" variant="ghost" color="info"  (click)="loadNextPage()">
+        >>
+      </button>
+    </c-card-body>
+  </c-card>
+</c-col>

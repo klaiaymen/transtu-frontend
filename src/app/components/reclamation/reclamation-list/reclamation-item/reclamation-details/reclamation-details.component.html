@@ -1,0 +1,95 @@
+<div class="modal-header">
+  <h4 class="modal-title">Détails du réclamation</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body" *ngIf="reclamation">
+  <c-accordion [alwaysOpen]="true" [flush]="true" class="shadow rounded-2">
+    <c-accordion-item #item0="cAccordionItem" [visible]="false">
+      <ng-template cTemplateId="accordionHeaderTemplate">
+        <button (click)="item0.toggleItem()" [collapsed]="!item0.visible" cAccordionButton>
+          Réclamation {{reclamation.id}} détails
+        </button>
+      </ng-template>
+      <ng-template cTemplateId="accordionBodyTemplate">
+        <div class="accordion-body">
+          <p><strong>ID:</strong> {{ reclamation.id }}</p>
+        </div>
+      </ng-template>
+    </c-accordion-item>
+    <c-accordion-item #item1="cAccordionItem" [visible]="false">
+      <ng-template cTemplateId="accordionHeaderTemplate">
+        <button (click)="item1.toggleItem()" [collapsed]="!item1.visible" cAccordionButton>
+          Données specifiques au reporteur
+        </button>
+      </ng-template>
+      <ng-template cTemplateId="accordionBodyTemplate">
+        <div class="accordion-body">
+          <c-col xs="12">
+            <c-card class="mb-4">
+              <c-card-body>
+                <table  [striped]="true" cTable hover>
+                  <thead>
+
+                  <tr>
+                    <th scope="col">Reporteur Etat</th>
+                    <th scope="col">Reporteur Nom et Prenom</th>
+                    <th scope="col">Reporteur Tel</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>{{reclamation.reportingSourceEtat}}</td>
+                    <td>{{reclamation.reportingSourceNomPrenom}}</td>
+                    <td>{{reclamation.reportingSourceTel}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </c-card-body>
+            </c-card>
+          </c-col>
+        </div>
+      </ng-template>
+    </c-accordion-item>
+    <c-accordion-item #item2="cAccordionItem" [visible]="false">
+      <ng-template cTemplateId="accordionHeaderTemplate">
+        <button (click)="item2.toggleItem()" [collapsed]="!item2.visible" cAccordionButton>
+          Données specifiques à l'accident
+        </button>
+      </ng-template>
+      <ng-template cTemplateId="accordionBodyTemplate">
+        <div class="accordion-body">
+          <c-col xs="12">
+            <c-card class="mb-4">
+              <c-card-body>
+                <table  [striped]="true" cTable hover>
+                  <thead>
+
+                  <tr>
+                    <th scope="col">Lieu</th>
+                    <th scope="col">Type accident/incident</th>
+                    <th scope="col">Type dégâts</th>
+                    <th scope="col">Notes</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>{{reclamation.lieu}}</td>
+                    <td>{{reclamation.typeAccidentIncident}}</td>
+                    <td>{{reclamation.typeDegat}}</td>
+                    <td>{{reclamation.notes}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </c-card-body>
+            </c-card>
+          </c-col>
+        </div>
+      </ng-template>
+    </c-accordion-item>
+  </c-accordion>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss()">Fermer</button>
+</div>

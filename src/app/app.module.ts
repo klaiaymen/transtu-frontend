@@ -63,6 +63,8 @@ import {PointReducers} from "./components/point/ngrx/point.reducers";
 import {PointEffects} from "./components/point/ngrx/point.effects";
 import {DxMapModule, DxSelectBoxModule} from "devextreme-angular";
 import {MapsComponent} from "./components/maps/maps.component";
+import {reclamationReducers} from "./components/reclamation/ngrx/reclamation.reducers";
+import {ReclamationEffects} from "./components/reclamation/ngrx/reclamation.effects";
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
@@ -102,8 +104,8 @@ const APP_CONTAINERS = [
     CardModule,
     NgScrollbarModule,
     MoyensTransportComponent,
-    EffectsModule.forRoot([MoyensTransportEffects,DistrictEffects,LigneEffects,StationEffects,ItineraireEffects,PointEffects]),
-    StoreModule.forRoot({catalogState: moyensTransportReducer,districtState: districtReducers,lineState:ligneReducers,stationState: StationReducers,itineraireState: itineraireReducers, pointState:PointReducers}),
+    EffectsModule.forRoot([MoyensTransportEffects,DistrictEffects,LigneEffects,StationEffects,ItineraireEffects,PointEffects,ReclamationEffects]),
+    StoreModule.forRoot({catalogState: moyensTransportReducer,districtState: districtReducers,lineState:ligneReducers,stationState: StationReducers,itineraireState: itineraireReducers, pointState:PointReducers, reclamationState:reclamationReducers}),
     StoreDevtoolsModule.instrument(),
     HttpClientModule,
     AlertModule,

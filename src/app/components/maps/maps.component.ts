@@ -11,6 +11,7 @@ import {Itineraire} from "../itineraire/model/itineraire.model";
 import {DistrictService} from "../district/service/district.services";
 import {FormsModule} from "@angular/forms";
 import {District} from "../district/model/district.model";
+import {NewReclamationComponent} from "../reclamation/new-reclamation/new-reclamation.component";
 @Component({
   selector: 'app-maps',
   standalone: true,
@@ -112,24 +113,13 @@ export class MapsComponent implements OnInit{
     };
     this.markers.push(newMarker);
 
-    //popup reclamation
-    const modalRef = this.modalService.open(ModalConfirmationComponent);
+    const modalRef = this.modalService.open(NewReclamationComponent);
+
+    // Passez la latitude et la longitude au composant NewReclamationComponent
     const latitude = e.location.lat;
     const longitude = e.location.lng;
-    modalRef.componentInstance.confirmationMessage = `Reclamation contenu... avec coordonnées : Latitude ${latitude}, Longitude ${longitude}`;
-
-    modalRef.result.then(
-      (result) => {
-        if (result === 'confirm') {
-          console.log("Reclamation envoyée !");
-        } else {
-          console.log("Reclamation annulée !");
-        }
-      },
-      () => {
-        console.log("Modal fermé sans confirmation");
-      }
-    );
+    modalRef.componentInstance.latitude = latitude;
+    modalRef.componentInstance.longitude = longitude;
 
     // Afficher les coordonnées dans la console
     console.log('Coordonnées du marqueur :', latitude, longitude);

@@ -33,10 +33,6 @@ export class DistrictService {
     return this.http.put<District>(this.baseUrl+"/api/district/" + district.id, district);
   }
 
-  /*public searchMoyensTransport(keyword:string):Observable<MoyenTransport[]>{
-    let host="http://localhost:3000";
-    return this.http.get<MoyenTransport[]>(`${host}/moyenTransports?name_like=${keyword}`);
-  }*/
 
   assignMTToDistrict(mtId: number, districtId: number): Observable<MoyenTransport> {
     const url = `${this.baseUrl}/api/${mtId}/assign-to-district/${districtId}`;
