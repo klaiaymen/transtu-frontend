@@ -69,6 +69,7 @@ export class EditReclamationComponent implements OnInit{
     this.submitted=true;
     if(this.reclamationFormGroup?.invalid)return
     this.store.dispatch(new UpdateReclamationAction(this.reclamationFormGroup?.value));
+    this.router.navigateByUrl('/reclamation')
   }
 
 }

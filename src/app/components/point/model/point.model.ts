@@ -1,6 +1,6 @@
 export  interface Points {
-  id: number;
+  id?: number;
   longitude: number;
   latitude: number;
-  assignedToItineraire:boolean;
+  assignedToItineraire?:boolean;
 }

@@ -6,7 +6,9 @@
   <button (click)="toggleTableMts()" class="btn btn-sm m-1">
     <i [class]="showTable ? iconExitFullscreen : iconFullscreen"></i>
   </button>
-  <table *ngIf="showTable" [striped]="true" cTable hover>
+  <input type="text" placeholder="Search" [(ngModel)]="searchQuery" (input)="searchMts(searchQuery)">
+  <table *ngIf="showTable" [striped]="true" cTable hover >
+
     <thead>
 
     <tr>

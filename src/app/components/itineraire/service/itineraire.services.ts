@@ -54,12 +54,12 @@ export class ItineraireService {
     );
   }
 
-  assignPointToItineraire(pointId: number, itineraireId: number): Observable<Points> {
+  assignPointToItineraire(pointId: number|undefined, itineraireId: number): Observable<Points> {
     const url = `${this.baseUrl}/api/${pointId}/assign-point-to-itineraire/${itineraireId}`;
     return this.http.post<Points>(url, null);
   }
 
-  removePointFromItineraire(pointId: number, itineraireId: number): Observable<any> {
+  removePointFromItineraire(pointId: number|undefined, itineraireId: number): Observable<any> {
     const url = `${this.baseUrl}/api/${pointId}/remove-point-from-itineraire/${itineraireId}`;
     return this.http.delete(url, {}).pipe(
       catchError(error => throwError(error))

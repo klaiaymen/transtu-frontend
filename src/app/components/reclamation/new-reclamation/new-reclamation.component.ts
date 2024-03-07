@@ -65,13 +65,14 @@ export class NewReclamationComponent implements OnInit{
   }
 
 
-  /*onSaveReclamation() {
+  onSaveReclamation() {
     this.submitted=true;
     if(!this.reclamationFormGroup?.valid) return;
     this.store.dispatch(new SaveReclamationAction(this.reclamationFormGroup?.value));
+    this.router.navigateByUrl("/reclamation")
 
-  }*/
-  onSaveReclamation() {
+  }
+  /*onSaveReclamation() {
     this.isDraftMode = true;
     this.submitted = true;
     if (!this.reclamationFormGroup?.valid) return;
@@ -91,7 +92,7 @@ export class NewReclamationComponent implements OnInit{
           console.error('Erreur lors de la sauvegarde de la réclamation:', error);
         }
       );
-  }
+  }*/
 
   /*onFileChange(event: any) {
     this.photos = event.target.files;

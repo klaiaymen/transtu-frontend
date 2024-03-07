@@ -16,6 +16,9 @@ import {result} from "lodash-es";
 import {ItineraireService} from "../../service/itineraire.services";
 import {PointService} from "../../../point/service/point.services";
 import {LigneService} from "../../../ligne/service/ligne.service";
+import {NewReclamationComponent} from "../../../reclamation/new-reclamation/new-reclamation.component";
+import {MapsComponent} from "../../../maps/maps.component";
+import {ItineraireMapsComponent} from "./itineraire-maps/itineraire-maps.component";
 
 @Component({
   selector: 'app-itineraire-item',
@@ -163,5 +166,11 @@ export class ItineraireItemComponent implements OnInit{
     } else {
       this.iconFullscreen = "cil-fullscreen";
     }
+  }
+
+  ShowMap(itineraire: Itineraire) {
+    const modalRef = this.modalService.open(ItineraireMapsComponent, { size: 'xl' });
+    modalRef.componentInstance.itineraireID = itineraire.id;
+    //console.log(itineraire.id)
   }
 }

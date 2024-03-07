@@ -18,6 +18,7 @@ export class PointService {
     return this.http.post<Points>(this.baseUrl + '/api/point', point);
   }
 
+
   public delete(id: number): Observable<void> {
     return this.http.delete<void>(this.baseUrl + "/api/point/" + id);
   }

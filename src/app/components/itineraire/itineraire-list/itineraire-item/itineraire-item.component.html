@@ -26,7 +26,11 @@
       </tr>
       </tbody>
     </table>
+    <button (click)="ShowMap(itineraire)" class="btn btn-sm m-1">
+      <i class="cil-plus"></i>
+    </button>
   </td>
+
   <td>
     <button (click)="toggleTableLignes()" class="btn btn-sm m-1">
       <i [class]="showTableLignes ? iconExitFullscreen : iconFullscreen"></i>

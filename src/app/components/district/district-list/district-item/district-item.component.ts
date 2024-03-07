@@ -15,6 +15,7 @@ import {MoyenTransportService} from "../../../moyens-transport/services/moyenTra
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {TableDirective} from "@coreui/angular";
 import {result} from "lodash-es";
+import {SearchMTAction} from "../../../moyens-transport/ngrx/moyensTransport.actions";
 
 @Component({
   selector: 'app-district-item',
@@ -32,9 +33,20 @@ export class DistrictItemComponent implements OnInit{
   showTable:boolean=false;
   iconFullscreen: string = "cil-fullscreen";
   iconExitFullscreen: string = "cil-fullscreen-exit";
+  searchQuery: string='';
   constructor(private store:Store, private router:Router,private modalService: NgbModal,private districtService: DistrictService, private moyenTransportService: MoyenTransportService) {
   }
 
+  searchMts(query: string) {
+    if (query.trim() !== '') {
+      this.showTable=true;
+      this.searchMoyenTransports(query)
+      //this.store.dispatch(new SearchMTAction(query));
+    } else {
+      this.showTable=false;
+      this.loadAllMoyensTransports()
+    }
+  }
   onDelete(district:District) {
     const modalRef = this.modalService.open(ModalConfirmationComponent);
 
@@ -66,6 +78,14 @@ export class DistrictItemComponent implements OnInit{
   }*/
 
 
+  searchMoyenTransports(query:string) {
+    this.moyenTransportService.searchMts(query).subscribe(moyensTransports => {
+      this.allMoyensTransports = moyensTransports.map(mt => ({
+        ...mt,
+        assignedToDistrict: this.isMoyenTransportAssignedToDistrict(mt, this.district)
+      }));
+    });
+  }
   loadAllMoyensTransports() {
     this.moyenTransportService.getMts(1,2).subscribe(moyensTransports => {
       this.allMoyensTransports = moyensTransports.map(mt => ({

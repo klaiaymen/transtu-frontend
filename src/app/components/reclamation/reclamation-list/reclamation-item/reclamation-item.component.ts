@@ -12,6 +12,7 @@ import {DeleteReclamationAction, EditReclamationAction} from "../../ngrx/reclama
 import {EditReclamationComponent} from "../../edit-reclamation/edit-reclamation.component";
 import {ReclamationDetailsComponent} from "./reclamation-details/reclamation-details.component";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {NewReclamationComponent} from "../../new-reclamation/new-reclamation.component";
 
 @Component({
   selector: 'app-reclamation-item',
@@ -53,7 +54,8 @@ export class ReclamationItemComponent {
   }
 
   onDetails(reclamation: Reclamation) {
-    const modalRef = this.modalService.open(ReclamationDetailsComponent);
+    //const modalRef = this.modalService.open(ReclamationDetailsComponent);
+      const modalRef = this.modalService.open(ReclamationDetailsComponent, { size: 'xl' });
     modalRef.componentInstance.reclamationID = reclamation.id;
   }
 
@@ -62,6 +64,7 @@ export class ReclamationItemComponent {
           (response: Reclamation) => {
             console.log('Réclamation dispatcher validée avec succès:', response);
             window.location.reload();
+            //this.router.navigateByUrl('/reclamation')
           },
           (error) => {
             console.error('Erreur lors de la validation de la réclamation:', error);
@@ -70,7 +73,7 @@ export class ReclamationItemComponent {
     }
 
 
-  sendEmail(recipient: string, subject: string, body: string): void {
+  /*sendEmail(recipient: string, subject: string, body: string): void {
     const url = 'http://localhost:8081/reclamation/sendEmail';
     const payload = { recipient, subject, body };
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -83,5 +86,5 @@ export class ReclamationItemComponent {
         console.error('Failed to send e-mail:', error);
       }
     });
-  }
+  }*/
 }

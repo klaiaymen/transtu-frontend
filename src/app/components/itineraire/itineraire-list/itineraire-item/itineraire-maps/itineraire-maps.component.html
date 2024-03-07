@@ -1,0 +1,12 @@
+<dx-map
+  provider="bing"
+  [apiKey]="apiKey"
+  [zoom]="14"
+  [height]="440"
+  width="100%"
+  [controls]="true"
+  [markers]="markers"
+  [routes]="routes"
+  (onClick)="addPointToItineraire($event)"
+>
+</dx-map>

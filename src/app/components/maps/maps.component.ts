@@ -113,7 +113,7 @@ export class MapsComponent implements OnInit{
     };
     this.markers.push(newMarker);
 
-    const modalRef = this.modalService.open(NewReclamationComponent);
+    const modalRef = this.modalService.open(NewReclamationComponent, { size: 'xl' });
 
     // Passez la latitude et la longitude au composant NewReclamationComponent
     const latitude = e.location.lat;

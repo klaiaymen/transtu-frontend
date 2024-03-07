@@ -1,0 +1,24 @@
+.notes-textarea {
+  height: 150px; /* Définissez la hauteur souhaitée */
+  resize: vertical; /* Permet à l'utilisateur de redimensionner la zone de texte verticalement */
+  overflow-y: auto; /* Ajoute une barre de défilement verticale si nécessaire */
+}
+
+@media (min-width: 768px) {
+  /* Appliquer uniquement sur les écrans de taille moyenne et plus grands */
+  .row {
+    display: flex;
+  }
+
+  .col {
+    flex: 1; /* Partagez l'espace disponible de manière égale entre les colonnes */
+  }
+
+  .row > .col:last-child {
+    flex: 0 0 auto; /* Fixez la dernière colonne à sa taille naturelle pour empêcher le redimensionnement */
+  }
+}
+*{
+  font-family: Arial;
+  font-size: small;
+}
