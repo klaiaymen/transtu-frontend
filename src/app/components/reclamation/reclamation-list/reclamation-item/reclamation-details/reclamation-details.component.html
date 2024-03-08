@@ -82,6 +82,7 @@
                   </tr>
                   </tbody>
                 </table>
+                <img *ngFor="let photo of reclamationPhotos" [src]="photo.url" alt="Reclamation photo">
               </c-card-body>
             </c-card>
           </c-col>

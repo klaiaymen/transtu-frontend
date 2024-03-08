@@ -9,5 +9,11 @@ export interface Reclamation {
   typeAccidentIncident: string;
   typeDegat: string;
   notes: string;
-  photos: File[];
+  photos?: PhotoReclamation[];
+}
+
+export interface PhotoReclamation {
+  id?: number;
+  nom: string;
+  url: string;
 }

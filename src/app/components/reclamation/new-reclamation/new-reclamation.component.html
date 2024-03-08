@@ -31,15 +31,43 @@
     </ng-container>
     <ng-container *ngIf="state.dataState==ReclamationsStateEnum.NEW">
       <ng-container>
+        <!--
+        <div class="container">
+          <div class="col-md-5">
+            <h2>Prendre une photo</h2>
+            <video #videoElement autoplay></video>
+            <button (click)="takePhoto()">Prendre une photo</button>
+          </div>
+          <div class="col-md-5">
+            <canvas #canvasElement hidden></canvas>
+            <img *ngIf="photoTaken" [src]="photoUrl" alt="Photo" >
+          </div>
+        </div>-->
 
+        <div class="container">
+          <div class="col-md-5">
+            <h2>Prendre une photo</h2>
+            <video #videoElement autoplay></video>
+            <button (click)="takePhoto()">Prendre une photo</button>
+          </div>
+          <div class="col-md-5">
+            <h2>Photos prises</h2>
+            <canvas #canvasElement hidden></canvas>
+            <div *ngFor="let url of photoUrls; let i = index">
+              <img [src]="url" alt="Photo">
+              <button (click)="deletePhoto(i)">Supprimer</button>
+            </div>
+          </div>
+        </div>
         <form *ngIf="reclamationFormGroup" [formGroup]="reclamationFormGroup" (ngSubmit)="onSaveReclamation()" style="margin: 30px">
           <div class="form-group">
             <h5>Envoyer une réclamation </h5>
           </div>
           <hr>
           <div claas="container">
+
             <div class="row">
-              <div class="col-md-8" style="border-right: 1px solid lightgray">
+              <div class="col" style="border-right: 1px solid lightgray">
                 <div class="row" style="margin-bottom: 20px">
                   <p><strong>Données spécifiques à la source de réclamation :</strong></p>
                   <div class="col">
@@ -167,9 +195,6 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-4">
-                reclamation potos
-              </div>
             </div>
           </div>
 
@@ -182,7 +207,9 @@
           <!--<input type="file" name="photos" (change)="onFileChange($event)" multiple>-->
 
           <button type="submit" class="btn btn-primary" style="margin-top: 10px">Réclamer</button>
+
         </form>
+
       </ng-container>
     </ng-container>
   </ng-container>

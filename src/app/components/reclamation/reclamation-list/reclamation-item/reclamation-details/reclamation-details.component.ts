@@ -14,19 +14,20 @@ import {ActivatedRoute} from "@angular/router";
 import {DomSanitizer} from "@angular/platform-browser";
 
 import {ReclamationService} from "../../../service/reclamation.service";
-import {Reclamation} from "../../../model/reclamation.model";
+import {PhotoReclamation, Reclamation} from "../../../model/reclamation.model";
+import {DxTextAreaModule} from "devextreme-angular";
 
 @Component({
   selector: 'app-reclamation-details',
   standalone: true,
-    imports: [CommonModule, AccordionButtonDirective, AccordionComponent, AccordionItemComponent, CardBodyComponent, CardComponent, ColComponent, ReactiveFormsModule, TableDirective, TemplateIdDirective],
+  imports: [CommonModule, AccordionButtonDirective, AccordionComponent, AccordionItemComponent, CardBodyComponent, CardComponent, ColComponent, ReactiveFormsModule, TableDirective, TemplateIdDirective, DxTextAreaModule],
   templateUrl: './reclamation-details.component.html',
   styleUrl: './reclamation-details.component.scss'
 })
 export class ReclamationDetailsComponent {
   @Input() reclamationID: number;
   reclamation: Reclamation|null=null;
-
+  reclamationPhotos:PhotoReclamation[] | undefined=[]
   constructor(public activeModal: NgbActiveModal,private activatedRoute: ActivatedRoute,private sanitizer: DomSanitizer,private modalService: NgbModal, private reclamationService: ReclamationService) {
     this.reclamationID=activatedRoute.snapshot.params['id'];
   }
@@ -38,6 +39,7 @@ export class ReclamationDetailsComponent {
   loadReclamationDetails(): void {
     this.reclamationService.getReclamationById(this.reclamationID).subscribe((reclamation: Reclamation) => {
       this.reclamation = reclamation;
+      this.reclamationPhotos=reclamation.photos
     });
   }
 

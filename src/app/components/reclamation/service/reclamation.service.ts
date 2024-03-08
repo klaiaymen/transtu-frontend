@@ -21,7 +21,30 @@ export class ReclamationService {
   public save(reclamation:Reclamation):Observable<Reclamation>{
     return this.http.post<Reclamation>(this.baseUrl+ '/api/reclamation',reclamation);
   }
+  public saveReclamation(reclamationData: Reclamation): Promise<number> {
+    return this.http.post<any>(this.baseUrl+ '/api/reclamation', reclamationData)
+      .toPromise()
+      .then(response => response.id)
+      .catch(error => {
+        console.error('Erreur lors de la sauvegarde de la réclamation :', error);
+        throw error;
+      });
+  }
+  saveReclamationWithPhotos(reclamation: Reclamation, photos: File[]): Observable<Reclamation> {
+    const formData: FormData = new FormData();
+    formData.append('reclamation', JSON.stringify(reclamation));
+    photos.forEach((photo, index) => {
+      formData.append('photo' + index, photo);
+    });
 
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'multipart/form-data'
+      })
+    };
+
+    return this.http.post<Reclamation>(`${this.baseUrl}/api/reclamation-with-photos`, formData, httpOptions);
+  }
   createReclamation(formData: FormData): Observable<Reclamation> {
     return this.http.post<Reclamation>(this.baseUrl+ '/api/reclamationWithPhotos', formData);
   }
