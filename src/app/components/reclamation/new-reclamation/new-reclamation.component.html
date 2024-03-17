@@ -31,39 +31,31 @@
     </ng-container>
     <ng-container *ngIf="state.dataState==ReclamationsStateEnum.NEW">
       <ng-container>
-        <!--
+        <div class="form-group">
+          <h5>Envoyer une réclamation </h5>
+        </div>
+        <hr>
         <div class="container">
           <div class="col-md-5">
-            <h2>Prendre une photo</h2>
-            <video #videoElement autoplay></video>
-            <button (click)="takePhoto()">Prendre une photo</button>
+            <h2>Prendre des photos pour la réclamation </h2>
+            <video #videoElement autoplay style="width: max-content"></video>
+            <button type="button" class="btn btn-secondary" (click)="takePhoto()"><span class="cil-camera"></span></button>
           </div>
-          <div class="col-md-5">
-            <canvas #canvasElement hidden></canvas>
-            <img *ngIf="photoTaken" [src]="photoUrl" alt="Photo" >
-          </div>
-        </div>-->
-
-        <div class="container">
-          <div class="col-md-5">
-            <h2>Prendre une photo</h2>
-            <video #videoElement autoplay></video>
-            <button (click)="takePhoto()">Prendre une photo</button>
-          </div>
-          <div class="col-md-5">
+          <div class="col">
             <h2>Photos prises</h2>
             <canvas #canvasElement hidden></canvas>
             <div *ngFor="let url of photoUrls; let i = index">
-              <img [src]="url" alt="Photo">
-              <button (click)="deletePhoto(i)">Supprimer</button>
+              <div class="card text-bg-dark" style="width: 250px;display: inline-flex">
+                <img [src]="url" class="card-img" alt="Photo">
+                <div class="card-img-overlay">
+                  <button type="button" (click)="deletePhoto(i)" class="btn-close" aria-label="Close" style="position: absolute;top: 10px;right: 10px;"></button>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
         <form *ngIf="reclamationFormGroup" [formGroup]="reclamationFormGroup" (ngSubmit)="onSaveReclamation()" style="margin: 30px">
-          <div class="form-group">
-            <h5>Envoyer une réclamation </h5>
-          </div>
-          <hr>
           <div claas="container">
 
             <div class="row">
@@ -147,12 +139,12 @@
                   </div>
 
 
-                  <!--<div class="col">
+                  <div class="col">
                     <div class="form-group">
-                      <label for="heure">Heure</label>
-                      <input type="text" class="form-control" formControlName="heure" id="heure" [ngClass]="{'is-invalid':submitted && reclamationFormGroup.controls['heure'].errors}">
+                      <label for="date">Date</label>
+                      <input type="text" class="form-control" formControlName="date" id="date" [ngClass]="{'is-invalid':submitted && reclamationFormGroup.controls['date'].errors}">
                     </div>
-                  </div>-->
+                  </div>
 
                   <div class="col">
                     <div class="form-group">

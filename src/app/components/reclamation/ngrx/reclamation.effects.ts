@@ -7,7 +7,9 @@ import {ReclamationsState} from "./reclamation.reducers";
 import {ReclamationService} from "../service/reclamation.service";
 import {
   DeleteReclamationActionError,
-  DeleteReclamationActionSuccess, EditReclamationActionError, EditReclamationActionSuccess,
+  DeleteReclamationActionSuccess,
+  EditReclamationActionError,
+  EditReclamationActionSuccess,
   GetAllReclamationAction,
   GetAllReclamationActionError,
   GetAllReclamationActionSuccess,
@@ -17,7 +19,10 @@ import {
   SaveReclamationActionError,
   SaveReclamationActionSuccess,
   SearchReclamationActionError,
-  SearchReclamationActionSuccess, UpdateReclamationActionError, UpdateReclamationActionSuccess
+  SearchReclamationActionSuccess, SearchReclamationsError
+  , SearchReclamationsGlobalError, SearchReclamationsGlobalSuccess, SearchReclamationsSuccess,
+  UpdateReclamationActionError,
+  UpdateReclamationActionSuccess
 } from "./reclamation.actions";
 
 @Injectable()
@@ -89,7 +94,7 @@ export class ReclamationEffects {
   );
 
   /*Search reclamation*/
-  searchReclamationEffect:Observable<ReclamationsActions>=createEffect(
+  /*searchReclamationEffect:Observable<ReclamationsActions>=createEffect(
     ()=>this.effectActions.pipe(
       ofType(ReclamationActionsTypes.SEARCH_RECLAMATION),
       mergeMap((action: ReclamationsActions)=>{
@@ -100,7 +105,7 @@ export class ReclamationEffects {
           )
       })
     )
-  );
+  );*/
 
   /* edit reclamation*/
   editReclamationEffect:Observable<ReclamationsActions>=createEffect(
@@ -125,6 +130,44 @@ export class ReclamationEffects {
           .pipe(
             map((reclamation)=> new UpdateReclamationActionSuccess(reclamation)),
             catchError((err)=>of(new UpdateReclamationActionError(err.message)))
+          )
+      })
+    )
+  );
+
+  //search reclamation global
+  searchReclamationsGlobalEffect: Observable<ReclamationsActions> = createEffect(
+    () => this.effectActions.pipe(
+      ofType(ReclamationActionsTypes.SEARCH_RECLAMATION_GLOBAL),
+      mergeMap((action:ReclamationsActions) =>{
+        return this.reclamationService.searchReclamationsGlobal(
+          action.payload.query,
+          action.payload.fromDate,
+          action.payload.toDate,
+          action.payload.typeAccidentIncident,
+          action.payload.typeDegat
+        )
+          .pipe(
+            map((reclamations) => new SearchReclamationsGlobalSuccess(reclamations)),
+            catchError((error) => of(new SearchReclamationsGlobalError(error)))
+          )
+      })
+    )
+  );
+
+  //search reclamation without date range
+  searchReclamationsEffect: Observable<ReclamationsActions> = createEffect(
+    () => this.effectActions.pipe(
+      ofType(ReclamationActionsTypes.SEARCH_RECLAMATION_WITHOUT_DATE),
+      mergeMap((action:ReclamationsActions) =>{
+        return this.reclamationService.searchReclamationsWithoutDateRange(
+          action.payload.query,
+          action.payload.typeAccidentIncident,
+          action.payload.typeDegat
+        )
+          .pipe(
+            map((reclamations) => new SearchReclamationsSuccess(reclamations)),
+            catchError((error) => of(new SearchReclamationsError(error)))
           )
       })
     )

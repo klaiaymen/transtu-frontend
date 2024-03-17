@@ -12,7 +12,7 @@ export enum TypeLigne {
 export interface Ligne {
   id: number;
   code: string;
-  type: TypeLigne;
+  type: string;
   moyenTransport: MoyenTransport|null;
   stations: Station[];
   //itineraire: Itineraire;

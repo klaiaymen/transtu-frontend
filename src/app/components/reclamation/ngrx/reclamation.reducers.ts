@@ -98,6 +98,53 @@ export function reclamationReducers (state =initState,action :Action): Reclamati
     case ReclamationActionsTypes.SEARCH_RECLAMATION_ERROR:
       return {...state, dataState:ReclamationsStateEnum.ERROR, errorMessage:(<ReclamationsActions>action).payload}
 
+    /*//search reclamtion by date range
+    case ReclamationActionsTypes.SEARCH_RECLAMATION_BY_DATE_RANGE:
+      return {...state, dataState:ReclamationsStateEnum.LOADING }
+    case ReclamationActionsTypes.SEARCH_RECLAMATION_BY_DATE_RANGE_SUCCESS:
+      return {...state, dataState:ReclamationsStateEnum.LOADED, reclamations:(<ReclamationsActions>action).payload}
+    case ReclamationActionsTypes.SEARCH_RECLAMATION_BY_DATE_RANGE_ERROR:
+      return {...state, dataState:ReclamationsStateEnum.ERROR, errorMessage:(<ReclamationsActions>action).payload}*/
+    case ReclamationActionsTypes.SEARCH_RECLAMATION_GLOBAL:
+      return {
+        ...state,
+        dataState:ReclamationsStateEnum.LOADING,
+        errorMessage:''
+      }
+    case ReclamationActionsTypes.SEARCH_RECLAMATION_GLOBAL_SUCCESS:
+      return {
+        ...state,
+        dataState: ReclamationsStateEnum.LOADED,
+        reclamations:(<ReclamationsActions>action).payload,
+        errorMessage: ''
+      };
+    case ReclamationActionsTypes.SEARCH_RECLAMATION_GLOBAL_ERROR:
+      return {
+        ...state,
+        dataState: ReclamationsStateEnum.ERROR,
+        errorMessage: (<ReclamationsActions>action).payload
+      };
+//without date range
+    case ReclamationActionsTypes.SEARCH_RECLAMATION_WITHOUT_DATE:
+      return {
+        ...state,
+        dataState:ReclamationsStateEnum.LOADING,
+        errorMessage:''
+      }
+    case ReclamationActionsTypes.SEARCH_RECLAMATION_WITHOUT_DATE_SUCCESS:
+      return {
+        ...state,
+        dataState: ReclamationsStateEnum.LOADED,
+        reclamations:(<ReclamationsActions>action).payload,
+        errorMessage: ''
+      };
+    case ReclamationActionsTypes.SEARCH_RECLAMATION_WITHOUT_DATE_ERROR:
+      return {
+        ...state,
+        dataState: ReclamationsStateEnum.ERROR,
+        errorMessage: (<ReclamationsActions>action).payload
+      };
+
     case ReclamationActionsTypes.LOAD_NEXT_PAGE:
       return { ...state, currentPage: state.currentPage + 1 };
     default : return {...state}

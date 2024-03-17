@@ -188,6 +188,7 @@ export const iconSubset = {
 };
 
 export enum IconSubset {
+  cilFilePdf,
   cibCcAmex = 'cibCcAmex',
   cibCcApplePay = 'cibCcApplePay',
   cibCcMastercard = 'cibCcMastercard',

@@ -10,6 +10,7 @@ import {LoadNextPageAction} from "../../moyens-transport/ngrx/moyensTransport.ac
 import {ReclamationsState} from "../ngrx/reclamation.reducers";
 import {Reclamation} from "../model/reclamation.model";
 import {ReclamationItemComponent} from "./reclamation-item/reclamation-item.component";
+import {ReclamationService} from "../service/reclamation.service";
 
 @Component({
   selector: 'app-reclamation-list',
@@ -23,13 +24,14 @@ export class ReclamationListComponent implements OnInit{
   @Input() state:ReclamationsState|null=null;
   reclamations$: Observable<Reclamation[]>|null=null;
   currentPage$: Observable<number>|null=null;
-
-  constructor(private store:Store<any>) {
+  reclamations: Reclamation[] | undefined;
+  constructor(private reclamationService:ReclamationService,private store:Store<any>) {
   }
 
   ngOnInit(): void {
-    this.reclamations$ = this.store.select(state => state.reclamations);
-    this.currentPage$ = this.store.select(state => state.currentPage);
+    //this.reclamations$ = this.store.select(state => state.reclamations);
+    //this.currentPage$ = this.store.select(state => state.currentPage);
+
   }
 
   loadNextPage() {

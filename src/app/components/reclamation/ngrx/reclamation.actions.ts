@@ -1,6 +1,7 @@
 import {Action} from "@ngrx/store";
 import {District} from "../../district/model/district.model";
 import {Reclamation} from "../model/reclamation.model";
+import {NgbDate} from "@ng-bootstrap/ng-bootstrap";
 
 export enum ReclamationActionsTypes{
   /* Get All Reclamation*/
@@ -38,9 +39,43 @@ export enum ReclamationActionsTypes{
   SEARCH_RECLAMATION_SUCCESS="[Reclamation] Search Reclamation Success",
   SEARCH_RECLAMATION_ERROR="[Reclamation] Search Reclamation Error",
 
+  /* search  reclamation global*/
+  SEARCH_RECLAMATION_GLOBAL="[Reclamation] Search Reclamation global",
+  SEARCH_RECLAMATION_GLOBAL_SUCCESS="[Reclamation] Search Reclamation global Success",
+  SEARCH_RECLAMATION_GLOBAL_ERROR="[Reclamation] Search Reclamation global Error",
+  /* search  reclamation global*/
+  SEARCH_RECLAMATION_WITHOUT_DATE="[Reclamation] Search Reclamation without date range",
+  SEARCH_RECLAMATION_WITHOUT_DATE_SUCCESS="[Reclamation] Search Reclamation without date range Success",
+  SEARCH_RECLAMATION_WITHOUT_DATE_ERROR="[Reclamation] Search Reclamation without date range Error",
+
   LOAD_NEXT_PAGE = '[Reclamation] Load Next Page',
 }
-
+// search reclamation global
+export class SearchReclamationsGlobal implements Action {
+  type:ReclamationActionsTypes = ReclamationActionsTypes.SEARCH_RECLAMATION_GLOBAL;
+  constructor(public payload: { query:string,fromDate: NgbDate, toDate: NgbDate,typeAccidentIncident:string,typeDegat:string }) {}
+}
+export class SearchReclamationsGlobalSuccess implements Action {
+  type:ReclamationActionsTypes = ReclamationActionsTypes.SEARCH_RECLAMATION_GLOBAL_SUCCESS;
+  constructor(public payload: Reclamation[]) {}
+}
+export class SearchReclamationsGlobalError implements Action {
+  type: ReclamationActionsTypes = ReclamationActionsTypes.SEARCH_RECLAMATION_GLOBAL_ERROR;
+  constructor(public payload:string) {}
+}
+// search reclamation without date range
+export class SearchReclamations implements Action {
+  type:ReclamationActionsTypes = ReclamationActionsTypes.SEARCH_RECLAMATION_WITHOUT_DATE;
+  constructor(public payload: { query:string,typeAccidentIncident:string,typeDegat:string }) {}
+}
+export class SearchReclamationsSuccess implements Action {
+  type:ReclamationActionsTypes = ReclamationActionsTypes.SEARCH_RECLAMATION_WITHOUT_DATE_SUCCESS;
+  constructor(public payload: Reclamation[]) {}
+}
+export class SearchReclamationsError implements Action {
+  type: ReclamationActionsTypes = ReclamationActionsTypes.SEARCH_RECLAMATION_WITHOUT_DATE_ERROR;
+  constructor(public payload:string) {}
+}
 /* Search reclamations Actions*/
 export class SearchReclamationAction implements Action{
   type: ReclamationActionsTypes=ReclamationActionsTypes.SEARCH_RECLAMATION;
@@ -186,4 +221,6 @@ export type ReclamationsActions=
   |GetAllReclamationAction | GetAllReclamationActionSuccess | GetAllReclamationActionError
   |UpdateReclamationAction | UpdateReclamationActionSuccess | UpdateReclamationActionError
   |SearchReclamationAction | SearchReclamationActionSuccess | SearchReclamationActionError
+  |SearchReclamationsGlobal | SearchReclamationsGlobalSuccess | SearchReclamationsGlobalError
+  |SearchReclamations | SearchReclamationsSuccess | SearchReclamationsError
   ;

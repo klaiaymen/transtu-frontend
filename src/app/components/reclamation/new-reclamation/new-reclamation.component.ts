@@ -59,7 +59,7 @@ export class NewReclamationComponent implements OnInit{
           reportingSourceTel:['',Validators.required],
           reportingSourceEtat:['',Validators.required],
           lieu: `${this.latitude}~${this.longitude}`,
-          //heure:[currentDate,Validators.required],
+          date:[currentDate,Validators.required],
           codeMt:['codeMt',Validators.required],
           ligne:['ligneAssocie',Validators.required],
           userId:['userId',Validators.required],

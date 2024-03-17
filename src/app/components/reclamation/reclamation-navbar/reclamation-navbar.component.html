@@ -5,15 +5,61 @@
         <li class="nav-item">
           <a class="nav-link"style="cursor: pointer" (click)="onGetAllReclamations()"> <i class="cil-list"></i></a>
         </li>
-       <!-- <li class="nav-item">
-          <a class="nav-link" style="cursor: pointer"  (click)="onNewReclamation()"><i class="cil-plus"></i></a>
-        </li>-->
-
+        <c-dropdown direction="dropend" variant="btn-group">
+          <button cButton color="secondary">
+            <i class="cil-print"></i>
+          </button>
+          <button [split]="true" cButton cDropdownToggle color="secondary">
+            <span class="visually-hidden">Toggle Dropdown</span>
+          </button>
+          <ul cDropdownMenu>
+            <li style="background-color: red">
+              <button cDropdownItem (click)="generateReport('pdf')"><i class="cil-file"></i> PDF</button>
+            </li>
+            <li style="background-color: cornflowerblue">
+              <button cDropdownItem (click)="generateReport('html')"><i class="cil-browser"></i> HTML</button>
+            </li>
+          </ul>
+        </c-dropdown>
       </ul>
 
-      <div class="option" >
-        <input type="text" placeholder="Search" [(ngModel)]="searchQuery" (input)="searchReclamations(searchQuery)">
+    </div>
+    <div class="input-group" style="width: 150px;margin-left: 10px">
+      <input class="form-control" placeholder="Début" name="fromDate" [(ngModel)]="fromDate" ngbDatepicker #d="ngbDatepicker">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+          <i class="cil-calendar"></i>
+        </button>
       </div>
     </div>
+    <div class="input-group" style="width: 150px;margin-left: 10px">
+      <input class="form-control" placeholder="Fin" name="toDate" [(ngModel)]="toDate" ngbDatepicker #d2="ngbDatepicker">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" (click)="d2.toggle()" type="button">
+          <i class="cil-calendar"></i>
+        </button>
+      </div>
+    </div>
+    <div style="margin-right: 10px;margin-left: 10px">
+      <select class="form-select form-select-sm" [(ngModel)]="selectedTypeAccidentIncident">
+        <option value="">type d'accident/incident</option>
+        <option value="collision">Collision</option>
+        <option value="violence">Violence</option>
+        <option value="cristalBrise">Cristal brisé</option>
+        <option value="accidentDeCirculation">Accident de circulation</option>
+        <option value="sabotage">sabotage</option>
+      </select>
+    </div>
+    <div style="margin-right: 10px">
+      <select class="form-select form-select-sm" [(ngModel)]="selectedTypeDegat" >
+        <option value="">type de dégât</option>
+        <option value="humains">Humains</option>
+        <option value="materiels">Matériels</option>
+      </select>
+    </div>
+    <div class="option" >
+      <input type="text" placeholder="Search" [(ngModel)]="searchQuery" style="width: 100px;border-radius: 5px">
+    </div>
+    <button class="btn btn-primary btn-sm" (click)="searchReclamationsGlobal()"><i class="cil-search"></i></button>
   </div>
 </nav>

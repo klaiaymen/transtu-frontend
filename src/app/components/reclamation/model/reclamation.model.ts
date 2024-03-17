@@ -5,7 +5,7 @@ export interface Reclamation {
   reportingSourceTel: string;
   reportingSourceNomPrenom: string;
   lieu: string;
-  //heure: string;
+  date: string;
   typeAccidentIncident: string;
   typeDegat: string;
   notes: string;
