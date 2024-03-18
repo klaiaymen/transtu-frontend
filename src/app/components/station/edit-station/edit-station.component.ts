@@ -7,7 +7,11 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Store} from "@ngrx/store";
 import {EditLigneAction, UpdateLigneAction} from "../../ligne/ngrx/ligne.actions";
 import {StationsState, StationsStateEnum} from "../ngrx/station.reducers";
-import {EditStationAction, UpdateStationAction} from "../ngrx/station.actions";
+import {DeleteStationAction, EditStationAction, UpdateStationAction} from "../ngrx/station.actions";
+import {StationService} from "../service/station.service";
+import {ModalConfirmationComponent} from "../../modal-confirmation/modal-confirmation.component";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {Station} from "../model/station.model";
 
 @Component({
   selector: 'app-edit-station',
@@ -24,7 +28,7 @@ export class EditStationComponent implements  OnInit{
   stationFormGroup: FormGroup |null=null;
   readonly StationsStateEnum= StationsStateEnum;
 submitted: boolean=false;
-  constructor(private activatedRoute: ActivatedRoute, private store:Store<any>, private router:Router,private fb:FormBuilder) {
+  constructor(private modalService: NgbModal,private stationService:StationService,private activatedRoute: ActivatedRoute, private store:Store<any>, private router:Router,private fb:FormBuilder) {
     this.stationID=activatedRoute.snapshot.params['id'];
   }
 
@@ -53,5 +57,33 @@ submitted: boolean=false;
     this.submitted=true;
     if(this.stationFormGroup?.invalid)return
     this.store.dispatch(new UpdateStationAction(this.stationFormGroup?.value));
+  }
+
+  onDelete(stationID: number) {
+    this.stationService.getStationById(stationID).subscribe(
+      (station: Station) => {
+        const modalRef = this.modalService.open(ModalConfirmationComponent);
+        modalRef.componentInstance.confirmationMessage = "Êtes-vous sûr de vouloir supprimer cette station ?";
+        modalRef.result.then(
+          (result) => {
+            if (result === 'confirm') {
+              this.store.dispatch(new DeleteStationAction(station));
+              console.log("station supprimé !");
+            } else {
+              console.log("Suppression annulée !");
+            }
+            this.modalService.dismissAll();
+          },
+          () => {
+            console.log("Modal fermé sans confirmation");
+          }
+        );
+      },
+      (error) => {
+        // Gérer les erreurs de récupération de la station
+        console.error(`Erreur lors de la récupération de la station avec l'ID ${stationID} :`, error);
+      }
+    );
+
   }
 }

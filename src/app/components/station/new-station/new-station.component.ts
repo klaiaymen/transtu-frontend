@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ToastBodyComponent, ToastComponent, ToasterComponent, ToastHeaderComponent} from "@coreui/angular";
@@ -22,6 +22,9 @@ export class NewStationComponent implements OnInit{
   readonly StationsStateEnum= StationsStateEnum;
   submitted: boolean=false;
 
+  @Input() latitude: number|undefined;
+  @Input() longitude: number|undefined;
+
   constructor(private store:Store<any>, private fb:FormBuilder) {
   }
 
@@ -33,8 +36,8 @@ export class NewStationComponent implements OnInit{
         this.stationFormGroup=this.fb.group({
           code:['',Validators.required],
           label:['',Validators.required],
-          longitude:['',Validators.required],
-          latitude:['',Validators.required],
+          longitude:`${this.longitude}`,
+          latitude:`${this.latitude}`,
         })
       }
     })

@@ -13,6 +13,8 @@ import {ItineraireMaps, PointMaps} from "./model/itineraire-maps.model";
 import {Points} from "../../../../point/model/point.model";
 import {PointService} from "../../../../point/service/point.services";
 import {ActivatedRoute} from "@angular/router";
+import {ModalConfirmationComponent} from "../../../../modal-confirmation/modal-confirmation.component";
+import {DeleteDistrictAction} from "../../../../district/ngrx/district.actions";
 
 @Component({
   selector: 'app-itineraire-maps',
@@ -41,7 +43,7 @@ export class ItineraireMapsComponent implements OnInit{
 
   ngOnInit(): void {
     //this.getDistricts();
-    this.loadStations()
+    //this.loadStations()
     this.loadItineraire()
   }
   /*getDistricts(): void {
@@ -49,7 +51,7 @@ export class ItineraireMapsComponent implements OnInit{
       .subscribe(districts => this.districtList = districts);
   }*/
 
-  loadStations(): void {
+  /*loadStations(): void {
     this.stationService.getStations().subscribe(stations => {
       stations.forEach(station => {
         const marker: Marker  = {
@@ -63,7 +65,7 @@ export class ItineraireMapsComponent implements OnInit{
         this.markers.push(marker);
       });
     });
-  }
+  }*/
 
   loadItineraire(): void {
       this.itineraireService.getItineraireById(this.itineraireID).subscribe(itineraire => {
@@ -83,8 +85,46 @@ export class ItineraireMapsComponent implements OnInit{
           console.log('Ligne de l\'itinéraire ',route.id,' :', route.ligne);
           this.routes.push(route);
 
+        this.markers = itineraire.points.map(point => {
+          return {
+            id: point.id,
+            location: [point.latitude, point.longitude],
+            tooltip: {
+              text: 'Point: ' + point.id
+            },
+            onClick: () => this.deletePointFromItineraire(point.id)
+          };
+        });
       });
     }
+
+  deletePointFromItineraire(pointId: number): void {
+    const modalRef = this.modalService.open(ModalConfirmationComponent);
+
+    modalRef.componentInstance.confirmationMessage = "Êtes-vous sûr de vouloir supprimer ce point ?";
+
+    modalRef.result.then(
+      (result) => {
+        if (result === 'confirm') {
+          this.itineraireService.removePointFromItineraire(pointId, this.itineraireID).subscribe(
+            () => {
+              // Suppression réussie, mettre à jour la liste des marqueurs
+              this.markers = this.markers.filter(marker => marker.id !== pointId);
+            },
+            (error) => {
+              console.error('Erreur lors de la suppression du point :', error);
+            }
+          );
+          console.log("point supprimé !");
+        } else {
+          console.log("Suppression annulée !");
+        }
+      },
+      () => {
+        console.log("Modal fermé sans confirmation");
+      }
+    );
+  }
 
 
   addPointToItineraire(e: any) {

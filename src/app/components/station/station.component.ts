@@ -11,11 +11,12 @@ import {StationsState, StationsStateEnum} from "./ngrx/station.reducers";
 import {GetAllStationAction} from "./ngrx/station.actions";
 import {StationListComponent} from "./station-list/station-list.component";
 import {StationNavbarComponent} from "./station-navbar/station-navbar.component";
+import {StationMapComponent} from "./station-list/station-map/station-map.component";
 
 @Component({
   selector: 'app-station',
   standalone: true,
-  imports: [CommonModule, LigneListComponent, LigneNavbarComponent, StationListComponent, StationNavbarComponent],
+  imports: [CommonModule, LigneListComponent, LigneNavbarComponent, StationListComponent, StationNavbarComponent, StationMapComponent],
   templateUrl: './station.component.html',
   styleUrl: './station.component.scss'
 })

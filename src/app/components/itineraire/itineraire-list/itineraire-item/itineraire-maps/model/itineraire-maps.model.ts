@@ -2,11 +2,12 @@ import {Ligne} from "../../../../../ligne/model/ligne.model";
 
 
 export class PointMaps {
+  id?: number;
   location: any;
   tooltip?: {
     text: string;
   };
-  iconCssClass?: string;
+  onClick?: () => void;
 }
 export type APIKey = {
   bing?: string;

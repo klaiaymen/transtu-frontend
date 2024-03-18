@@ -1,0 +1,28 @@
+<dx-map
+  provider="bing"
+  [apiKey]="apiKey"
+  [zoom]="14"
+  [height]="440"
+  width="100%"
+  [controls]="true"
+  [markers]="stations"
+  (onClick)="addMarker($event)"
+>
+</dx-map>
+
+
+  <div class="option">
+    <span>District </span>
+    <select [(ngModel)]="districtId" (change)="loadStations()">
+      <option value="">Tous les districts</option>
+      <option *ngFor="let district of districtList" [value]="district.id">{{ district.id }} {{district.label}}</option>
+    </select>
+  </div>
+
+  <div class="option">
+    <span>Recherche de stations</span>
+    <input type="text" [(ngModel)]="searchQuery" (input)="searchStations(searchQuery)">
+  </div>
+
+
+
