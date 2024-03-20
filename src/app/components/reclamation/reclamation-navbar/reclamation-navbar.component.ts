@@ -2,7 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {Store} from "@ngrx/store";
-import {NgbCalendar, NgbDate, NgbDatepicker, NgbInputDatepicker, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {
+  NgbCalendar,
+  NgbDate,
+  NgbDatepicker,
+  NgbDateStruct,
+  NgbInputDatepicker,
+  NgbModal
+} from "@ng-bootstrap/ng-bootstrap";
 import {NewReclamationComponent} from "../new-reclamation/new-reclamation.component";
 import {
   GetAllReclamationAction,
@@ -173,5 +180,18 @@ export class ReclamationNavbarComponent {
       );
     }
 
+  }
+
+
+  // Fonction pour obtenir la date minimale autorisée pour la date de début
+  minFromDate(): NgbDateStruct  {
+    const currentDate = new Date('01-01-1970');
+    if (this.fromDate === null) {
+      // Si aucune date de début n'a été sélectionnée, retourne la date actuelle
+      return { year: currentDate.getFullYear(), month: currentDate.getMonth() + 1, day: currentDate.getDate() };
+    } else {
+      // Sinon, retourne la date de début sélectionnée
+      return { year: this.fromDate.year, month: this.fromDate.month, day: this.fromDate.day };
+    }
   }
 }

@@ -8,4 +8,5 @@ export interface Station {
   latitude: any;
   ligne: Ligne;
   assignedToLigne:boolean;
+  disabled:boolean;
 }

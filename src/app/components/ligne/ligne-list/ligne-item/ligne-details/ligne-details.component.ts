@@ -1,3 +1,4 @@
+/*
 import {Component, Input, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -131,3 +132,4 @@ export class LigneDetailsComponent implements OnInit{
 
 }
 
+*/

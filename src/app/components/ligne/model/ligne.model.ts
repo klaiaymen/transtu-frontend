@@ -13,9 +13,8 @@ export interface Ligne {
   id: number;
   code: string;
   type: string;
-  moyenTransport: MoyenTransport|null;
+  moyensTransport: MoyenTransport[];
   stations: Station[];
   //itineraire: Itineraire;
   assignedToItineraire: boolean;
-  disabled:boolean;
 }

@@ -74,7 +74,7 @@ export class ItineraireDetailsComponent implements OnInit{
   toggleLigneAssignment(ligne: Ligne, itineraire: Itineraire) {
     this.allLignes.forEach(l => {
       if (l.id !== ligne.id) {
-        l.disabled = true;
+        //l.disabled = true;
       }
     });
 
@@ -86,7 +86,7 @@ export class ItineraireDetailsComponent implements OnInit{
     } else {
       // Activer tous les autres lignes
       this.allLignes.forEach(l => {
-        l.disabled = false;
+        //l.disabled = false;
       });
       const index = itineraire.ligne ? 0 : -1;
       if (index !== -1) {

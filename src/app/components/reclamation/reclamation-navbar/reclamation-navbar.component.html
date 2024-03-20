@@ -24,7 +24,7 @@
       </ul>
 
     </div>
-    <div class="input-group" style="width: 150px;margin-left: 10px">
+    <!--<div class="input-group" style="width: 150px;margin-left: 10px">
       <input class="form-control" placeholder="Début" name="fromDate" [(ngModel)]="fromDate" ngbDatepicker #d="ngbDatepicker">
       <div class="input-group-append">
         <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
@@ -39,7 +39,26 @@
           <i class="cil-calendar"></i>
         </button>
       </div>
+    </div>-->
+    <div class="input-group" style="width: 150px;margin-left: 10px">
+      <input class="form-control" placeholder="Début" name="fromDate" [(ngModel)]="fromDate" ngbDatepicker #d="ngbDatepicker"
+             [minDate]="minFromDate()">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+          <i class="cil-calendar"></i>
+        </button>
+      </div>
     </div>
+    <div class="input-group" style="width: 150px;margin-left: 10px">
+      <input class="form-control" placeholder="Fin" name="toDate" [(ngModel)]="toDate" ngbDatepicker #d2="ngbDatepicker">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" (click)="d2.toggle()" type="button">
+          <i class="cil-calendar"></i>
+        </button>
+      </div>
+    </div>
+
+
     <div style="margin-right: 10px;margin-left: 10px">
       <select class="form-select form-select-sm" [(ngModel)]="selectedTypeAccidentIncident">
         <option value="">type d'accident/incident</option>

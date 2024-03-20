@@ -7,7 +7,6 @@ import {ModalConfirmationComponent} from "../../../modal-confirmation/modal-conf
 import {Ligne} from "../../model/ligne.model";
 import {DeleteLigneAction} from "../../ngrx/ligne.actions";
 import {EditLigneComponent} from "../../edit-ligne/edit-ligne.component";
-import {LigneDetailsComponent} from "./ligne-details/ligne-details.component";
 import {MoyenTransport} from "../../../moyens-transport/model/moyenTransport.model";
 import {Station} from "../../../station/model/station.model";
 import {MoyenTransportService} from "../../../moyens-transport/services/moyenTransport.service";
@@ -26,9 +25,11 @@ import {StationService} from "../../../station/service/station.service";
 })
 export class LigneItemComponent implements OnInit{
   ngOnInit(): void {
+    this.loadLignes()
     this.loadAllMoyensTransports()
     this.loadAllStations()
   }
+  allLignes: Ligne[]=[]
   @Input() ligne: Ligne|null=null;
   moyenTransport: MoyenTransport|null=null;
   allMoyensTransports: MoyenTransport[]=[];
@@ -69,10 +70,10 @@ export class LigneItemComponent implements OnInit{
     modalRef.componentInstance.ligneID = ligne.id;
   }
 
-  onDetails(ligne: Ligne) {
+  /*onDetails(ligne: Ligne) {
     const modalRef = this.modalService.open(LigneDetailsComponent);
     modalRef.componentInstance.ligneID = ligne.id;
-  }
+  }*/
 
   //moyen transport panel
   loadAllMoyensTransports() {
@@ -80,41 +81,46 @@ export class LigneItemComponent implements OnInit{
       this.allMoyensTransports = moyensTransports.map(mt => ({
         ...mt,
         assignedToLigne: this.isMoyenTransportAssignedToLigne(mt, this.ligne),
-        disabled: (this.ligne && this.ligne.moyenTransport && this.ligne.moyenTransport.id !== mt.id) || false
+        disabled: this.isMoyenTransportAssigned(mt) && !this.isMoyenTransportAssignedToLigne(mt, this.ligne)
       }));
     });
   }
-
+  loadLignes() {
+    this.ligneService.getLignes().subscribe(lignes => {
+       this.allLignes = lignes;
+       //console.log(lignes)
+    });
+  }
+  isMoyenTransportAssigned(moyenTransport: MoyenTransport): boolean {
+    return this.allLignes.some(ligne => ligne.moyensTransport.some(mt => mt.id === moyenTransport.id));
+  }
   isMoyenTransportAssignedToLigne(moyenTransport: MoyenTransport, ligne: Ligne | null): boolean {
-    return ligne?.moyenTransport?.id === moyenTransport.id;
+    // @ts-ignore
+    return ligne?.moyensTransport.some(mt => mt.id === moyenTransport.id);
   }
 
   toggleMoyenTransportAssignments(moyenTransport: MoyenTransport, ligne: Ligne) {
-    this.allMoyensTransports.forEach(mt => {
-      if (mt.id !== moyenTransport.id) {
-        mt.disabled = true;
-      }
-    });
-
+    // assigne la moyen de transport  au ligne
     if (moyenTransport.assignedToLigne) {
       this.ligneService.assignMTToLigne(moyenTransport.id, ligne.id).subscribe(() => {
         moyenTransport.assignedToLigne = true;
-        ligne.moyenTransport = moyenTransport;
+        ligne.moyensTransport.push(moyenTransport);
       });
     } else {
-      // Activer tous les autres moyens de transport
-      this.allMoyensTransports.forEach(mt => {
-        mt.disabled = false;
-      });
-      const index = ligne.moyenTransport ? 0 : -1;
+      // Supprimer la moyen de transport  du ligne
+      const index = ligne.moyensTransport.findIndex(mt => mt.id === moyenTransport.id);
       if (index !== -1) {
-        // @ts-ignore
-        this.ligneService.removeMTFromLigne(ligne.moyenTransport.id, ligne.id).subscribe(() => {
-          ligne.moyenTransport = null;
+        this.ligneService.removeMTFromLigne(moyenTransport.id, ligne.id).subscribe(() => {
+          moyenTransport.assignedToLigne = false;
+          ligne.moyensTransport.splice(index, 1);
         });
       }
     }
+    window.location.reload()
   }
+
+
+
   toggleTableMts(): void {
     this.showTable = !this.showTable;
     if (this.showTable) {
@@ -129,11 +135,15 @@ export class LigneItemComponent implements OnInit{
     this.stationService.getStations().subscribe(stations => {
       this.allStations = stations.map(s => ({
         ...s,
-        assignedToLigne: this.isStationAssignedToLigne(s, this.ligne)
+        assignedToLigne: this.isStationAssignedToLigne(s, this.ligne),
+        disabled: this.isStationAssigned(s) && !this.isStationAssignedToLigne(s, this.ligne)
       }));
     });
   }
 
+  isStationAssigned(station: Station): boolean {
+    return this.allLignes.some(ligne => ligne.stations.some(s => s.id === station.id));
+  }
   isStationAssignedToLigne(station: Station, ligne: Ligne | null): boolean {
     // @ts-ignore
     return ligne.stations.some(s => s.id === station.id);
@@ -156,6 +166,7 @@ export class LigneItemComponent implements OnInit{
         });
       }
     }
+    window.location.reload()
   }
   toggleTableStations(): void {
     this.showTableStations = !this.showTableStations;
@@ -166,4 +177,7 @@ export class LigneItemComponent implements OnInit{
     }
   }
 
+  showStationOnMap() {
+    this.router.navigateByUrl('/dashboard')
+  }
 }
