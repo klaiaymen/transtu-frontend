@@ -14,7 +14,7 @@ import {DistrictListComponent} from "./district-list/district-list.component";
   standalone: true,
   imports: [CommonModule, MtListComponent, DistrictNavbarComponent, DistrictListComponent],
   templateUrl: './district.component.html',
-  //styleUrl: './district.component.scss'
+  styleUrl: './district.component.scss'
 })
 export class DistrictComponent implements  OnInit{
   districtsState$:Observable<DistrictsState>|null=null;

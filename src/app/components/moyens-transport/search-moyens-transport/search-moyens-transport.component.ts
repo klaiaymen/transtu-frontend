@@ -12,7 +12,7 @@ import {map} from "rxjs/operators";
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, MatAutocompleteModule, MatInputModule],
   templateUrl: './search-moyens-transport.component.html',
-  styleUrl: './search-district.component.scss'
+  styleUrl: './search-moyens-transport.component.scss'
 })
 export class SearchMoyensTransportComponent {
   searchControl = new FormControl();

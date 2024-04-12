@@ -1,4 +1,4 @@
-FROM node:latest as build
+FROM node:18-buster as build
 
 WORKDIR /usr/local/app
 
@@ -10,6 +10,6 @@ RUN npm run build
 
 FROM nginx:latest
 
-COPY --from=build /usr/local/app/dist/coreui-free-angular-admin-template-main/browser /usr/share/nginx/html
+COPY --from=build /usr/local/app/dist/coreui-free-angular-admin-template /usr/share/nginx/html
 
 EXPOSE 80

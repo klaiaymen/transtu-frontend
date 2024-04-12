@@ -19,7 +19,7 @@ import {MoyenTransportService} from "./services/moyenTransport.service";
   standalone: true,
   imports: [CommonModule, DocsComponentsModule, TableDirective, MtNavbarComponent,MtListComponent],
   templateUrl: './moyens-transport.component.html',
-  styleUrl: './district.component.scss'
+  styleUrl: './moyens-transport.component.scss'
 })
 export class MoyensTransportComponent implements  OnInit{
   moyensTransportState$:Observable<MoyensTransportState>|null=null;
