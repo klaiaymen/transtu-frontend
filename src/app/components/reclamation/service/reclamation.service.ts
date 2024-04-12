@@ -9,7 +9,7 @@ import {NgbDate} from "@ng-bootstrap/ng-bootstrap";
 
 @Injectable({providedIn:"root"})
 export class ReclamationService {
-  private baseUrl = 'http://localhost:8081';
+  private baseUrl = 'http://localhost:8888/RECLAMATION-SERVICE';
   constructor(private http:HttpClient) { }
 
   public getReclamations():Observable<Reclamation[]>{

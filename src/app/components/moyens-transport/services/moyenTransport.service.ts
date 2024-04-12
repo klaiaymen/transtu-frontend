@@ -6,7 +6,7 @@ import {Itineraire} from "../../itineraire/model/itineraire.model";
 
 @Injectable({providedIn:"root"})
 export class MoyenTransportService{
-  private baseUrl = 'http://localhost:8081';
+  private baseUrl = 'http://localhost:8888/GESTIONACCIDENTSINCIDENTS';
   constructor(private http:HttpClient) { }
 
   public getMoyensTransport():Observable<MoyenTransport[]>{
@@ -19,7 +19,7 @@ export class MoyenTransportService{
   }
 
   public getMts(page: number=1, size:number=4):Observable<Array<MoyenTransport>>{
-    return this.http.get<Array<MoyenTransport>>(`http://localhost:8081/api/mt?_page=${page}&_limit=${size}`);
+    return this.http.get<Array<MoyenTransport>>(`http://localhost:8888/GESTIONACCIDENTSINCIDENTS/api/mt?_page=${page}&_limit=${size}`);
   }
   public save(moyentransport:MoyenTransport):Observable<MoyenTransport>{
     return this.http.post<MoyenTransport>(this.baseUrl+ '/api/mt',moyentransport);
