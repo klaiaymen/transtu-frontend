@@ -2,7 +2,7 @@
   <td>{{point.id}}</td>
   <td>{{point.longitude}}</td>
   <td>{{point.latitude}}</td>
-  <td>
+  <td *ngIf="authService.roles.includes('ADMIN')">
     <button (click)="onDelete(point)" class="btn btn-sm m-1" style="background-color: crimson">
       <i class="cil-trash" ></i>
     </button>

@@ -6,6 +6,7 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {GetAllItineraireAction, NewItineraireAction, SearchItineraireAction} from "../ngrx/itineraire.actions";
 import {NewItineraireComponent} from "../new-itineraire/new-itineraire.component";
 import {SearchMTAction} from "../../moyens-transport/ngrx/moyensTransport.actions";
+import {AuthService} from "../../authService/auth.service";
 
 @Component({
   selector: 'app-itineraire-navbar',
@@ -16,7 +17,7 @@ import {SearchMTAction} from "../../moyens-transport/ngrx/moyensTransport.action
 })
 export class ItineraireNavbarComponent {
   searchQuery: string='';
-  constructor(private store:Store<any>,private modalService: NgbModal) {
+  constructor(public authService:AuthService,private store:Store<any>,private modalService: NgbModal) {
   }
 
   onGetAllItineraires() {

@@ -1,0 +1,46 @@
+<tr *ngIf="user">
+  <td>{{user.userId}}</td>
+  <td>{{user.username}}</td>
+  <td>{{user.tel}}</td>
+  <td>{{user.email}}</td>
+  <button (click)="toggleTableRoles()" class="btn btn-sm m-1" >
+    <i [class]="showTable ? iconExitFullscreen : iconFullscreen"></i>
+  </button>
+
+  <table *ngIf="showTable" [striped]="true" cTable hover >
+
+    <thead>
+
+    <tr>
+      <th scope="col">Role</th>
+      <select class="form-select form-select-sm" aria-label=".form-select-sm example" [(ngModel)]="query" (click)="searchRoles(query)">
+        <option selected>All</option>
+        <option value="DISTRICT">District</option>
+        <option value="LIGNE">Ligne</option>
+        <option value="MT">Mt</option>
+        <option value="ITINERAIRE">Itineraire</option>
+        <option value="STATION">Station</option>
+        <option value="POINT">Point</option>
+        <option value="RECLAMATION">Reclamation</option>
+        <option value="REPORTS">Rapports</option>
+      </select>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let role of roles">
+      <td>{{role.role}}</td>
+      <td>
+        <input type="checkbox" [(ngModel)]="role.assignedToUser" [disabled]="role.disabled" (change)="toggleRoleAssignment(role, user)">
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <td>
+    <button *ngIf="authService.roles.includes('ADMIN')" (click)="onDelete(user)" class="btn btn-sm m-1" style="background-color: crimson">
+      <i class="cil-trash" ></i>
+    </button>
+    <button *ngIf="authService.roles.includes('ADMIN')" (click)="onEdit(user)"  class="btn btn-sm m-1" style="background-color: cornflowerblue">
+      <i class="cil-pencil"></i>
+    </button>
+  </td>
+</tr>

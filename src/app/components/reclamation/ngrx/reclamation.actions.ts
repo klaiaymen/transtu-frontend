@@ -9,6 +9,11 @@ export enum ReclamationActionsTypes{
   GET_ALL_RECLAMATIONS_SUCCESS="[Reclamations] Get All reclamations Success",
   GET_ALL_RECLAMATIONS_ERROR="[Reclamations] Get All reclamations Error",
 
+  /* Get Reclamations by user*/
+  GET_ALL_RECLAMATIONS_BY_USER="[Reclamations] Get reclamations by user",
+  GET_ALL_RECLAMATIONS_BY_USER_SUCCESS="[Reclamations] Get reclamations by user Success",
+  GET_ALL_RECLAMATIONS_BY_USER_ERROR="[Reclamations] Get reclamations by user Error",
+
   /* new reclamation*/
   NEW_RECLAMATION="[Reclamation] new Reclamation",
   NEW_RECLAMATION_SUCCESS="[Reclamation] new Reclamation Success",
@@ -50,6 +55,26 @@ export enum ReclamationActionsTypes{
 
   LOAD_NEXT_PAGE = '[Reclamation] Load Next Page',
 }
+
+// get all reclamtion
+export class GetReclamationByUserAction implements Action{
+  type: ReclamationActionsTypes=ReclamationActionsTypes.GET_ALL_RECLAMATIONS_BY_USER;
+  constructor(public payload:any) {
+  }
+}
+export class GetReclamationByUserActionSuccess implements Action{
+  type: ReclamationActionsTypes=ReclamationActionsTypes.GET_ALL_RECLAMATIONS_BY_USER_SUCCESS;
+
+  constructor(public payload: Reclamation[]) {
+  }
+}
+
+export class GetReclamationByUserActionError implements Action{
+  type: ReclamationActionsTypes=ReclamationActionsTypes.GET_ALL_RECLAMATIONS_BY_USER_ERROR;
+  constructor(public payload:string) {
+  }
+}
+
 // search reclamation global
 export class SearchReclamationsGlobal implements Action {
   type:ReclamationActionsTypes = ReclamationActionsTypes.SEARCH_RECLAMATION_GLOBAL;
@@ -223,4 +248,5 @@ export type ReclamationsActions=
   |SearchReclamationAction | SearchReclamationActionSuccess | SearchReclamationActionError
   |SearchReclamationsGlobal | SearchReclamationsGlobalSuccess | SearchReclamationsGlobalError
   |SearchReclamations | SearchReclamationsSuccess | SearchReclamationsError
+  |GetReclamationByUserAction|GetReclamationByUserActionSuccess|GetReclamationByUserActionError
   ;

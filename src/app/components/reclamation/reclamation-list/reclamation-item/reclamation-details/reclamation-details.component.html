@@ -1,3 +1,4 @@
+<!--
 <div class="modal-header">
   <h4 class="modal-title">Détails du réclamation</h4>
   <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
@@ -93,4 +94,35 @@
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss()">Fermer</button>
+</div>
+-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<div class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <div class="project-info-box mt-0">
+        <h5>RECLAMATION DETAILS</h5>
+        <p class="mb-0">{{reclamation?.notes}}.</p>
+      </div><!-- / project-info-box -->
+
+      <div class="project-info-box">
+        <p><b>Reporteur:</b>{{reclamation?.reportingSourceNomPrenom}} - {{reclamation?.reportingSourceEtat}} - {{reclamation?.reportingSourceTel}}</p>
+        <p><b>Date:</b> {{reclamation?.date}}</p>
+        <p><b>Lieu:</b><a [href]="'https://www.bing.com/maps?cp='+(reclamation?.lieu)+'&lvl=18.0'">Lien vers la carte Bing Maps</a></p>
+        <p class="mb-0"><b>Status:</b> {{reclamation?.state}}</p>
+      </div><!-- / project-info-box -->
+
+    </div><!-- / column -->
+
+    <div class="col-md-7">
+      <img *ngFor="let photo of reclamationPhotos" [src]="photo.url" alt="Reclamation photo" style="border-radius: 10px;margin: 10px;height: 250px;
+width: 300px">
+      <div class="project-info-box">
+        <p><b>District :</b>{{districtAsigned}}</p>
+        <p><b>Moyen Transport :</b>{{moyenTransportAsigned}}</p>
+        <p><b>Type degats:</b>{{reclamation?.typeDegat}}</p>
+        <p><b>Type accident/incident:</b> {{reclamation?.typeAccidentIncident}}</p>
+      </div><!-- / project-info-box -->
+    </div><!-- / column -->
+  </div>
 </div>

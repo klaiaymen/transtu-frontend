@@ -5,7 +5,7 @@
                 <li class="nav-item">
                     <a class="nav-link"style="cursor: pointer" (click)="onGetAllDistricts()"> <i class="cil-list"></i></a>
                 </li>
-                <li class="nav-item">
+                <li *ngIf="authService.roles.includes('DISTRICT_ADD')" class="nav-item">
                     <a class="nav-link" style="cursor: pointer"  (click)="onNewDistrict()"><i class="cil-plus"></i></a>
                 </li>
 

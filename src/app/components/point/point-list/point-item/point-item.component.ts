@@ -7,6 +7,7 @@ import {ModalConfirmationComponent} from "../../../modal-confirmation/modal-conf
 import {Points} from "../../model/point.model";
 import {DeletePointAction} from "../../ngrx/point.actions";
 import {EditPointComponent} from "../../edit-point/edit-point.component";
+import {AuthService} from "../../../authService/auth.service";
 
 @Component({
   selector: 'app-point-item',
@@ -18,7 +19,7 @@ import {EditPointComponent} from "../../edit-point/edit-point.component";
 export class PointItemComponent {
   @Input() point: Points|null=null;
 
-  constructor(private store:Store, private router:Router,private modalService: NgbModal) {
+  constructor(public authService:AuthService,private store:Store, private router:Router,private modalService: NgbModal) {
   }
   onDelete(point: any) {
     const modalRef = this.modalService.open(ModalConfirmationComponent);

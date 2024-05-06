@@ -45,7 +45,25 @@ export const navItems: INavData[] = [
     iconComponent: { name: 'cil-location-pin'}
   },*/
   {
-    name: 'Gestion des Paramétrages',
+    name: 'Users / Authorities',
+    url: '/gestionUsers',
+    iconComponent: { name: 'cil-caret-bottom' },
+    children: [
+      {
+        name: 'Users',
+        iconComponent: { name: 'cil-user' },
+        url: '/gestionUser'
+      },
+      {
+        name: 'Authorities',
+        iconComponent: { name: 'cil-truck' },
+        url: '/gestionRole'
+      }
+    ]
+  },
+
+  {
+    name: 'Paramétrages',
     url: '/gestionParams',
     iconComponent: { name: 'cil-caret-bottom' },
     children: [

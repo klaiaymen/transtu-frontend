@@ -2,7 +2,7 @@
   <td>{{ligne.id}}</td>
   <td>{{ligne.code}}</td>
   <td>{{ligne.type}}</td>
-  <td>
+  <td *ngIf="authService.roles.includes('ADMIN')">
     <button (click)="toggleTableMts()" class="btn btn-sm m-1">
       <i [class]="showTable ? iconExitFullscreen : iconFullscreen"></i>
     </button>
@@ -30,35 +30,38 @@
       </tbody>
     </table>
   </td>
-  <button (click)="toggleTableStations()" class="btn btn-sm m-1">
-    <i [class]="showTableStations ? iconExitFullscreenStations : iconFullscreenStations"></i>
-  </button>
-  <table  *ngIf="showTableStations" [striped]="true" cTable hover>
-    <thead>
+  <td *ngIf="authService.roles.includes('ADMIN')">
+    <button (click)="toggleTableStations()" class="btn btn-sm m-1" >
+      <i [class]="showTableStations ? iconExitFullscreenStations : iconFullscreenStations"></i>
+    </button>
+    <table  *ngIf="showTableStations" [striped]="true" cTable hover>
+      <thead>
 
-    <tr>
-      <th scope="col">Id</th>
-      <th scope="col">Label</th>
-      <th scope="col">Code</th>
-      <th scope="col">Longitude</th>
-      <th scope="col">lattitude</th>
-      <th scope="col">Assignée</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let station of allStations" (click)="showStationOnMap()">
-      <td>{{station.id}}</td>
-      <td>{{station.label}}</td>
-      <td>{{station.code}}</td>
-      <td>{{station.longitude}}</td>
-      <td>{{station.latitude}}</td>
-      <td>
-        <input type="checkbox" [(ngModel)]="station.assignedToLigne" [disabled]="station.disabled" (change)="toggleStationsAssignment(station, ligne)">
-      </td>
-    </tr>
-    </tbody>
-  </table>
-  <td>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Label</th>
+        <th scope="col">Code</th>
+        <th scope="col">Longitude</th>
+        <th scope="col">lattitude</th>
+        <th scope="col">Assignée</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let station of allStations" (click)="showStationOnMap()">
+        <td>{{station.id}}</td>
+        <td>{{station.label}}</td>
+        <td>{{station.code}}</td>
+        <td>{{station.longitude}}</td>
+        <td>{{station.latitude}}</td>
+        <td>
+          <input type="checkbox" [(ngModel)]="station.assignedToLigne" [disabled]="station.disabled" (change)="toggleStationsAssignment(station, ligne)">
+        </td>
+
+      </tr>
+      </tbody>
+    </table>
+  </td>
+  <td *ngIf="authService.roles.includes('ADMIN')">
     <button (click)="onDelete(ligne)" class="btn btn-sm m-1" style="background-color: crimson">
       <i class="cil-trash" ></i>
     </button>

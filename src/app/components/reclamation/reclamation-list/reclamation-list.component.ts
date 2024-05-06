@@ -31,7 +31,6 @@ export class ReclamationListComponent implements OnInit{
   ngOnInit(): void {
     //this.reclamations$ = this.store.select(state => state.reclamations);
     //this.currentPage$ = this.store.select(state => state.currentPage);
-
   }
 
   loadNextPage() {

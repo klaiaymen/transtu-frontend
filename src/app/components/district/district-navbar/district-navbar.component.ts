@@ -9,6 +9,7 @@ import {GetAllDistrictAction, SearchDistrictAction} from "../ngrx/district.actio
 import {Store} from "@ngrx/store";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {SearchMTAction} from "../../moyens-transport/ngrx/moyensTransport.actions";
+import {AuthService} from "../../authService/auth.service";
 
 @Component({
   selector: 'app-district-navbar',
@@ -19,7 +20,7 @@ import {SearchMTAction} from "../../moyens-transport/ngrx/moyensTransport.action
 })
 export class DistrictNavbarComponent {
   searchQuery: string='';
-  constructor(private store:Store<any>,private modalService: NgbModal) {
+  constructor(private store:Store<any>,private modalService: NgbModal,public authService:AuthService) {
   }
 
 

@@ -10,6 +10,7 @@ import {LoadNextPageAction} from "../../moyens-transport/ngrx/moyensTransport.ac
 import {Ligne} from "../model/ligne.model";
 import {LignesState} from "../ngrx/ligne.reducers";
 import {LigneItemComponent} from "./ligne-item/ligne-item.component";
+import {AuthService} from "../../authService/auth.service";
 
 @Component({
   selector: 'app-ligne-list',
@@ -25,7 +26,7 @@ export class LigneListComponent implements OnInit{
   lignes$: Observable<Ligne[]>|null=null;
   currentPage$: Observable<number>|null=null;
 
-  constructor(private store:Store<any>) {
+  constructor(public authService:AuthService,private store:Store<any>) {
   }
 
   ngOnInit(): void {

@@ -8,7 +8,7 @@ import {Station} from "../../station/model/station.model";
 
 @Injectable({providedIn:"root"})
 export class LigneService {
-  private baseUrl = 'http://localhost:8888/GESTIONACCIDENTSINCIDENTS';
+  private baseUrl = 'http://localhost:8081';
   constructor(private http:HttpClient) { }
 
   public getLignes():Observable<Ligne[]>{

@@ -71,7 +71,7 @@
 
           <div class="form-group" >
             <label for="longitude"> Longitude</label>
-            <input type="text" class="form-control" formControlName="longitude" id="longitude" [ngClass]="{'is-invalid':submitted && stationFormGroup.controls['longitude'].errors}">
+            <input type="text" class="form-control" formControlName="longitude" id="longitude" [ngClass]="{'is-invalid':submitted && stationFormGroup.controls['longitude'].errors}" readonly>
             <div *ngIf="submitted && stationFormGroup.controls['longitude'].errors" class="invalid-feedback">
               <div *ngIf="stationFormGroup.controls['longitude'].hasError('required')">longitude is required</div>
             </div>
@@ -79,16 +79,16 @@
 
           <div class="form-group" >
             <label for="latitude"> latitude</label>
-            <input type="text" class="form-control" formControlName="latitude" id="latitude" [ngClass]="{'is-invalid':submitted && stationFormGroup.controls['latitude'].errors}">
+            <input type="text" class="form-control" formControlName="latitude" id="latitude" [ngClass]="{'is-invalid':submitted && stationFormGroup.controls['latitude'].errors}" readonly>
             <div *ngIf="submitted && stationFormGroup.controls['latitude'].errors" class="invalid-feedback">
               <div *ngIf="stationFormGroup.controls['latitude'].hasError('required')">latitude is required</div>
             </div>
           </div>
 
-          <button type="submit" class="btn btn-success m-1" >Save</button>
-
+          <button [disabled]="disabledBtns" type="submit" class="btn btn-success m-1" >Save</button>
+          <button  [disabled]="disabledBtns" class="btn btn-danger m-1" (click)="onDelete(stationID)">Supprimer</button>
         </form>
-        <button  class="btn btn-danger m-1" (click)="onDelete(stationID)">Supprimer</button>
+
 
       </ng-container>
     </ng-container>

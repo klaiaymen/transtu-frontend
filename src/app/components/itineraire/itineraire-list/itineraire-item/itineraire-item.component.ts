@@ -19,6 +19,7 @@ import {LigneService} from "../../../ligne/service/ligne.service";
 import {NewReclamationComponent} from "../../../reclamation/new-reclamation/new-reclamation.component";
 import {MapsComponent} from "../../../maps/maps.component";
 import {ItineraireMapsComponent} from "./itineraire-maps/itineraire-maps.component";
+import {AuthService} from "../../../authService/auth.service";
 
 @Component({
   selector: 'app-itineraire-item',
@@ -41,7 +42,7 @@ export class ItineraireItemComponent implements OnInit{
   iconFullscreen: string = "cil-fullscreen";
   iconExitFullscreen: string = "cil-fullscreen-exit";
   showTableLignes: boolean=false;
-  constructor(private store:Store, private router:Router,private modalService: NgbModal,private itineraireService: ItineraireService,
+  constructor(public authService:AuthService,private store:Store, private router:Router,private modalService: NgbModal,private itineraireService: ItineraireService,
               private pointService:PointService,private ligneService:LigneService) {
   }
 

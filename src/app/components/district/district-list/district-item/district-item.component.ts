@@ -16,6 +16,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {TableDirective} from "@coreui/angular";
 import {result} from "lodash-es";
 import {SearchMTAction} from "../../../moyens-transport/ngrx/moyensTransport.actions";
+import {AuthService} from "../../../authService/auth.service";
 
 @Component({
   selector: 'app-district-item',
@@ -34,7 +35,7 @@ export class DistrictItemComponent implements OnInit{
   iconFullscreen: string = "cil-fullscreen";
   iconExitFullscreen: string = "cil-fullscreen-exit";
   searchQuery: string='';
-  constructor(private store:Store, private router:Router,private modalService: NgbModal,private districtService: DistrictService, private moyenTransportService: MoyenTransportService) {
+  constructor(public authService:AuthService,private store:Store, private router:Router,private modalService: NgbModal,private districtService: DistrictService, private moyenTransportService: MoyenTransportService) {
   }
 
   searchMts(query: string) {
@@ -82,7 +83,8 @@ export class DistrictItemComponent implements OnInit{
     this.moyenTransportService.searchMts(query).subscribe(moyensTransports => {
       this.allMoyensTransports = moyensTransports.map(mt => ({
         ...mt,
-        assignedToDistrict: this.isMoyenTransportAssignedToDistrict(mt, this.district)
+        assignedToDistrict: this.isMoyenTransportAssignedToDistrict(mt, this.district),
+        disabled:!this.authService.roles.includes('ADMIN')
       }));
     });
   }
@@ -90,7 +92,8 @@ export class DistrictItemComponent implements OnInit{
     this.moyenTransportService.getMts(1,2).subscribe(moyensTransports => {
       this.allMoyensTransports = moyensTransports.map(mt => ({
         ...mt,
-        assignedToDistrict: this.isMoyenTransportAssignedToDistrict(mt, this.district)
+        assignedToDistrict: this.isMoyenTransportAssignedToDistrict(mt, this.district),
+        disabled:!this.authService.roles.includes('ADMIN')
       }));
     });
   }

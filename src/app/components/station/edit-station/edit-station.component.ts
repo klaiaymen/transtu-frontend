@@ -12,6 +12,7 @@ import {StationService} from "../service/station.service";
 import {ModalConfirmationComponent} from "../../modal-confirmation/modal-confirmation.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {Station} from "../model/station.model";
+import {AuthService} from "../../authService/auth.service";
 
 @Component({
   selector: 'app-edit-station',
@@ -27,8 +28,9 @@ export class EditStationComponent implements  OnInit{
   stationID:number;
   stationFormGroup: FormGroup |null=null;
   readonly StationsStateEnum= StationsStateEnum;
-submitted: boolean=false;
-  constructor(private modalService: NgbModal,private stationService:StationService,private activatedRoute: ActivatedRoute, private store:Store<any>, private router:Router,private fb:FormBuilder) {
+  submitted: boolean=false;
+  disabledBtns:boolean=!this.authService.roles.includes('ADMIN');
+  constructor(public authService:AuthService,private modalService: NgbModal,private stationService:StationService,private activatedRoute: ActivatedRoute, private store:Store<any>, private router:Router,private fb:FormBuilder) {
     this.stationID=activatedRoute.snapshot.params['id'];
   }
 

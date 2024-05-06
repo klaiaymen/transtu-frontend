@@ -1,0 +1,26 @@
+<c-col xs="12">
+  <c-card class="mb-4">
+    <c-card-body>
+      <table *ngIf="state"  [striped]="true" cTable hover>
+        <thead>
+
+        <tr>
+          <th scope="col">User Id</th>
+          <th scope="col">Username</th>
+          <th scope="col">Phone Number</th>
+          <th scope="col">Email</th>
+          <th scope="col">Roles</th>
+        </tr>
+        </thead>
+        <tbody>
+        <app-user-item *ngFor="let user of state.users" [user]="user" style="display: contents"></app-user-item>
+        </tbody>
+      </table>
+      <!-- Affichez les contrôles de pagination ici -->
+      <button cButton class="me-1" variant="ghost" color="info"  (click)="loadNextPage()">
+        >>
+      </button>
+    </c-card-body>
+  </c-card>
+</c-col>
+

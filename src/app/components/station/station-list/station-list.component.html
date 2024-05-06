@@ -1,4 +1,4 @@
-<c-col xs="12">
+<c-col xs="12" *ngIf="authService.roles.includes('ADMIN')">
   <c-card class="mb-4">
     <c-card-body>
       <table *ngIf="state"  [striped]="true" cTable hover>

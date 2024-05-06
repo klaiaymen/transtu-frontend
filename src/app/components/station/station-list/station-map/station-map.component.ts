@@ -14,6 +14,7 @@ import {StationMaps} from "./model/station-map.model";
 import {ModalComponent} from "@coreui/angular";
 import {EditStationComponent} from "../../edit-station/edit-station.component";
 import {Station} from "../../model/station.model";
+import {AuthService} from "../../../authService/auth.service";
 
 @Component({
   selector: 'app-station-map',
@@ -32,7 +33,7 @@ export class StationMapComponent implements OnInit{
   districtId: number | undefined;
   searchQuery: string = '';
 
-  constructor(private districtService: DistrictService,service: MapsService,private modalService: NgbModal,private stationService:StationService,private itineraireService:ItineraireService) {
+  constructor(public authService:AuthService,private districtService: DistrictService,service: MapsService,private modalService: NgbModal,private stationService:StationService,private itineraireService:ItineraireService) {
     this.apiKey.bing = 'AjeWzxR3mKrEIK0TXRP_6EpnkfOWxM0h4ezJzrHdJpBkzXy0Q6oZ0PmzpwGbf8L8';
   }
 
@@ -90,21 +91,25 @@ export class StationMapComponent implements OnInit{
 
 
   addMarker(e: any) {
-    const newMarker = {
-      location: e.location,
-    };
-    this.stations.push(newMarker);
+    if(this.authService.roles.includes('ADMIN')){
+      const newMarker = {
+        location: e.location,
+      };
+      this.stations.push(newMarker);
 
-    const modalRef = this.modalService.open(NewStationComponent);
+      const modalRef = this.modalService.open(NewStationComponent);
 
-    // Passez la latitude et la longitude au composant NewStationComponent
-    const latitude = e.location.lat;
-    const longitude = e.location.lng;
-    modalRef.componentInstance.latitude = latitude;
-    modalRef.componentInstance.longitude = longitude;
+      // Passez la latitude et la longitude au composant NewStationComponent
+      const latitude = e.location.lat;
+      const longitude = e.location.lng;
+      modalRef.componentInstance.latitude = latitude;
+      modalRef.componentInstance.longitude = longitude;
 
-    // Afficher les coordonnées dans la console
-    console.log('Coordonnées du marqueur :', latitude, longitude);
+      // Afficher les coordonnées dans la console
+      console.log('Coordonnées du marqueur :', latitude, longitude);
+    }else{
+      console.log('ajout station interdit !')
+    }
   }
 
 

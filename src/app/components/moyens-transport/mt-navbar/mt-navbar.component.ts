@@ -17,6 +17,7 @@ import {FormsModule} from "@angular/forms";
 import {MoyenTransportService} from "../services/moyenTransport.service";
 import {MoyenTransport} from "../model/moyenTransport.model";
 import {Road} from "../../maps/model/maps.model";
+import {AuthService} from "../../authService/auth.service";
 
 
 @Component({
@@ -28,7 +29,7 @@ import {Road} from "../../maps/model/maps.model";
 })
 export class MtNavbarComponent implements OnInit{
   searchQuery: string='';
-  constructor(private store:Store<any>,private modalService: NgbModal,private moyenTransportService:MoyenTransportService) {
+  constructor(public authService:AuthService,private store:Store<any>,private modalService: NgbModal,private moyenTransportService:MoyenTransportService) {
   }
   ngOnInit(): void {
   }

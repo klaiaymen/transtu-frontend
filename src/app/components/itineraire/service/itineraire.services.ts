@@ -11,7 +11,7 @@ import {Road} from "../../maps/model/maps.model";
 
 @Injectable({providedIn:"root"})
 export class ItineraireService {
-  private baseUrl = 'http://localhost:8888/GESTIONACCIDENTSINCIDENTS';
+  private baseUrl = 'http://localhost:8081';
   constructor(private http:HttpClient) { }
 
   public getItineraires():Observable<Itineraire[]>{

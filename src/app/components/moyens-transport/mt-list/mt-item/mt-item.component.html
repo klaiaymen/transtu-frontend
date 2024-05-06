@@ -3,13 +3,40 @@
     <td>{{moyenTransport.label}}</td>
     <td>{{moyenTransport.code}}</td>
     <td>{{moyenTransport.type}}</td>
+  <button (click)="toggleTableUsers()" class="btn btn-sm m-1" >
+    <i [class]="showTable ? iconExitFullscreen : iconFullscreen"></i>
+  </button>
+  <input type="text" placeholder="Search" [(ngModel)]="searchQuery" (input)="searchUsers(searchQuery)">
+  <table *ngIf="showTable" [striped]="true" cTable hover >
+
+    <thead>
+
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Label</th>
+      <th scope="col">Code</th>
+      <th scope="col">Type</th>
+      <th scope="col">Asigné</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of allUsers">
+      <td>{{user.userId}}</td>
+      <td>{{user.username}}</td>
+      <td>{{user.tel}}</td>
+      <td>{{user.email}}</td>
+      <td>
+        <input type="checkbox" [(ngModel)]="user.assignedToMt" [disabled]="user.disabled" (change)="toggleUserAssignment(user, moyenTransport)">
+      </td>
+  </table>
     <td>
-        <button (click)="onDelete(moyenTransport)" class="btn">
+        <button *ngIf="authService.roles.includes('ADMIN')" (click)="onDelete(moyenTransport)" class="btn">
             <i class="cil-trash" style="color: red"></i>
         </button>
-        <button (click)="onEdit(moyenTransport)"  class="btn">
+        <button *ngIf="authService.roles.includes('ADMIN')" (click)="onEdit(moyenTransport)"  class="btn">
             <i class="cil-pencil"></i>
         </button>
     </td>
+
 </tr>
 

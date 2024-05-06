@@ -8,6 +8,7 @@ import {Observable} from "rxjs";
 import {Itineraire} from "../model/itineraire.model";
 import {ItinerairesState} from "../ngrx/itineraire.reducers";
 import {ItineraireItemComponent} from "./itineraire-item/itineraire-item.component";
+import {AuthService} from "../../authService/auth.service";
 
 @Component({
   selector: 'app-itineraire-list',
@@ -23,7 +24,7 @@ export class ItineraireListComponent implements  OnInit{
   itineraires$: Observable<Itineraire[]>|null=null;
   currentPage$: Observable<number>|null=null;
 
-  constructor(private store:Store<any>) {
+  constructor(public authService:AuthService,private store:Store<any>) {
   }
 
   ngOnInit(): void {

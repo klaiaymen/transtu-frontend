@@ -5,7 +5,7 @@ import {Points} from "../model/point.model";
 
 @Injectable({providedIn:"root"})
 export class PointService {
-  private baseUrl = 'http://localhost:8888/GESTIONACCIDENTSINCIDENTS';
+  private baseUrl = 'http://localhost:8081';
 
   constructor(private http: HttpClient) {
   }

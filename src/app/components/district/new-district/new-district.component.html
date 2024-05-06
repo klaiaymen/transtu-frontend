@@ -15,6 +15,24 @@
         </c-toaster>
       </div>
     </ng-container>
+    <ng-container *ngIf="state.dataState==DistrictsStateEnum.ERROR">
+      <div class="position-relative" >
+        <c-toaster placement="top-end" position="absolute" >
+          <c-toast [autohide]="false" visible>
+            <c-toast-header style="background-color: red">
+
+              <strong class="me-auto">Error ...</strong>
+              <small class="text-muted">Just now</small>
+            </c-toast-header>
+            <c-toast-body>
+              {{state.errorMessage |json}}
+              <app-not-authorized></app-not-authorized>
+            </c-toast-body>
+
+          </c-toast>
+        </c-toaster>
+      </div>
+    </ng-container>
     <ng-container *ngIf="state.dataState==DistrictsStateEnum.LOADED">
       <div class="position-relative" >
         <c-toaster placement="top-end" position="absolute" >

@@ -5,7 +5,7 @@
         <li class="nav-item">
           <a class="nav-link"style="cursor: pointer" (click)="onGetAllStations()"> <i class="cil-list"></i></a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="authService.roles.includes('ADMIN')">
           <a class="nav-link" style="cursor: pointer"  (click)="onNewStation()"><i class="cil-plus"></i></a>
         </li>
 

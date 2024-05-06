@@ -5,7 +5,7 @@ import {Observable} from "rxjs";
 
 @Injectable({providedIn:"root"})
 export class PhotoReclamationService {
-  private baseUrl = 'http://localhost:8888/RECLAMATION-SERVICE';
+  private baseUrl = 'http://localhost:8081';
   constructor(private http:HttpClient) { }
 
   savePhoto(reclamationId: number, photoUrl: string): Observable<any> {

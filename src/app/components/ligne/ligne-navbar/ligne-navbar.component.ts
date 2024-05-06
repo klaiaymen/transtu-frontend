@@ -8,6 +8,7 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {NewLigneComponent} from "../new-ligne/new-ligne.component";
 import {GetAllLigneAction, SearchLigneAction} from "../ngrx/ligne.actions";
 import {SearchMTAction} from "../../moyens-transport/ngrx/moyensTransport.actions";
+import {AuthService} from "../../authService/auth.service";
 
 @Component({
   selector: 'app-ligne-navbar',
@@ -19,7 +20,7 @@ import {SearchMTAction} from "../../moyens-transport/ngrx/moyensTransport.action
 export class LigneNavbarComponent {
   searchQuery: string='';
 
-  constructor(private store:Store<any>,private modalService: NgbModal) {
+  constructor(public authService:AuthService,private store:Store<any>,private modalService: NgbModal) {
   }
 
 

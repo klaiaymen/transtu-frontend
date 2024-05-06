@@ -6,11 +6,12 @@ import {Store} from "@ngrx/store";
 import {Router} from "@angular/router";
 import {DistrictsState, DistrictsStateEnum} from "../ngrx/district.reducers";
 import {NewDistrictAction, SaveDistrictAction} from "../ngrx/district.actions";
+import {NotAuthorizedComponent} from "../../../not-authorized/not-authorized.component";
 
 @Component({
   selector: 'app-new-district',
   standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, ToastBodyComponent, ToastComponent, ToastHeaderComponent, ToasterComponent],
+  imports: [CommonModule, ReactiveFormsModule, ToastBodyComponent, ToastComponent, ToastHeaderComponent, ToasterComponent, NotAuthorizedComponent],
   templateUrl: './new-district.component.html',
   styleUrl: './new-district.component.scss'
 })

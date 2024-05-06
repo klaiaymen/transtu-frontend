@@ -5,6 +5,7 @@ import {Store} from "@ngrx/store";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {GetAllPointAction} from "../ngrx/point.actions";
 import {NewPointComponent} from "../new-point/new-point.component";
+import {AuthService} from "../../authService/auth.service";
 
 @Component({
   selector: 'app-point-navbar',
@@ -14,7 +15,7 @@ import {NewPointComponent} from "../new-point/new-point.component";
   styleUrl: './point-navbar.component.scss'
 })
 export class PointNavbarComponent {
-  constructor(private store:Store<any>,private modalService: NgbModal) {
+  constructor(public authService:AuthService,private store:Store<any>,private modalService: NgbModal) {
   }
 
   onGetAllPoints() {

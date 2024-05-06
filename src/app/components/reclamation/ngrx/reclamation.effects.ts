@@ -12,7 +12,7 @@ import {
   EditReclamationActionSuccess,
   GetAllReclamationAction,
   GetAllReclamationActionError,
-  GetAllReclamationActionSuccess,
+  GetAllReclamationActionSuccess, GetReclamationByUserActionError, GetReclamationByUserActionSuccess,
   NewReclamationActionSuccess,
   ReclamationActionsTypes,
   ReclamationsActions,
@@ -39,6 +39,19 @@ export class ReclamationEffects {
           .pipe(
             map((reclamation)=> new GetAllReclamationActionSuccess(reclamation)),
             catchError((err)=>of(new GetAllReclamationActionError(err.message)))
+          )
+      })
+    )
+  );
+
+  getReclamationsByUserEffects:Observable<ReclamationsActions>=createEffect(
+    ()=>this.effectActions.pipe(
+      ofType(ReclamationActionsTypes.GET_ALL_RECLAMATIONS_BY_USER),
+      mergeMap((action: ReclamationsActions)=>{
+        return this.reclamationService.getReclamationsByUser(action.payload)
+          .pipe(
+            map((reclamation)=> new GetReclamationByUserActionSuccess(reclamation)),
+            catchError((err)=>of(new GetReclamationByUserActionError(err.message)))
           )
       })
     )

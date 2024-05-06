@@ -7,7 +7,7 @@ import {catchError, map} from "rxjs/operators";
 
 @Injectable({providedIn:"root"})
 export class DistrictService {
-  private baseUrl = 'http://localhost:8888/GESTIONACCIDENTSINCIDENTS';
+  private baseUrl = 'http://localhost:8081';
   constructor(private http:HttpClient) { }
 
   public getDistricts():Observable<District[]>{

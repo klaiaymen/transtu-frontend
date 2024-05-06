@@ -8,6 +8,7 @@ import {GetAllLigneAction} from "../../ligne/ngrx/ligne.actions";
 import {NewStationComponent} from "../new-station/new-station.component";
 import {GetAllStationAction, SearchStationAction} from "../ngrx/station.actions";
 import {SearchMTAction} from "../../moyens-transport/ngrx/moyensTransport.actions";
+import {AuthService} from "../../authService/auth.service";
 
 @Component({
   selector: 'app-station-navbar',
@@ -19,7 +20,7 @@ import {SearchMTAction} from "../../moyens-transport/ngrx/moyensTransport.action
 export class StationNavbarComponent {
   searchQuery: string='';
 
-  constructor(private store:Store<any>,private modalService: NgbModal) {
+  constructor(public authService:AuthService,private store:Store<any>,private modalService: NgbModal) {
   }
 
   onGetAllStations() {

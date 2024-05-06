@@ -49,7 +49,7 @@ export class ReclamationItemComponent {
   }
 
   onEdit(reclamation:Reclamation) {
-    const modalRef = this.modalService.open(EditReclamationComponent);
+    const modalRef = this.modalService.open(EditReclamationComponent, { size: 'xl' });
     modalRef.componentInstance.reclamationID = reclamation.id;
   }
 

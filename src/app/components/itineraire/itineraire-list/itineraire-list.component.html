@@ -7,8 +7,8 @@
         <tr>
           <th scope="col">Id</th>
           <th scope="col">Nom</th>
-          <th scope="col">Points</th>
-          <th scope="col">Lignes</th>
+          <th scope="col" *ngIf="authService.roles.includes('ADMIN')">Points</th>
+          <th scope="col" *ngIf="authService.roles.includes('ADMIN')">Lignes</th>
         </tr>
         </thead>
         <tbody>

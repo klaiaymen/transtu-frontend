@@ -44,7 +44,7 @@ import {MoyensTransportEffects} from "./components/moyens-transport/ngrx/moyensT
 import {StoreModule} from "@ngrx/store";
 import {moyensTransportReducer} from "./components/moyens-transport/ngrx/moyensTransport.reducer";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {NgbDatepickerModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {
   EditMoyenTransportComponent
@@ -65,6 +65,11 @@ import {DxMapModule, DxSelectBoxModule} from "devextreme-angular";
 import {MapsComponent} from "./components/maps/maps.component";
 import {reclamationReducers} from "./components/reclamation/ngrx/reclamation.reducers";
 import {ReclamationEffects} from "./components/reclamation/ngrx/reclamation.effects";
+import {LoginComponent} from "./components/login/login.component";
+import {AppHttpInterceptor} from "./interceptors/app-http.interceptor";
+import {userReducers} from "./components/user/ngrx/user.reducers";
+import {UserEffects} from "./components/user/ngrx/user.effects";
+
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
@@ -104,8 +109,8 @@ const APP_CONTAINERS = [
     CardModule,
     NgScrollbarModule,
     MoyensTransportComponent,
-    EffectsModule.forRoot([MoyensTransportEffects,DistrictEffects,LigneEffects,StationEffects,ItineraireEffects,PointEffects,ReclamationEffects]),
-    StoreModule.forRoot({catalogState: moyensTransportReducer,districtState: districtReducers,lineState:ligneReducers,stationState: StationReducers,itineraireState: itineraireReducers, pointState:PointReducers, reclamationState:reclamationReducers}),
+    EffectsModule.forRoot([MoyensTransportEffects,DistrictEffects,LigneEffects,StationEffects,ItineraireEffects,PointEffects,ReclamationEffects,UserEffects]),
+    StoreModule.forRoot({catalogState: moyensTransportReducer,districtState: districtReducers,lineState:ligneReducers,stationState: StationReducers,itineraireState: itineraireReducers, pointState:PointReducers, reclamationState:reclamationReducers,userState:userReducers}),
     StoreDevtoolsModule.instrument(),
     HttpClientModule,
     AlertModule,
@@ -114,7 +119,7 @@ const APP_CONTAINERS = [
     MatInputModule,
     EditMoyenTransportComponent,
     //BrowserTransferStateModule,
-    NgbDatepickerModule
+    NgbDatepickerModule,
   ],
   providers: [
     {
@@ -122,7 +127,10 @@ const APP_CONTAINERS = [
       useClass: HashLocationStrategy
     },
     IconSetService,
-    Title
+    Title,
+    {
+      provide : HTTP_INTERCEPTORS, useClass : AppHttpInterceptor , multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

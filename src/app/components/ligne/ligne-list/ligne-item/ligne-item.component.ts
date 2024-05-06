@@ -15,6 +15,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {TableDirective} from "@coreui/angular";
 import {result} from "lodash-es";
 import {StationService} from "../../../station/service/station.service";
+import {AuthService} from "../../../authService/auth.service";
 
 @Component({
   selector: 'app-ligne-item',
@@ -41,7 +42,7 @@ export class LigneItemComponent implements OnInit{
   iconExitFullscreen: string = "cil-fullscreen-exit";
   iconFullscreenStations: string = "cil-fullscreen";
   iconExitFullscreenStations: string = "cil-fullscreen-exit";
-  constructor(private store:Store, private router:Router,private modalService: NgbModal, private moyenTransportService:MoyenTransportService,
+  constructor(public authService:AuthService,private store:Store, private router:Router,private modalService: NgbModal, private moyenTransportService:MoyenTransportService,
               private ligneService:LigneService,private stationService:StationService) {
   }
 

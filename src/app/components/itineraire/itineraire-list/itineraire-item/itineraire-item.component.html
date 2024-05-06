@@ -1,7 +1,7 @@
 <tr *ngIf="itineraire">
   <td>{{itineraire.id}}</td>
   <td>{{itineraire.name}}</td>
-  <td>
+  <td *ngIf="authService.roles.includes('ADMIN')">
     <button (click)="toggleTablePoints()" class="btn btn-sm m-1">
       <i [class]="showTable ? iconExitFullscreen : iconFullscreen"></i>
     </button>
@@ -31,7 +31,7 @@
     </button>
   </td>
 
-  <td>
+  <td *ngIf="authService.roles.includes('ADMIN')">
     <button (click)="toggleTableLignes()" class="btn btn-sm m-1">
       <i [class]="showTableLignes ? iconExitFullscreen : iconFullscreen"></i>
     </button>
@@ -57,11 +57,11 @@
       </tbody>
     </table>
   </td>
-  <td>
-    <button (click)="onDelete(itineraire)" class="btn btn-sm m-1" style="background-color: crimson">
+  <td >
+    <button *ngIf="authService.roles.includes('ADMIN')"(click)="onDelete(itineraire)" class="btn btn-sm m-1" style="background-color: crimson">
       <i class="cil-trash" ></i>
     </button>
-    <button (click)="onEdit(itineraire)"  class="btn btn-sm m-1" style="background-color: cornflowerblue">
+    <button *ngIf="authService.roles.includes('ADMIN')"(click)="onEdit(itineraire)"  class="btn btn-sm m-1" style="background-color: cornflowerblue">
       <i class="cil-pencil"></i>
     </button>
     <button (click)="onDetails(itineraire)"  class="btn btn-sm m-1" style="background-color: gold">

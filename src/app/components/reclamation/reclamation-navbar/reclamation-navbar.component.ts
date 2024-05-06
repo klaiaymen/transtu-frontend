@@ -12,7 +12,7 @@ import {
 } from "@ng-bootstrap/ng-bootstrap";
 import {NewReclamationComponent} from "../new-reclamation/new-reclamation.component";
 import {
-  GetAllReclamationAction,
+  GetAllReclamationAction, GetReclamationByUserAction,
   SearchReclamationAction, SearchReclamations, SearchReclamationsGlobal,
 } from "../ngrx/reclamation.actions";
 import {ReclamationService} from "../service/reclamation.service";
@@ -33,6 +33,8 @@ import {
 } from "@coreui/angular";
 import {error} from "@angular/compiler-cli/src/transformers/util";
 import {Reclamation} from "../model/reclamation.model";
+import {AuthService} from "../../authService/auth.service";
+import {UserService} from "../../user/services/user.service";
 
 @Component({
   selector: 'app-reclamation-navbar',
@@ -48,93 +50,25 @@ export class ReclamationNavbarComponent {
   selectedTypeAccidentIncident: string = '';
   selectedTypeDegat: string = '';
   reclamations: Reclamation[]=[]
-  constructor(private calendar: NgbCalendar,private reclamationService: ReclamationService,private store:Store<any>,private modalService: NgbModal) {
+  constructor(private userService:UserService,private authService:AuthService,private calendar: NgbCalendar,private reclamationService: ReclamationService,private store:Store<any>,private modalService: NgbModal) {
     this.fromDate = null;
     this.toDate =null;
   }
 
 
   onGetAllReclamations() {
-    this.store.dispatch(new GetAllReclamationAction({}))
-  }
-
- /* onNewReclamation() {
-    const modalRef = this.modalService.open(NewReclamationComponent);
-  }*/
-
-  /*searchReclamations(query: string) {
-    if (query.trim() !== '') {
-      this.store.dispatch(new SearchReclamationAction(query));
-    } else {
-      this.onGetAllReclamations()
-    }
-  }*/
-  /*searchByDateRange(): void {
-    if (this.fromDate && this.toDate) {
-      // Recherche par plage de dates
-      this.reclamationService.searchReclamationsByDateRange(this.fromDate, this.toDate)
-        .subscribe(reclamations => {
-          this.reclamations=reclamations
-          console.log(this.reclamations)
-        });
-    }
-  }*/
-  /*searchByDateRange(): void {
-    if (this.fromDate && this.toDate) {
-      // Convertir NgbDate en Date
-      //const fromDate = new Date(this.fromDate.year, this.fromDate.month - 1, this.fromDate.day);
-      //const toDate = new Date(this.toDate.year, this.toDate.month - 1, this.toDate.day);
-      const fromDate=this.fromDate
-      const toDate=this.toDate
-
-      this.store.dispatch(new SearchReclamationsByDateRange({ fromDate, toDate }));
-    }
-  }*/
-  /*searchReclamationByfilters(): void {
-    let searchTerms: string[] = [];
-
-    // Vérifier si une plage de dates est sélectionnée
-    /!*if (this.fromDate && this.toDate) {
-      // Ajouter la plage de dates à la recherche
-      const fromDateStr = `${this.fromDate.year}-${this.fromDate.month}-${this.fromDate.day}`;
-      const toDateStr = `${this.toDate.year}-${this.toDate.month}-${this.toDate.day}`;
-      searchTerms.push(fromDateStr,toDateStr);
-    }*!/
-
-    // Vérifier si un type d'accident/incident est sélectionné
-    if (this.selectedTypeAccidentIncident) {
-      // Ajouter le type d'accident/incident à la recherche
-      searchTerms.push(this.selectedTypeAccidentIncident);
-    }
-
-    // Vérifier si un type de dégât est sélectionné
-    if (this.selectedTypeDegat) {
-      // Ajouter le type de dégât à la recherche
-      searchTerms.push(this.selectedTypeDegat);
-    }
-
-    // Construire la chaîne de recherche en concaténant les termes avec des '&'
-    this.searchQuery = searchTerms.join('');
-
-    // Exécuter la recherche
-    this.searchReclamations(this.searchQuery);
-  }
-*/
-
-  /*searchReclamationsGlobal() {
-    if (this.fromDate && this.toDate) {
-      this.reclamationService.searchReclamationsGlobal(this.searchQuery,this.fromDate, this.toDate, this.selectedTypeAccidentIncident, this.selectedTypeDegat).subscribe(
-        (reclamations) => {
-          console.log(reclamations)
-        },
-        (error) => {
-          console.error('Erreur lors de la récupération des réclamations :', error);
+    this.userService.getUserByUsername(this.authService.username).subscribe(
+      (response:any)=>{
+        if(this.authService.roles.includes('ADMIN')){
+          this.store.dispatch(new GetAllReclamationAction({}))
+        }else{
+          this.store.dispatch(new GetReclamationByUserAction(response.userId))
         }
-      );
-    } else {
-      console.error('Veuillez saisir toutes les informations nécessaires.');
-    }
-  }*/
+      }
+    )
+  }
+
+
   searchReclamationsGlobal() {
     if (this.fromDate && this.toDate) {
       this.store.dispatch(new SearchReclamationsGlobal({

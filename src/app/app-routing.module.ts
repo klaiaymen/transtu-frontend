@@ -31,20 +31,50 @@ import {MapsComponent} from "./components/maps/maps.component";
 import {ReclamationComponent} from "./components/reclamation/reclamation.component";
 import {NewReclamationComponent} from "./components/reclamation/new-reclamation/new-reclamation.component";
 import {EditReclamationComponent} from "./components/reclamation/edit-reclamation/edit-reclamation.component";
+import {AuthenticationGuard} from "./guards/authentication.guard";
+import {AuthorizationGuard} from "./guards/authorization.guard";
+import {EditItineraireComponent} from "./components/itineraire/edit-itineraire/edit-itineraire.component";
+import {NotAuthorizedComponent} from "./not-authorized/not-authorized.component";
+import {UserComponent} from "./components/user/user.component";
+import {NewUserComponent} from "./components/user/new-user/new-user.component";
+import {EditUserComponent} from "./components/user/edit-user/edit-user.component";
+import {RoleComponent} from "./components/role/role.component";
+import {NewRoleComponent} from "./components/role/new-role/new-role.component";
+import {UserProfileComponent} from "./components/user/user-profile/user-profile.component";
+import {ChartsComponent} from "./components/charts/charts.component";
+import {Page403Component} from "./views/pages/page403/page403.component";
 
 
 const routes: Routes = [
   {
+    path: 'register',
+    component: RegisterComponent
+  },
+  {
+    path: 'notAuthorized',
+    component: Page403Component
+  },
+  {
+    path: 'page500',
+    component: Page500Component
+  },{
+    path: 'page404',
+    component: Page404Component
+  },
+  {path:"login" , component:LoginComponent},
+  {path:"" , redirectTo:"/login",pathMatch:"full"},
+  /*{
     path: '',
     redirectTo: 'dashboard',
-    pathMatch: 'full'
-  },
+    pathMatch: 'full',
+  },*/
   {
     path: '',
     component: DefaultLayoutComponent,
     data: {
       title: 'Home'
     },
+    canActivate: [AuthenticationGuard],
     children: [
       {
         path: 'dashboard',
@@ -63,11 +93,11 @@ const routes: Routes = [
       },
       {
         path: 'newMoyenTransport',
-        component: NewMoyenTransportComponent
+        component: NewMoyenTransportComponent,canActivate: [AuthorizationGuard], data: {role: "ADMIN"}
       },
       {
         path: 'editMoyenTransport/:id',
-        component: EditMoyenTransportComponent
+        component: EditMoyenTransportComponent,canActivate: [AuthorizationGuard], data: {role: "ADMIN"}
       },
         //districts routings
       {
@@ -76,11 +106,11 @@ const routes: Routes = [
       },
       {
         path: 'newDistrict',
-        component: NewDistrictComponent
+        component: NewDistrictComponent,canActivate: [AuthorizationGuard], data: {role: "ADMIN"}
       },
       {
         path: 'editDistrict/:id',
-        component: EditDistrictComponent
+        component: EditDistrictComponent,canActivate: [AuthorizationGuard], data: {role: "ADMIN"}
       },
       //lignes routings
       {
@@ -89,11 +119,11 @@ const routes: Routes = [
       },
       {
         path: 'newLigne',
-        component: NewLigneComponent
+        component: NewLigneComponent,canActivate: [AuthorizationGuard], data: {role: "ADMIN"}
       },
       {
         path: 'editLigne/:id',
-        component: EditLigneComponent
+        component: EditLigneComponent,canActivate: [AuthorizationGuard], data: {role: "ADMIN"}
       },
       //stations routings
       {
@@ -102,11 +132,11 @@ const routes: Routes = [
       },
       {
         path: 'newStation',
-        component: NewStationComponent
+        component: NewStationComponent,canActivate: [AuthorizationGuard], data: {role: "ADMIN"}
       },
       {
         path: 'editStation/:id',
-        component: EditStationComponent
+        component: EditStationComponent,canActivate: [AuthorizationGuard], data: {role: "ADMIN"}
       },
       //points routings
       {
@@ -115,11 +145,11 @@ const routes: Routes = [
       },
       {
         path: 'newPoint',
-        component: NewPointComponent
+        component: NewPointComponent,canActivate: [AuthorizationGuard], data: {role: "ADMIN"}
       },
       {
         path: 'editPoint/:id',
-        component: EditPointComponent
+        component: EditPointComponent,canActivate: [AuthorizationGuard], data: {role: "ADMIN"}
       },
       //itineraires routings
       {
@@ -128,7 +158,11 @@ const routes: Routes = [
       },
       {
         path: 'newItineraire',
-        component: NewItineraireComponent
+        component: NewItineraireComponent,canActivate: [AuthorizationGuard], data: {role: "ADMIN"}
+      },
+      {
+        path: 'editItineraire',
+        component: EditItineraireComponent,canActivate: [AuthorizationGuard], data: {role: "ADMIN"}
       },
       //reclamations routings
       {
@@ -138,6 +172,36 @@ const routes: Routes = [
       {
         path: 'editReclamation/:id',
         component: EditReclamationComponent
+      },
+      //user routings
+      {
+        path: 'profile',
+        component: UserProfileComponent
+      },
+      {
+        path: 'gestionUser',
+        component: UserComponent
+      },
+      {
+        path: 'newUser',
+        component: NewUserComponent,canActivate: [AuthorizationGuard], data: {role: "ADMIN"}
+      },
+      {
+        path: 'editUser',
+        component: EditUserComponent,canActivate: [AuthorizationGuard], data: {role: "ADMIN"}
+      },
+      //role routings
+      {
+        path: 'gestionRole',
+        component: RoleComponent
+      },
+      {
+        path: 'newUser',
+        component: NewRoleComponent,canActivate: [AuthorizationGuard], data: {role: "ADMIN"}
+      },
+      {
+        path: 'charts',
+        component: ChartsComponent
       },
       {
         path: 'theme',
@@ -201,14 +265,14 @@ const routes: Routes = [
     }
   },
   {
-    path: 'login',
+    path: 'loginCoreUi',
     component: LoginComponent,
     data: {
       title: 'Login Page'
     }
   },
   {
-    path: 'register',
+    path: 'registerCoreUi',
     component: RegisterComponent,
     data: {
       title: 'Register Page'

@@ -31,8 +31,8 @@ export class MapsComponent implements OnInit{
   districtId: number | undefined;
   searchQuery: string = '';
   constructor(private districtService: DistrictService,service: MapsService,private modalService: NgbModal,private stationService:StationService,private itineraireService:ItineraireService) {
-    this.apiKey.bing = 'AjeWzxR3mKrEIK0TXRP_6EpnkfOWxM0h4ezJzrHdJpBkzXy0Q6oZ0PmzpwGbf8L8';
-
+    //this.apiKey.bing = 'AjeWzxR3mKrEIK0TXRP_6EpnkfOWxM0h4ezJzrHdJpBkzXy0Q6oZ0PmzpwGbf8L8';
+    this.apiKey.bing = 'AiWhuAzXjJz6Ny755YsAvnXWUIcrVkY9xwHRdz6MRgG-Jed_SLM6UCAAXbXj9ehv';
     //this.markers = service.getMarkers();
     //this.routes = service.getRoutes();
   }

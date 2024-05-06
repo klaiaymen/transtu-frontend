@@ -41,6 +41,14 @@ export function reclamationReducers (state =initState,action :Action): Reclamati
     case ReclamationActionsTypes.GET_ALL_RECLAMATIONS_ERROR:
       return {...state, dataState:ReclamationsStateEnum.ERROR,errorMessage:(<ReclamationsActions>action).payload }
 
+    /*get reclamations by user */
+    case ReclamationActionsTypes.GET_ALL_RECLAMATIONS_BY_USER:
+      return {...state, dataState:ReclamationsStateEnum.LOADING }
+    case ReclamationActionsTypes.GET_ALL_RECLAMATIONS_BY_USER_SUCCESS:
+      return {...state, dataState:ReclamationsStateEnum.LOADED, reclamations:(<ReclamationsActions>action).payload}
+    case ReclamationActionsTypes.GET_ALL_RECLAMATIONS_BY_USER_ERROR:
+      return {...state, dataState:ReclamationsStateEnum.ERROR,errorMessage:(<ReclamationsActions>action).payload }
+
     /*new reclamation */
     case ReclamationActionsTypes.NEW_RECLAMATION:
       return {...state, dataState:ReclamationsStateEnum.LOADING }

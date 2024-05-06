@@ -52,11 +52,11 @@ export class EditReclamationComponent implements OnInit{
             typeDegat:[this.state.currentReclamation.typeDegat,Validators.required],
             notes:[this.state.currentReclamation.notes,Validators.required],
             lieu:[this.state.currentReclamation.lieu,Validators.required],
-            codeMt:['codeMt',Validators.required],
-            ligne:['ligneAssocie',Validators.required],
-            userId:['userId',Validators.required],
-            userNomPrenom:['userNomPrenom',Validators.required],
-            userTel:['userNomPrenom',Validators.required],
+            /*codeMt:['code mt',Validators.required],
+            ligne:['district',Validators.required],
+            userId:[this.state.currentReclamation.user.userId,Validators.required],
+            userNomPrenom:[this.state.currentReclamation.user.username,Validators.required],
+            userTel:[this.state.currentReclamation.user.tel,Validators.required],*/
           });
           this.formBuilt=true;
         }

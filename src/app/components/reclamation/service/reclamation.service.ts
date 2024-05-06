@@ -6,12 +6,15 @@ import {MoyenTransport} from "../../moyens-transport/model/moyenTransport.model"
 import {catchError} from "rxjs/operators";
 import {Reclamation} from "../model/reclamation.model";
 import {NgbDate} from "@ng-bootstrap/ng-bootstrap";
+import {AuthService} from "../../authService/auth.service";
 
 @Injectable({providedIn:"root"})
 export class ReclamationService {
-  private baseUrl = 'http://localhost:8888/RECLAMATION-SERVICE';
-  constructor(private http:HttpClient) { }
-
+  private baseUrl = 'http://localhost:8081';
+  constructor(private http:HttpClient,private authService:AuthService) { }
+  public getReclamationsByUser(id: number):Observable<Reclamation[]>{
+    return this.http.get<Reclamation[]>(this.baseUrl + '/api/reclamation/users/'+id);
+  }
   public getReclamations():Observable<Reclamation[]>{
     return this.http.get<Reclamation[]>(this.baseUrl + '/api/reclamation');
   }
@@ -22,7 +25,7 @@ export class ReclamationService {
   public save(reclamation:Reclamation):Observable<Reclamation>{
     return this.http.post<Reclamation>(this.baseUrl+ '/api/reclamation',reclamation);
   }
-  public saveReclamation(reclamationData: Reclamation): Promise<number> {
+  /*public saveReclamation(reclamationData: Reclamation): Promise<number> {
     return this.http.post<any>(this.baseUrl+ '/api/reclamation', reclamationData)
       .toPromise()
       .then(response => response.id)
@@ -30,25 +33,20 @@ export class ReclamationService {
         console.error('Erreur lors de la sauvegarde de la réclamation :', error);
         throw error;
       });
+  }*/
+  public saveReclamation(reclamationData: Reclamation, userId: number|undefined): Promise<number> {
+    // Ajoutez l'ID de l'utilisateur aux données de la réclamation
+    reclamationData.user = { userId: userId,disabled:!this.authService.roles.includes('ADMIN') };
+
+    return this.http.post<any>(this.baseUrl + '/api/reclamation?userId='+userId, reclamationData)
+      .toPromise()
+      .then(response => response.id)
+      .catch(error => {
+        console.error('Erreur lors de la sauvegarde de la réclamation :', error);
+        throw error;
+      });
   }
-  /*saveReclamationWithPhotos(reclamation: Reclamation, photos: File[]): Observable<Reclamation> {
-    const formData: FormData = new FormData();
-    formData.append('reclamation', JSON.stringify(reclamation));
-    photos.forEach((photo, index) => {
-      formData.append('photo' + index, photo);
-    });
 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'multipart/form-data'
-      })
-    };
-
-    return this.http.post<Reclamation>(`${this.baseUrl}/api/reclamation-with-photos`, formData, httpOptions);
-  }*/
-  /*createReclamation(formData: FormData): Observable<Reclamation> {
-    return this.http.post<Reclamation>(this.baseUrl+ '/api/reclamationWithPhotos', formData);
-  }*/
   public delete(id:number):Observable<void>{
     return this.http.delete<void>(this.baseUrl+ "/api/reclamation/" +id);
   }

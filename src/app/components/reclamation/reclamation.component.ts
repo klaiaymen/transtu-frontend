@@ -10,7 +10,9 @@ import {Store} from "@ngrx/store";
 import {map} from "rxjs/operators";
 import {GetAllDistrictAction} from "../district/ngrx/district.actions";
 import {ReclamationsState, ReclamationsStateEnum} from "./ngrx/reclamation.reducers";
-import {GetAllReclamationAction} from "./ngrx/reclamation.actions";
+import {GetAllReclamationAction, GetReclamationByUserAction} from "./ngrx/reclamation.actions";
+import {AuthService} from "../authService/auth.service";
+import {UserService} from "../user/services/user.service";
 
 @Component({
   selector: 'app-reclamation',
@@ -24,7 +26,7 @@ export class ReclamationComponent {
   readonly ReclamationsStateEnum= ReclamationsStateEnum;
   state:ReclamationsState|null=null;
 
-  constructor(private store:Store<any>) {
+  constructor(private userService:UserService,private authService:AuthService,private store:Store<any>) {
   }
 
   ngOnInit(): void {
@@ -32,6 +34,17 @@ export class ReclamationComponent {
       map((state)=>  state.reclamationState)
     );
 
-    this.store.dispatch(new GetAllReclamationAction({}))
+    this.userService.getUserByUsername(this.authService.username).subscribe(
+      (response:any)=>{
+        if(this.authService.roles.includes('ADMIN')){
+          this.store.dispatch(new GetAllReclamationAction({}))
+        }else{
+          this.store.dispatch(new GetReclamationByUserAction(response.userId))
+        }
+      }
+    )
   }
+
+
+
 }

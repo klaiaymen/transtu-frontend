@@ -1,0 +1,104 @@
+<div class="container">
+
+  <ng-container *ngIf="state">
+    <ng-container *ngIf="state.dataState==UsersStateEnum.LOADING">
+      <div class="position-relative" >
+        <c-toaster placement="top-end" position="absolute" >
+          <c-toast [autohide]="false" visible>
+            <c-toast-header style="background-color: cadetblue">
+
+              <strong class="me-auto">Loading ...</strong>
+              <small class="text-muted">Just now</small>
+            </c-toast-header>
+            <c-toast-body>Pls wait !</c-toast-body>
+          </c-toast>
+        </c-toaster>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="state.dataState==UsersStateEnum.ERROR">
+      <div class="position-relative" >
+        <c-toaster placement="top-end" position="absolute" >
+          <c-toast [autohide]="false" visible>
+            <c-toast-header style="background-color: red">
+
+              <strong class="me-auto">Error ...</strong>
+              <small class="text-muted">Just now</small>
+            </c-toast-header>
+            <c-toast-body>
+              {{state.errorMessage |json}}
+              <app-not-authorized></app-not-authorized>
+            </c-toast-body>
+
+          </c-toast>
+        </c-toaster>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="state.dataState==UsersStateEnum.LOADED">
+      <div class="position-relative" >
+        <c-toaster placement="top-end" position="absolute" >
+          <c-toast [autohide]="false" visible>
+            <c-toast-header style="background-color: darkseagreen">
+
+              <strong class="me-auto">Well done</strong>
+              <small class="text-muted">Just now</small>
+            </c-toast-header>
+            <c-toast-body>User ajouté avec success</c-toast-body>
+          </c-toast>
+        </c-toaster>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="state.dataState==UsersStateEnum.NEW">
+      <ng-container>
+        <form *ngIf="userFormGroup" [formGroup]="userFormGroup" (ngSubmit)="onSaveUser()" style="margin: 50px">
+          <div class="form-group">
+            <h5>Ajout User </h5>
+          </div>
+          <hr>
+
+          <div class="form-group" >
+            <label for="username"> Username</label>
+            <input type="text" class="form-control" formControlName="username" id="username" [ngClass]="{'is-invalid':submitted && userFormGroup.controls['username'].errors}">
+            <div *ngIf="submitted && userFormGroup.controls['username'].errors" class="invalid-feedback">
+              <div *ngIf="userFormGroup.controls['username'].hasError('required')">username can't be empty</div>
+            </div>
+          </div>
+
+          <div class="form-group" >
+            <label for="password"> Password</label>
+            <input type="text" class="form-control" formControlName="password" id="password" [ngClass]="{'is-invalid':submitted && userFormGroup.controls['password'].errors}">
+            <div *ngIf="submitted && userFormGroup.controls['password'].errors" class="invalid-feedback">
+              <div *ngIf="userFormGroup.controls['password'].hasError('required')">password can't be empty</div>
+            </div>
+          </div>
+
+          <div class="form-group" >
+            <label for="confirmPassword"> Confirmation password</label>
+            <input type="text" class="form-control" formControlName="confirmPassword" id="confirmPassword" [ngClass]="{'is-invalid':submitted && userFormGroup.controls['confirmPassword'].errors}">
+            <div *ngIf="submitted && userFormGroup.controls['confirmPassword'].errors" class="invalid-feedback">
+              <div *ngIf="userFormGroup.controls['confirmPassword'].hasError('required')">confirmation password can't be empty</div>
+            </div>
+          </div>
+
+          <div class="form-group" >
+            <label for="tel"> Phone number</label>
+            <input type="tel" class="form-control" formControlName="tel" id="tel" [ngClass]="{'is-invalid':submitted && userFormGroup.controls['tel'].errors}">
+            <div *ngIf="submitted && userFormGroup.controls['tel'].errors" class="invalid-feedback">
+              <div *ngIf="userFormGroup.controls['tel'].hasError('required')">Phone number can't be empty</div>
+            </div>
+          </div>
+
+          <div class="form-group" >
+            <label for="email"> Email</label>
+            <input type="text" class="form-control" formControlName="email" id="email" [ngClass]="{'is-invalid':submitted && userFormGroup.controls['email'].errors}">
+            <div *ngIf="submitted && userFormGroup.controls['email'].errors" class="invalid-feedback">
+              <div *ngIf="userFormGroup.controls['email'].hasError('required')">Email can't be empty</div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-success" style="margin-top: 10px">Ajouter</button>
+        </form>
+
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</div>

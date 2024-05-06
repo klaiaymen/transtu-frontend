@@ -10,6 +10,7 @@ import {LoadNextPageAction} from "../../moyens-transport/ngrx/moyensTransport.ac
 import {Station} from "../model/station.model";
 import {StationsState} from "../ngrx/station.reducers";
 import {StationItemComponent} from "./station-item/station-item.component";
+import {AuthService} from "../../authService/auth.service";
 
 @Component({
   selector: 'app-station-list',
@@ -25,7 +26,7 @@ export class StationListComponent implements OnInit{
   stations$: Observable<Station[]>|null=null;
   currentPage$: Observable<number>|null=null;
 
-  constructor(private store:Store<any>) {
+  constructor(public authService:AuthService,private store:Store<any>) {
   }
 
 

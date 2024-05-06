@@ -9,7 +9,7 @@ import {Itineraire} from "../../itineraire/model/itineraire.model";
 
 @Injectable({providedIn:"root"})
 export class StationService {
-  private baseUrl = 'http://localhost:8888/GESTIONACCIDENTSINCIDENTS';
+  private baseUrl = 'http://localhost:8081';
 
   constructor(private http: HttpClient) {
   }
