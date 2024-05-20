@@ -18,6 +18,7 @@ export class RegisterComponent implements OnInit{
   constructor(private store:Store<any>, private fb:FormBuilder,private router:Router) {
   }
 
+
   ngOnInit(): void {
     this.store.dispatch(new NewUserAction({}))
     this.store.subscribe(state=>{
