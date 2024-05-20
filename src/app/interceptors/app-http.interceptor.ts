@@ -12,10 +12,12 @@ export class AppHttpInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     console.log(request.url)
-    if(!request.url.includes("/auth/login")){
-      let newRequest = request.clone({
-        headers : request.headers.set('Authorization','Bearer '+this.authService.accessToken)
-      })
+    const isAuthRequest = request.url.includes('/auth/login');
+    const isUsersPostRequest = request.url.includes('/users') && request.method === 'POST';
+    if (!isAuthRequest && !isUsersPostRequest) {
+      const newRequest = request.clone({
+        headers: request.headers.set('Authorization', 'Bearer ' + this.authService.accessToken)
+      });
       return next.handle(newRequest).pipe(
         catchError(err=>{
           if(err.status==401){

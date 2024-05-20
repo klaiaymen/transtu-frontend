@@ -26,6 +26,10 @@ export class UserService {
     return this.http.post<AppUser>(this.baseUrl + '/users', user);
   }
 
+  public register(user: AppUser): Observable<AppUser> {
+    return this.http.post<AppUser>(this.baseUrl + '/register', user);
+  }
+
   public delete(id: number): Observable<void> {
     return this.http.delete<void>(this.baseUrl + "/users/" + id);
   }

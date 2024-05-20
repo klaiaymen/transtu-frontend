@@ -46,21 +46,12 @@ import {Page403Component} from "./views/pages/page403/page403.component";
 
 
 const routes: Routes = [
+
   {
     path: 'register',
     component: RegisterComponent
   },
-  {
-    path: 'notAuthorized',
-    component: Page403Component
-  },
-  {
-    path: 'page500',
-    component: Page500Component
-  },{
-    path: 'page404',
-    component: Page404Component
-  },
+
   {path:"login" , component:LoginComponent},
   {path:"" , redirectTo:"/login",pathMatch:"full"},
   /*{
@@ -81,6 +72,17 @@ const routes: Routes = [
         component: MapsComponent,
         loadChildren: () =>
           import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
+      },
+      {
+        path: 'notAuthorized',
+        component: Page403Component
+      },
+      {
+        path: 'page500',
+        component: Page500Component
+      },{
+        path: 'page404',
+        component: Page404Component
       },
       {
         path: 'reclamation',
@@ -184,11 +186,11 @@ const routes: Routes = [
       },
       {
         path: 'newUser',
-        component: NewUserComponent,canActivate: [AuthorizationGuard], data: {role: "ADMIN"}
+        component: NewUserComponent
       },
       {
         path: 'editUser',
-        component: EditUserComponent,canActivate: [AuthorizationGuard], data: {role: "ADMIN"}
+        component: EditUserComponent,canActivate: [AuthorizationGuard], data: {role: "USER"}
       },
       //role routings
       {
@@ -196,7 +198,7 @@ const routes: Routes = [
         component: RoleComponent
       },
       {
-        path: 'newUser',
+        path: 'newRole',
         component: NewRoleComponent,canActivate: [AuthorizationGuard], data: {role: "ADMIN"}
       },
       {

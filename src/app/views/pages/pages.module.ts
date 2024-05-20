@@ -6,10 +6,19 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { Page404Component } from './page404/page404.component';
 import { Page500Component } from './page500/page500.component';
-import { ButtonModule, CardModule, FormModule, GridModule } from '@coreui/angular';
+import {
+  ButtonModule,
+  CardModule,
+  FormModule,
+  GridModule,
+  ToastBodyComponent,
+  ToastComponent, ToasterComponent,
+  ToastHeaderComponent
+} from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {Page403Component} from "./page403/page403.component";
+import {NotAuthorizedComponent} from "../../not-authorized/not-authorized.component";
 
 
 @NgModule({
@@ -29,7 +38,12 @@ import {Page403Component} from "./page403/page403.component";
     IconModule,
     FormModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NotAuthorizedComponent,
+    ToastBodyComponent,
+    ToastComponent,
+    ToastHeaderComponent,
+    ToasterComponent
   ]
 })
 export class PagesModule {
