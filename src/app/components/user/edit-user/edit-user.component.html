@@ -1,1 +1,95 @@
-<p>edit-user works!</p>
+<div class="container">
+
+  <ng-container *ngIf="state">
+    <ng-container *ngIf="state.dataState==UsersStateEnum.LOADING">
+      <div class="position-relative" >
+        <c-toaster placement="top-end" position="absolute" >
+          <c-toast [autohide]="false" visible>
+            <c-toast-header style="background-color: cadetblue">
+
+              <strong class="me-auto">Loading ...</strong>
+              <small class="text-muted">Just now</small>
+            </c-toast-header>
+            <c-toast-body>Pls wait !</c-toast-body>
+          </c-toast>
+        </c-toaster>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="state.dataState==UsersStateEnum.ERROR">
+      <div class="position-relative" >
+        <c-toaster placement="top-end" position="absolute" >
+          <c-toast [autohide]="false" visible>
+            <c-toast-header style="background-color: #cf2f4c">
+
+              <strong class="me-auto">Error</strong>
+              <small class="text-muted">Just now</small>
+            </c-toast-header>
+            <c-toast-body>{{state.errorMessage | json}}</c-toast-body>
+          </c-toast>
+        </c-toaster>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="state.dataState==UsersStateEnum.UPDATED">
+      <div class="position-relative" >
+        <c-toaster placement="top-end" position="absolute" >
+          <c-toast [autohide]="false" visible>
+            <c-toast-header style="background-color: darkseagreen">
+
+              <strong class="me-auto">Well done</strong>
+              <small class="text-muted">Just now</small>
+            </c-toast-header>
+            <c-toast-body>Station Updated Successfully</c-toast-body>
+          </c-toast>
+        </c-toaster>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="state.dataState==UsersStateEnum.LOADED">
+      <ng-container *ngIf="formBuilt" >
+        <form *ngIf="userFormGroup" [formGroup]="userFormGroup" (ngSubmit)="onUpdateUser()" style="margin: 50px">
+          <div class="form-group">
+            <h5>Edition Station </h5>
+            <label for="userId"> ID  :</label>
+            <label>{{userFormGroup.controls['userId'].value}}</label>
+            <input type="hidden" formControlName="userId" id="userId">
+          </div>
+          <hr>
+          <div class="form-group" >
+            <label for="username"> username</label>
+            <input type="text" class="form-control" formControlName="username" id="username" [ngClass]="{'is-invalid':submitted && userFormGroup.controls['username'].errors}" readonly>
+            <div *ngIf="submitted && userFormGroup.controls['username'].errors" class="invalid-feedback">
+              <div *ngIf="userFormGroup.controls['username'].hasError('required')">username is required</div>
+            </div>
+          </div>
+
+          <div class="form-group" >
+            <label for="password"> password</label>
+            <input type="text" class="form-control" formControlName="password" id="password" [ngClass]="{'is-invalid':submitted && userFormGroup.controls['password'].errors}" readonly>
+            <div *ngIf="submitted && userFormGroup.controls['password'].errors" class="invalid-feedback">
+              <div *ngIf="userFormGroup.controls['password'].hasError('required')">password is required</div>
+            </div>
+          </div>
+
+          <div class="form-group" >
+            <label for="email"> email</label>
+            <input type="text" class="form-control" formControlName="email" id="email" [ngClass]="{'is-invalid':submitted && userFormGroup.controls['email'].errors}" >
+            <div *ngIf="submitted && userFormGroup.controls['email'].errors" class="invalid-feedback">
+              <div *ngIf="userFormGroup.controls['email'].hasError('required')">email is required</div>
+            </div>
+          </div>
+
+          <div class="form-group" >
+            <label for="tel"> tel</label>
+            <input type="text" class="form-control" formControlName="tel" id="tel" [ngClass]="{'is-invalid':submitted && userFormGroup.controls['tel'].errors}" >
+            <div *ngIf="submitted && userFormGroup.controls['tel'].errors" class="invalid-feedback">
+              <div *ngIf="userFormGroup.controls['tel'].hasError('required')">tel is required</div>
+            </div>
+          </div>
+
+          <button  type="submit" class="btn btn-success m-1" >Save</button>
+        </form>
+
+
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</div>

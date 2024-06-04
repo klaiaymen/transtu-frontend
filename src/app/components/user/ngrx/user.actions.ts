@@ -140,7 +140,8 @@ export class DeleteUserActionError implements Action{
 
 export class EditUserAction implements Action{
   type: UserActionsTypes=UserActionsTypes.EDIT_USER;
-  constructor(public payload:string) {
+
+    constructor(public payload: number | undefined) {
   }
 }
 

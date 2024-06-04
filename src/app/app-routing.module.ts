@@ -189,8 +189,8 @@ const routes: Routes = [
         component: NewUserComponent
       },
       {
-        path: 'editUser',
-        component: EditUserComponent,canActivate: [AuthorizationGuard], data: {role: "USER"}
+        path: 'editUser/:id',
+        component: EditUserComponent,
       },
       //role routings
       {
